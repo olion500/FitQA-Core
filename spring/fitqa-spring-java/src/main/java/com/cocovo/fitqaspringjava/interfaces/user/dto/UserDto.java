@@ -15,7 +15,7 @@ public class UserDto {
 
   @Getter
   @ToString
-  public static class RegisterRequest {
+  public static class RegisterUserRequest {
     @NotBlank(message = "nickName 은 필수값입니다")
     private String nickName;
     @NotNull(message = "birthDay 는 필수값입니다")
@@ -38,7 +38,7 @@ public class UserDto {
   @Getter
   @Builder
   @ToString
-  public static class RegisterResponse {
+  public static class RegisterUserResponse {
     private final String userToken;
   }
 }
