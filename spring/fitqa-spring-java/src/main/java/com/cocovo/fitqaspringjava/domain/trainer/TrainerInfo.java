@@ -11,7 +11,6 @@ import java.util.List;
 public class TrainerInfo {
 
   @Getter
-  @Builder
   @ToString
   public static class Main {
     private final String name;
@@ -25,13 +24,17 @@ public class TrainerInfo {
     private final List<TrainerInterestArea> interestAreaList;
     private final List<TrainerSns> snsList;
 
-    public static Main fromEntity(Trainer trainer) {
-      return Main.builder().name(trainer.getName()).style(trainer.getStyle())
-          .introduceTitle(trainer.getIntroduceTitle())
-          .introduceContext(trainer.getIntroduceContext()).likesCount(trainer.getLikesCount())
-          .imageList(trainer.getImageList()).careerList(trainer.getCareerList())
-          .feedbackPriceList(trainer.getFeedbackPriceList())
-          .interestAreaList(trainer.getInterestAreaList()).snsList(trainer.getSnsList()).build();
+    public Main(Trainer trainer) {
+      this.name = trainer.getName();
+      this.style = trainer.getStyle();
+      this.introduceTitle = trainer.getIntroduceTitle();
+      this.introduceContext = trainer.getIntroduceContext();
+      this.likesCount = trainer.getLikesCount();
+      this.imageList = trainer.getImages();
+      this.careerList = trainer.getCareers();
+      this.feedbackPriceList = trainer.getFeedbackPrices();
+      this.interestAreaList = trainer.getInterestAreas();
+      this.snsList = trainer.getSns();
     }
   }
 }
