@@ -1,0 +1,14 @@
+POST http://localhost:8080/api/v1/users
+Content-Type: application/json
+
+{
+  "nickName": "닉네임",
+  "birthDay": "1995-12-02T00:00:00+0900",
+  "workOutLevel": "BEGINNER",
+  "height": 175,
+  "weight": 85,
+  "gender": "FEMALE",
+  "workoutStyle": "BODY_BUILDING",
+  "bodyFatPercentage": 15.5,
+  "muscleMass": 5.0
+}
