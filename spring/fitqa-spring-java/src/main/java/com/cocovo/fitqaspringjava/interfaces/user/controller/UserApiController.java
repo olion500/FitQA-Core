@@ -22,7 +22,7 @@ public class UserApiController {
   private final UserFacade userFacade;
 
   @PostMapping
-  public CommonResponse registerUser(@RequestBody @Valid UserDto.RegisterRequest request) {
+  public CommonResponse registerUser(@RequestBody @Valid UserDto.RegisterUserRequest request) {
     var userRequest = userDtoMapper.toUserRequest(request);
     var userSpecRequest = userDtoMapper.toUserSpecRequest(request);
 

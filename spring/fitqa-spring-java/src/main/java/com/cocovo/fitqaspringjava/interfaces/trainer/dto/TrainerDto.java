@@ -1,17 +1,38 @@
-package com.cocovo.fitqaspringjava.domain.trainer;
+package com.cocovo.fitqaspringjava.interfaces.trainer.dto;
+
 
 import com.cocovo.fitqaspringjava.domain.common.entity.type.WorkOutType;
 import com.cocovo.fitqaspringjava.domain.trainer.entity.*;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.ToString;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
-public class TrainerInfo {
+public class TrainerDto {
 
   @Getter
   @ToString
-  public static class Main {
+  public static class RegisterTrainerRequest {
+    @NotEmpty(message = "name 은 필수값입니다")
+    private String name;
+    @NotNull(message = "style 은 필수값입니다")
+    private WorkOutType.Style style;
+  }
+
+  @Getter
+  @Builder
+  @ToString
+  public static class RegisterTrainerResponse {
+    private final String trainerToken;
+  }
+
+  @Getter
+  @Builder
+  @ToString
+  public static class TrainerInfo {
     private final String name;
     private final WorkOutType.Style style;
     private final String introduceTitle;
@@ -22,18 +43,5 @@ public class TrainerInfo {
     private final List<TrainerFeedbackPrice> feedbackPrices;
     private final List<TrainerInterestArea> interestAreas;
     private final List<TrainerSns> sns;
-
-    public Main(Trainer trainer) {
-      this.name = trainer.getName();
-      this.style = trainer.getStyle();
-      this.introduceTitle = trainer.getIntroduceTitle();
-      this.introduceContext = trainer.getIntroduceContext();
-      this.likesCount = trainer.getLikesCount();
-      this.images = trainer.getImages();
-      this.careers = trainer.getCareers();
-      this.feedbackPrices = trainer.getFeedbackPrices();
-      this.interestAreas = trainer.getInterestAreas();
-      this.sns = trainer.getSns();
-    }
   }
 }
