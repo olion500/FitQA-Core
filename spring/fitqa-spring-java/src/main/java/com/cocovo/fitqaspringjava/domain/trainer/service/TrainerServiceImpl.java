@@ -9,6 +9,9 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Slf4j
 @Service
 @RequiredArgsConstructor
@@ -25,8 +28,17 @@ public class TrainerServiceImpl implements TrainerService {
   }
 
   @Override
-  public TrainerInfo.Main getTrainerByToken(String trainerToken) {
-    Trainer foundTrainer = trainerReader.getTrainerByToken(trainerToken);
-    return TrainerInfo.Main.fromEntity(foundTrainer);
+  public TrainerInfo.Main retrieveTrainerByToken(String trainerToken) {
+    Trainer foundTrainer = trainerReader.retrieveTrainerByToken(trainerToken);
+    return new TrainerInfo.Main(foundTrainer);
+  }
+
+  @Override
+  public List<TrainerInfo.Main> retrieveTrainers(TrainerCommand.RetrieveTrainers retrieveTrainers) {
+    List<Trainer> foundTrainers =
+        trainerReader.retrieveTrainerByInterestAreas(retrieveTrainers.getInterestAreaList());
+
+    return foundTrainers.stream().map(TrainerInfo.Main::new)
+        .collect(Collectors.toUnmodifiableList());
   }
 }

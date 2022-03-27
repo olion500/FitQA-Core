@@ -37,19 +37,19 @@ public class Trainer extends BaseEntity {
   private Integer likesCount;
 
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "trainer", cascade = CascadeType.PERSIST)
-  private List<TrainerImage> imageList = Lists.newArrayList();
+  private List<TrainerImage> images = Lists.newArrayList();
 
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "trainer", cascade = CascadeType.PERSIST)
-  private List<TrainerCareer> careerList = Lists.newArrayList();
+  private List<TrainerCareer> careers = Lists.newArrayList();
 
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "trainer", cascade = CascadeType.PERSIST)
-  private List<TrainerFeedbackPrice> feedbackPriceList = Lists.newArrayList();
+  private List<TrainerFeedbackPrice> feedbackPrices = Lists.newArrayList();
 
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "trainer", cascade = CascadeType.PERSIST)
-  private List<TrainerInterestArea> interestAreaList = Lists.newArrayList();
+  private List<TrainerInterestArea> interestAreas = Lists.newArrayList();
 
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "trainer", cascade = CascadeType.PERSIST)
-  private List<TrainerSns> snsList = Lists.newArrayList();
+  private List<TrainerSns> sns = Lists.newArrayList();
 
   @Builder
   public Trainer(String name, WorkOutType.Style style) {

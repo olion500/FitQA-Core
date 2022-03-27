@@ -6,6 +6,8 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.ToString;
 
+import java.util.List;
+
 public class TrainerCommand {
 
   @Getter
@@ -18,5 +20,12 @@ public class TrainerCommand {
     public Trainer toEntity() {
       return Trainer.builder().name(name).style(style).build();
     }
+  }
+
+  @Getter
+  @Builder
+  @ToString
+  public static class RetrieveTrainers {
+    private final List<WorkOutType.InterestArea> interestAreaList;
   }
 }
