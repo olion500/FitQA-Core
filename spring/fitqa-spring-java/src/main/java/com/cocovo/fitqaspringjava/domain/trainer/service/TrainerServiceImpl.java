@@ -34,9 +34,10 @@ public class TrainerServiceImpl implements TrainerService {
   }
 
   @Override
-  public List<TrainerInfo.Main> retrieveTrainers(TrainerCommand.RetrieveTrainers retrieveTrainers) {
+  public List<TrainerInfo.Main> retrieveTrainers(
+      TrainerCommand.RetrieveTrainersByInterestAreas retrieveTrainersByInterestAreas) {
     List<Trainer> foundTrainers =
-        trainerReader.retrieveTrainersByInterestAreas(retrieveTrainers.getInterestAreas());
+        trainerReader.retrieveTrainersByInterestAreas(retrieveTrainersByInterestAreas.getInterestAreas());
 
     return foundTrainers.stream().map(TrainerInfo.Main::new)
         .collect(Collectors.toUnmodifiableList());

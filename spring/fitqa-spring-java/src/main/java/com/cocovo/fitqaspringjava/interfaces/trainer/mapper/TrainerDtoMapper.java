@@ -13,7 +13,7 @@ public interface TrainerDtoMapper {
   // register
   TrainerCommand.RegisterTrainer of(TrainerDto.RegisterTrainerRequest request);
 
-  TrainerCommand.RetrieveTrainers of(TrainerDto.RetrieveTrainersRequest request);
+  TrainerCommand.RetrieveTrainersByInterestAreas of(TrainerDto.RetrieveTrainersRequest request);
 
   TrainerDto.RegisterTrainerResponse of(String trainerToken);
 
