@@ -20,7 +20,9 @@ public class UserSpec extends BaseEntity {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  private String userToken;
+  @OneToOne
+  @JoinColumn(name = "user_id")
+  private User user;
 
   @Enumerated(EnumType.STRING)
   private WorkOutLevel workOutLevel;
@@ -39,9 +41,9 @@ public class UserSpec extends BaseEntity {
   }
 
   @Builder
-  public UserSpec(String userToken, Float bodyFatPercentage, Float muscleMass,
+  public UserSpec(User user, Float bodyFatPercentage, Float muscleMass,
                   WorkOutType.Style workOutStyle, WorkOutLevel workOutLevel) {
-    this.userToken = userToken;
+    this.user = user;
     this.bodyFatPercentage = bodyFatPercentage;
     this.muscleMass = muscleMass;
     this.workOutStyle = workOutStyle;

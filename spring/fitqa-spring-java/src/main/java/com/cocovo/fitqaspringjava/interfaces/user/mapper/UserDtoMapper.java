@@ -12,9 +12,7 @@ import org.mapstruct.ReportingPolicy;
 
 public interface UserDtoMapper {
   @Mapping(target = "age", ignore = true)
-  UserCommand.RegisterUserRequest toUserRequest(UserDto.RegisterUserRequest request);
-
-  UserCommand.RegisterUserSpecRequest toUserSpecRequest(UserDto.RegisterUserRequest request);
+  UserCommand.RegisterUser of(UserDto.RegisterUserRequest request);
 
   UserDto.RegisterUserResponse of(String userToken);
 }
