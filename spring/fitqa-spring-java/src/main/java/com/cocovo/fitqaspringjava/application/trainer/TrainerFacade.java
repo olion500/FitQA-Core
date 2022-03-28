@@ -1,12 +1,15 @@
 package com.cocovo.fitqaspringjava.application.trainer;
 
 
+import com.cocovo.fitqaspringjava.domain.common.entity.type.WorkOutType;
 import com.cocovo.fitqaspringjava.domain.trainer.TrainerCommand;
 import com.cocovo.fitqaspringjava.domain.trainer.TrainerInfo;
 import com.cocovo.fitqaspringjava.domain.trainer.service.TrainerService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Slf4j
 @Service
@@ -20,5 +23,13 @@ public class TrainerFacade {
 
   public TrainerInfo.Main retrieveTrainerInfo(String trainerToken) {
     return trainerService.retrieveTrainerByToken(trainerToken);
+  }
+
+  public List<TrainerInfo.Main> retrieveTrainers(TrainerCommand.RetrieveTrainers interestAreas) {
+    return trainerService.retrieveTrainers(interestAreas);
+  }
+
+  public List<TrainerInfo.Main> retrieveTrainers() {
+    return trainerService.retrieveTrainers();
   }
 }

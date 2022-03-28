@@ -26,6 +26,6 @@ public class TrainerCommand {
   @Builder
   @ToString
   public static class RetrieveTrainers {
-    private final List<WorkOutType.InterestArea> interestAreaList;
+    private final List<WorkOutType.InterestArea> interestAreas;
   }
 }

@@ -8,5 +8,7 @@ import java.util.List;
 public interface TrainerReader {
   Trainer retrieveTrainerByToken(String trainerToken);
 
-  List<Trainer> retrieveTrainerByInterestAreas(List<WorkOutType.InterestArea> interestAreaList);
+  List<Trainer> retrieveTrainersByInterestAreas(List<WorkOutType.InterestArea> interestAreaList);
+
+  List<Trainer> retrieveTrainersAll();
 }
