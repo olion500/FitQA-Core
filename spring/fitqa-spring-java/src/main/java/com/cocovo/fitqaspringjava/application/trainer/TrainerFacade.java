@@ -1,7 +1,6 @@
 package com.cocovo.fitqaspringjava.application.trainer;
 
 
-import com.cocovo.fitqaspringjava.domain.common.entity.type.WorkOutType;
 import com.cocovo.fitqaspringjava.domain.trainer.TrainerCommand;
 import com.cocovo.fitqaspringjava.domain.trainer.TrainerInfo;
 import com.cocovo.fitqaspringjava.domain.trainer.service.TrainerService;
@@ -25,7 +24,8 @@ public class TrainerFacade {
     return trainerService.retrieveTrainerByToken(trainerToken);
   }
 
-  public List<TrainerInfo.Main> retrieveTrainers(TrainerCommand.RetrieveTrainers interestAreas) {
+  public List<TrainerInfo.Main> retrieveTrainers(
+      TrainerCommand.RetrieveTrainersByInterestAreas interestAreas) {
     return trainerService.retrieveTrainers(interestAreas);
   }
 
