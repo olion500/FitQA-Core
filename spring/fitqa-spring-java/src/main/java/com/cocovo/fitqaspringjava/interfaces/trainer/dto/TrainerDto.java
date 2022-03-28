@@ -1,10 +1,7 @@
 package com.cocovo.fitqaspringjava.interfaces.trainer.dto;
 
+import com.cocovo.fitqaspringjava.domain.common.TypeInfo;
 
-import com.cocovo.fitqaspringjava.domain.common.entity.type.ImageType;
-import com.cocovo.fitqaspringjava.domain.common.entity.type.SnsType;
-import com.cocovo.fitqaspringjava.domain.common.entity.type.WorkOutType;
-import com.cocovo.fitqaspringjava.domain.trainer.entity.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.ToString;
@@ -21,7 +18,7 @@ public class TrainerDto {
     @NotEmpty(message = "name 은 필수값입니다")
     private String name;
     @NotNull(message = "style 은 필수값입니다")
-    private WorkOutType.Style style;
+    private TypeInfo.WorkOutStyle style;
   }
 
   @Getter
@@ -43,15 +40,15 @@ public class TrainerDto {
   @ToString
   public static class Main {
     private final String name;
-    private final WorkOutType.Style style;
+    private final TypeInfo.WorkOutStyle style;
     private final String introduceTitle;
     private final String introduceContext;
     private final Integer likesCount;
-    private final List<TrainerImage> images;
-    private final List<TrainerCareer> careers;
-    private final List<TrainerFeedbackPrice> feedbackPrices;
-    private final List<TrainerInterestArea> interestAreas;
-    private final List<TrainerSns> sns;
+    private final List<TrainerImageInfo> images;
+    private final List<TrainerCareerInfo> careers;
+    private final List<TrainerFeedbackPriceInfo> feedbackPrices;
+    private final List<TrainerInterestAreaInfo> interestAreas;
+    private final List<TrainerSnsInfo> sns;
   }
 
   @Getter
@@ -59,7 +56,7 @@ public class TrainerDto {
   @ToString
   public static class TrainerImageInfo {
     private final String imageUrl;
-    private final ImageType.Type imageType;
+    private final TypeInfo.ImageType imageType;
   }
 
   @Getter
@@ -74,7 +71,7 @@ public class TrainerDto {
   @Builder
   @ToString
   public static class TrainerFeedbackPriceInfo {
-    private final WorkOutType.InterestArea interestArea;
+    private final TypeInfo.InterestArea interestArea;
     private final Integer price;
   }
 
@@ -82,14 +79,14 @@ public class TrainerDto {
   @Builder
   @ToString
   public static class TrainerInterestAreaInfo {
-    private final WorkOutType.InterestArea interestArea;
+    private final TypeInfo.InterestArea interestArea;
   }
 
   @Getter
   @Builder
   @ToString
   public static class TrainerSnsInfo {
-    private final SnsType.Type snsType;
+    private final TypeInfo.SnsType snsType;
     private final String snsUrl;
   }
 }

@@ -42,7 +42,10 @@ public class User extends BaseEntity {
   }
 
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.PERSIST)
-  private List<UserImage> imageList = Lists.newArrayList();
+  private List<UserImage> images = Lists.newArrayList();
+
+  @OneToOne(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.PERSIST)
+  private UserSpec userSpec;
 
   @Builder
   public User(String nickName, ZonedDateTime birthDay, Integer age, Integer height, Integer weight,

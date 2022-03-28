@@ -12,9 +12,8 @@ import org.springframework.stereotype.Service;
 public class UserFacade {
   private final UserService userService;
 
-  public String registerUser(UserCommand.RegisterUserRequest userRequest,
-                             UserCommand.RegisterUserSpecRequest userSpecRequest) {
-    var userToken = userService.registerUser(userRequest, userSpecRequest);
+  public String registerUser(UserCommand.RegisterUser registerUser) {
+    var userToken = userService.registerUser(registerUser);
     return userToken;
   }
 }

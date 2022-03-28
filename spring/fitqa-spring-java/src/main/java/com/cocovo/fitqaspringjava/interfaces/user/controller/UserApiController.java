@@ -23,10 +23,9 @@ public class UserApiController {
 
   @PostMapping
   public CommonResponse registerUser(@RequestBody @Valid UserDto.RegisterUserRequest request) {
-    var userRequest = userDtoMapper.toUserRequest(request);
-    var userSpecRequest = userDtoMapper.toUserSpecRequest(request);
+    var registerUserRequest = userDtoMapper.of(request);
 
-    var userToken = userFacade.registerUser(userRequest, userSpecRequest);
+    var userToken = userFacade.registerUser(registerUserRequest);
     var response = userDtoMapper.of(userToken);
     return CommonResponse.success(response);
   }

@@ -1,14 +1,13 @@
 package com.cocovo.fitqaspringjava.domain.user;
 
-import com.cocovo.fitqaspringjava.domain.common.entity.type.ImageType;
-import com.cocovo.fitqaspringjava.domain.common.entity.type.WorkOutType;
-import com.cocovo.fitqaspringjava.domain.user.entity.User;
-import com.cocovo.fitqaspringjava.domain.user.entity.UserSpec;
+import com.cocovo.fitqaspringjava.domain.common.TypeInfo;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import lombok.ToString;
 
 import java.time.ZonedDateTime;
+import java.util.List;
 
 public class UserInfo {
 
@@ -22,21 +21,23 @@ public class UserInfo {
     private final Integer age;
     private final Integer height;
     private final Integer weight;
-    private final User.Gender gender;
+    private final GenderInfo gender;
+    private List<ImageInfo> images;
+    private SpecInfo userSpec;
   }
 
   @Getter
   @Builder
   @ToString
-  public static class Image {
+  public static class ImageInfo {
     private final String imageUrl;
-    private final ImageType.Type imageType;
+    private final TypeInfo.ImageType imageType;
   }
 
   @Getter
   @Builder
   @ToString
-  public static class Oauth {
+  public static class OauthInfo {
     private final String oauthProvider;
     private final String accessToken;
     private final String refreshToken;
@@ -46,10 +47,26 @@ public class UserInfo {
   @Getter
   @Builder
   @ToString
-  public static class Spec {
+  public static class SpecInfo {
     private final Float bodyFatPercentage;
     private final Float muscleMass;
-    private final WorkOutType.Style workOutStyle;
-    private final UserSpec.WorkOutLevel workOutLevel;
+    private final TypeInfo.WorkOutStyle workOutStyle;
+    private final WorkOutLevelInfo workOutLevel;
+  }
+
+  @Getter
+  @RequiredArgsConstructor
+  public enum GenderInfo {
+    FEMALE("여성"), MALE("남성");
+
+    private final String description;
+  }
+
+  @Getter
+  @RequiredArgsConstructor
+  public enum WorkOutLevelInfo {
+    BEGINNER("초보자"), INTERMEDIATE("중급자"), ADVANCED("상급자"), SKILLED("숙련자");
+
+    private final String description;
   }
 }

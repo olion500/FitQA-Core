@@ -59,5 +59,8 @@ public class Trainer extends BaseEntity {
     this.trainerToken = TokenGenerator.randomCharacterWithPrefix(TRAINER_PREFIX);
     this.name = name;
     this.style = style;
+    this.likesCount = 0;
+    this.introduceTitle = "";
+    this.introduceContext = "";
   }
 }
