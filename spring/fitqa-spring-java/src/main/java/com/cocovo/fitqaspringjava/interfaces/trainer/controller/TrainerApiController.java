@@ -9,6 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.stream.Collectors;
 
 @Slf4j
 @RestController
@@ -18,12 +19,11 @@ public class TrainerApiController {
   private final TrainerFacade trainerFacade;
   private final TrainerDtoMapper trainerDtoMapper;
 
-  @PostMapping
-  public CommonResponse registerTrainer(
-      @RequestBody @Valid TrainerDto.RegisterTrainerRequest request) {
-    var registerTrainer = trainerDtoMapper.of(request);
-    var trainerToken = trainerFacade.registerTrainer(registerTrainer);
-    var response = trainerDtoMapper.of(trainerToken);
+  @GetMapping
+  public CommonResponse getTrainersAll() {
+    var trainers = trainerFacade.retrieveTrainers();
+    var response =
+        trainers.stream().map(main -> trainerDtoMapper.of(main)).collect(Collectors.toList());
     return CommonResponse.success(response);
   }
 
@@ -32,5 +32,23 @@ public class TrainerApiController {
     var trainerInfo = trainerFacade.retrieveTrainerInfo(trainerToken);
     var trainerResponse = trainerDtoMapper.of(trainerInfo);
     return CommonResponse.success(trainerResponse);
+  }
+
+  @GetMapping(params = "interestAreas")
+  public CommonResponse getTrainerByInterestAreas(
+      @RequestParam(value = "interestAreas", required = true) TrainerDto.RetrieveTrainersRequest request) {
+    var trainers = trainerFacade.retrieveTrainers(trainerDtoMapper.of(request));
+    var response =
+        trainers.stream().map(main -> trainerDtoMapper.of(main)).collect(Collectors.toList());
+    return CommonResponse.success(response);
+  }
+
+  @PostMapping
+  public CommonResponse registerTrainer(
+      @RequestBody @Valid TrainerDto.RegisterTrainerRequest request) {
+    var registerTrainer = trainerDtoMapper.of(request);
+    var trainerToken = trainerFacade.registerTrainer(registerTrainer);
+    var response = trainerDtoMapper.of(trainerToken);
+    return CommonResponse.success(response);
   }
 }

@@ -11,4 +11,6 @@ public interface TrainerService {
   TrainerInfo.Main retrieveTrainerByToken(String trainerToken);
 
   List<TrainerInfo.Main> retrieveTrainers(TrainerCommand.RetrieveTrainers retrieveTrainers);
+
+  List<TrainerInfo.Main> retrieveTrainers();
 }

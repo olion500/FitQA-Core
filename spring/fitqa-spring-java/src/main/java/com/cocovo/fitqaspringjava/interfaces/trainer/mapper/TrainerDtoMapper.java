@@ -5,7 +5,6 @@ import com.cocovo.fitqaspringjava.domain.trainer.TrainerInfo;
 import com.cocovo.fitqaspringjava.interfaces.trainer.dto.TrainerDto;
 import org.mapstruct.InjectionStrategy;
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
 import org.mapstruct.ReportingPolicy;
 
 @Mapper(componentModel = "spring", injectionStrategy = InjectionStrategy.CONSTRUCTOR,
@@ -14,8 +13,21 @@ public interface TrainerDtoMapper {
   // register
   TrainerCommand.RegisterTrainer of(TrainerDto.RegisterTrainerRequest request);
 
+  TrainerCommand.RetrieveTrainers of(TrainerDto.RetrieveTrainersRequest request);
+
   TrainerDto.RegisterTrainerResponse of(String trainerToken);
 
-  // retrieve
-  TrainerDto.TrainerInfo of(TrainerInfo.Main trainerInfo);
+  TrainerDto.Main of(TrainerInfo.Main trainerInfo);
+
+  TrainerDto.TrainerImageInfo of(TrainerInfo.TrainerImageInfo trainerImageInfo);
+
+  TrainerDto.TrainerCareerInfo of(TrainerInfo.TrainerCareerInfo trainerCareerInfo);
+
+  TrainerDto.TrainerFeedbackPriceInfo of(
+      TrainerInfo.TrainerFeedbackPriceInfo trainerFeedbackPriceInfo);
+
+  TrainerDto.TrainerInterestAreaInfo of(
+      TrainerInfo.TrainerInterestAreaInfo trainerInterestAreaInfo);
+
+  TrainerDto.TrainerSnsInfo of(TrainerInfo.TrainerSnsInfo trainerSnsInfo);
 }
