@@ -8,5 +8,5 @@ import java.util.List;
 public interface UserReader {
   User getUserBy(String userToken);
   List<User> findUserAllBy(List<String> userToken);
-  List<UserInfo.Image> getUserImages(String userToken);
+  List<UserInfo.ImageInfo> getUserImages(String userToken);
 }

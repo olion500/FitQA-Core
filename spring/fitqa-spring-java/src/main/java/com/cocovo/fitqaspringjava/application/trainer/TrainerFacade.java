@@ -32,4 +32,9 @@ public class TrainerFacade {
   public List<TrainerInfo.Main> retrieveTrainers() {
     return trainerService.retrieveTrainers();
   }
+
+  public TrainerInfo.Main updateTrainer(String trainerToken,
+                                        TrainerCommand.UpdateTrainer updateTrainer) {
+    return trainerService.updateTrainer(trainerToken, updateTrainer);
+  }
 }

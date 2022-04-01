@@ -15,6 +15,20 @@ public interface TrainerDtoMapper {
 
   TrainerCommand.RetrieveTrainersByInterestAreas of(TrainerDto.RetrieveTrainersRequest request);
 
+  TrainerCommand.UpdateTrainerInterestArea toUpdateInterestAreas(String interestArea);
+
+  TrainerCommand.UpdateTrainer of(TrainerDto.UpdateTrainerRequest request);
+
+  TrainerCommand.UpdateTrainerCareer of(TrainerDto.TrainerCareerInfo trainerCareerInfo);
+
+  TrainerCommand.UpdateTrainerSns of(TrainerDto.TrainerSnsInfo trainerSnsInfo);
+
+  TrainerCommand.UpdateTrainerFeedbackPrice of(
+      TrainerDto.TrainerFeedbackPriceInfo trainerFeedbackPriceInfo);
+
+  TrainerCommand.UpdateTrainerInterestArea of(
+      TrainerDto.TrainerInterestAreaInfo trainerInterestAreaInfo);
+
   TrainerDto.RegisterTrainerResponse of(String trainerToken);
 
   TrainerDto.Main of(TrainerInfo.Main trainerInfo);

@@ -2,8 +2,14 @@ package com.cocovo.fitqaspringjava.interfaces.trainer.dto;
 
 import com.cocovo.fitqaspringjava.domain.common.TypeInfo;
 
+import com.cocovo.fitqaspringjava.domain.common.entity.type.WorkOutType;
+import com.cocovo.fitqaspringjava.domain.trainer.entity.TrainerCareer;
+import com.cocovo.fitqaspringjava.domain.trainer.entity.TrainerFeedbackPrice;
+import com.cocovo.fitqaspringjava.domain.trainer.entity.TrainerInterestArea;
+import com.cocovo.fitqaspringjava.domain.trainer.entity.TrainerSns;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import javax.validation.constraints.NotEmpty;
@@ -35,6 +41,18 @@ public class TrainerDto {
     private List<String> interestAreas;
   }
 
+  @Getter
+  @Builder
+  @ToString
+  public static class UpdateTrainerRequest {
+    private final TypeInfo.WorkOutStyle style;
+    private final String introduceTitle;
+    private final String introduceContext;
+    private final List<TrainerCareerInfo> careers;
+    private final List<TrainerFeedbackPriceInfo> feedbackPrices;
+    private final List<TrainerInterestAreaInfo> interestAreas;
+    private final List<TrainerSnsInfo> sns;
+  }
   @Getter
   @Builder
   @ToString
@@ -80,6 +98,14 @@ public class TrainerDto {
   @ToString
   public static class TrainerInterestAreaInfo {
     private final TypeInfo.InterestArea interestArea;
+
+    public TrainerInterestAreaInfo(TypeInfo.InterestArea interestArea) {
+      this.interestArea = interestArea;
+    }
+
+    public TrainerInterestAreaInfo(String description) {
+      this.interestArea = TypeInfo.InterestArea.valueOf(description);
+    }
   }
 
   @Getter

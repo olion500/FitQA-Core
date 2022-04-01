@@ -17,4 +17,6 @@ public interface TrainerService {
   // register
   String registerTrainer(TrainerCommand.RegisterTrainer registerTrainer);
 
+  // update
+  TrainerInfo.Main updateTrainer(String trainerToken, TrainerCommand.UpdateTrainer updateTrainer);
 }

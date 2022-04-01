@@ -51,4 +51,12 @@ public class TrainerApiController {
     var response = trainerDtoMapper.of(trainerToken);
     return CommonResponse.success(response);
   }
+
+  @PutMapping("/{trainerToken}")
+  public CommonResponse updateTrainer(@PathVariable(value = "trainerToken") String trainerToken,
+                                      @RequestBody TrainerDto.UpdateTrainerRequest request) {
+    var updatedTrainer = trainerFacade.updateTrainer(trainerToken, trainerDtoMapper.of(request));
+    var response = trainerDtoMapper.of(updatedTrainer);
+    return CommonResponse.success(response);
+  }
 }
