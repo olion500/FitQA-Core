@@ -28,4 +28,11 @@ public class TrainerCommand {
   public static class RetrieveTrainersByInterestAreas {
     private final List<WorkOutType.InterestArea> interestAreas;
   }
+
+  @Getter
+  @Builder
+  @ToString
+  public static class UpdateTrainersByInterestAreas {
+    private final List<WorkOutType.InterestArea> interestAreas;
+  }
 }

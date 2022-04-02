@@ -36,6 +36,12 @@ public class TrainerDto {
   }
 
   @Getter
+  @ToString
+  public static class UpdateTrainerInterestAreasRequest {
+    private List<TypeInfo.InterestArea> interestAreas;
+  }
+
+  @Getter
   @Builder
   @ToString
   public static class Main {

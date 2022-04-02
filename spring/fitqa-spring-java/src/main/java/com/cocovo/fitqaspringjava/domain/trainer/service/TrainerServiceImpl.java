@@ -4,12 +4,16 @@ import com.cocovo.fitqaspringjava.domain.trainer.TrainerCommand;
 import com.cocovo.fitqaspringjava.domain.trainer.TrainerInfo;
 import com.cocovo.fitqaspringjava.domain.trainer.component.TrainerReader;
 import com.cocovo.fitqaspringjava.domain.trainer.component.TrainerStore;
+import com.cocovo.fitqaspringjava.domain.trainer.component.TrainerUpdater;
 import com.cocovo.fitqaspringjava.domain.trainer.entity.Trainer;
+import com.cocovo.fitqaspringjava.domain.trainer.entity.TrainerInterestArea;
 import com.cocovo.fitqaspringjava.domain.trainer.mapper.TrainerInfoMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -19,6 +23,7 @@ import java.util.stream.Collectors;
 public class TrainerServiceImpl implements TrainerService {
   private final TrainerStore trainerStore;
   private final TrainerReader trainerReader;
+  private final TrainerUpdater trainerUpdater;
   private final TrainerInfoMapper trainerInfoMapper;
 
   @Override
@@ -50,5 +55,14 @@ public class TrainerServiceImpl implements TrainerService {
     List<Trainer> foundTrainers = trainerReader.retrieveTrainersAll();
 
     return foundTrainers.stream().map(trainer -> trainerInfoMapper.of(trainer)).collect(Collectors.toList());
+  }
+
+  @Override
+  @Transactional
+  public TrainerInfo.Main updateTrainerInterestAreas(String trainerToken,
+                                                     TrainerCommand.UpdateTrainersByInterestAreas updateInterestAreas) {
+    var foundTrainer = trainerReader.retrieveTrainerByToken(trainerToken);
+    trainerUpdater.updateTrainerInterestAreas(foundTrainer, updateInterestAreas.getInterestAreas());
+    return trainerInfoMapper.of(foundTrainer);
   }
 }

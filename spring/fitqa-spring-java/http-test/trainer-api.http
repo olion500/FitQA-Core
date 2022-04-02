@@ -1,17 +1,38 @@
 ###
+# 모든 Trainer 들을 가져옵니다
+
 GET http://localhost:8080/api/v1/trainers
 Accept: application/json
 
 ###
+# InterestAreas가 일치하는 Trainer 들을 가져옵니다.
+
+GET http://localhost:8080/api/v1/trainers?interestAreas="LOWER"&interestAreas="BACK"
+###
+# 특정 Trainer의 정보를 가져옵니다
+
 GET http://localhost:8080/api/v1/trainers/trn_qQYHg782nZ4qKC3i
 Accept: application/json
 
 ###
+# 트레이너를 등록합니다
 POST http://localhost:8080/api/v1/trainers
 Content-Type: application/json
 
 {
-  "name": "트레이너 이름3",
+  "name": "오상헌",
   "style": "BODY_BUILDING"
 }
 
+###
+# 트레이너의 관심 부위 정보를 변경합니다
+
+PUT http://localhost:8080/api/v1/trainers/trn_Fb1Q9MPItiVTnkiY/interestAreas
+Content-Type: application/json
+
+{
+  "interestAreas": [
+    "LOWER",
+    "BACK"
+  ]
+}
