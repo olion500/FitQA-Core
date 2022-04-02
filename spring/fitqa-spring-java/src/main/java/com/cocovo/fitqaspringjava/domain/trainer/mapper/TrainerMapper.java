@@ -1,3 +1,4 @@
+/*
 package com.cocovo.fitqaspringjava.domain.trainer.mapper;
 
 import com.cocovo.fitqaspringjava.domain.trainer.TrainerCommand;
@@ -13,3 +14,4 @@ public interface TrainerMapper {
   @Mapping(target = "name", ignore = true)
   Trainer of(TrainerCommand.UpdateTrainer updateTrainer);
 }
+*/

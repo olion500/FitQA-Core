@@ -5,6 +5,7 @@ import com.cocovo.fitqaspringjava.domain.trainer.TrainerInfo;
 import com.cocovo.fitqaspringjava.domain.trainer.component.TrainerReader;
 import com.cocovo.fitqaspringjava.domain.trainer.component.TrainerStore;
 import com.cocovo.fitqaspringjava.domain.trainer.entity.Trainer;
+import com.cocovo.fitqaspringjava.domain.trainer.mapper.TrainerInfoMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -18,6 +19,7 @@ import java.util.stream.Collectors;
 public class TrainerServiceImpl implements TrainerService {
   private final TrainerStore trainerStore;
   private final TrainerReader trainerReader;
+  private final TrainerInfoMapper trainerInfoMapper;
 
   @Override
   public String registerTrainer(TrainerCommand.RegisterTrainer registerTrainer) {
@@ -30,7 +32,7 @@ public class TrainerServiceImpl implements TrainerService {
   @Override
   public TrainerInfo.Main retrieveTrainerByToken(String trainerToken) {
     Trainer foundTrainer = trainerReader.retrieveTrainerByToken(trainerToken);
-    return new TrainerInfo.Main(foundTrainer);
+    return trainerInfoMapper.of(foundTrainer);
   }
 
   @Override
@@ -39,7 +41,7 @@ public class TrainerServiceImpl implements TrainerService {
     List<Trainer> foundTrainers =
         trainerReader.retrieveTrainersByInterestAreas(retrieveTrainersByInterestAreas.getInterestAreas());
 
-    return foundTrainers.stream().map(TrainerInfo.Main::new)
+    return foundTrainers.stream().map(trainer -> trainerInfoMapper.of(trainer))
         .collect(Collectors.toUnmodifiableList());
   }
 
@@ -47,6 +49,6 @@ public class TrainerServiceImpl implements TrainerService {
   public List<TrainerInfo.Main> retrieveTrainers() {
     List<Trainer> foundTrainers = trainerReader.retrieveTrainersAll();
 
-    return foundTrainers.stream().map(TrainerInfo.Main::new).collect(Collectors.toList());
+    return foundTrainers.stream().map(trainer -> trainerInfoMapper.of(trainer)).collect(Collectors.toList());
   }
 }
