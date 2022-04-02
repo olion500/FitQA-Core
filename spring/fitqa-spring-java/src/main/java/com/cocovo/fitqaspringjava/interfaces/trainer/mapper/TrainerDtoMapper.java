@@ -30,4 +30,7 @@ public interface TrainerDtoMapper {
       TrainerInfo.TrainerInterestAreaInfo trainerInterestAreaInfo);
 
   TrainerDto.TrainerSnsInfo of(TrainerInfo.TrainerSnsInfo trainerSnsInfo);
+
+  // update
+  TrainerCommand.UpdateTrainersByInterestAreas of(TrainerDto.UpdateTrainerInterestAreasRequest request);
 }

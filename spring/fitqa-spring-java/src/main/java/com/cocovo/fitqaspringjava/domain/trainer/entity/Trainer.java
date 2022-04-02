@@ -10,6 +10,7 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
+import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 import java.util.List;
@@ -18,6 +19,7 @@ import java.util.List;
 @Getter
 @Entity
 @Table(name = "trainers")
+@DynamicUpdate
 @RequiredArgsConstructor
 public class Trainer extends BaseEntity {
   private static final String TRAINER_PREFIX = "trn_";
@@ -62,5 +64,9 @@ public class Trainer extends BaseEntity {
     this.likesCount = 0;
     this.introduceTitle = "";
     this.introduceContext = "";
+  }
+
+  public void addInterestArea(TrainerInterestArea newTrainerInterestArea) {
+    interestAreas.add(newTrainerInterestArea);
   }
 }
