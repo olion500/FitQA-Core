@@ -1,3 +1,4 @@
+/*
 package com.cocovo.fitqaspringjava.domain.user.component;
 
 import com.cocovo.fitqaspringjava.domain.user.UserInfo;
@@ -10,3 +11,4 @@ public interface UserReader {
   List<User> findUserAllBy(List<String> userToken);
   List<UserInfo.Image> getUserImages(String userToken);
 }
+*/

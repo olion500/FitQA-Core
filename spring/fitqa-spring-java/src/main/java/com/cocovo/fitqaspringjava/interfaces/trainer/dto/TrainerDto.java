@@ -39,6 +39,7 @@ public class TrainerDto {
   @Builder
   @ToString
   public static class Main {
+    private final String trainerToken;
     private final String name;
     private final TypeInfo.WorkOutStyle style;
     private final String introduceTitle;
