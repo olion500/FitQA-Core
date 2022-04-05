@@ -25,15 +25,15 @@ public class Feedback extends BaseEntity {
 
     private String title;
     private String content;
-    private boolean isPrivate;
+    private boolean locked;
 
-    public Feedback(String title, String content, boolean isPrivate) {
+    public Feedback(String title, String content, boolean locked) {
         if (StringUtils.isEmpty(title)) throw new InvalidParamException("title cannot be empty.");
         if (StringUtils.isEmpty(content)) throw new InvalidParamException("content cannot be empty.");
 
         feedbackToken = TokenGenerator.randomCharacterWithPrefix(FEEDBACK_PREFIX);
         this.title = title;
         this.content = content;
-        this.isPrivate = isPrivate;
+        this.locked = locked;
     }
 }

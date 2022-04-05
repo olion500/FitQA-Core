@@ -11,5 +11,5 @@ public class FeedbackInfo {
     private final String feedbackToken;
     private final String title;
     private final String content;
-    private final boolean isPrivate;
+    private final boolean locked;
 }
