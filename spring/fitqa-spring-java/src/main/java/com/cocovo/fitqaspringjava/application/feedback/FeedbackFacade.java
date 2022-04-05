@@ -1,5 +1,6 @@
 package com.cocovo.fitqaspringjava.application.feedback;
 
+import com.cocovo.fitqaspringjava.domain.feedback.FeedbackCommand;
 import com.cocovo.fitqaspringjava.domain.feedback.FeedbackInfo;
 import com.cocovo.fitqaspringjava.domain.feedback.service.FeedbackService;
 import lombok.RequiredArgsConstructor;
@@ -20,5 +21,9 @@ public class FeedbackFacade {
 
     public FeedbackInfo retrieveFeedbackByToken(String feedbackToken) {
         return feedbackService.retrieveFeedbackByToken(feedbackToken);
+    }
+
+    public FeedbackInfo registerFeedback(FeedbackCommand.RegisterFeedback command) {
+        return feedbackService.registerFeedback(command);
     }
 }

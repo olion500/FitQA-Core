@@ -3,6 +3,7 @@ package com.cocovo.fitqaspringjava.domain.feedback.entity;
 import com.cocovo.fitqaspringjava.common.exception.InvalidParamException;
 import com.cocovo.fitqaspringjava.common.util.TokenGenerator;
 import com.cocovo.fitqaspringjava.domain.BaseEntity;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -24,9 +25,11 @@ public class Feedback extends BaseEntity {
     private String feedbackToken;
 
     private String title;
+    @Column(columnDefinition = "TEXT")
     private String content;
     private boolean locked;
 
+    @Builder
     public Feedback(String title, String content, boolean locked) {
         if (StringUtils.isEmpty(title)) throw new InvalidParamException("title cannot be empty.");
         if (StringUtils.isEmpty(content)) throw new InvalidParamException("content cannot be empty.");

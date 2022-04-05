@@ -1,0 +1,26 @@
+### 피드백 조회
+
+GET http://localhost:8080/api/v1/feedbacks
+Content-Type: application/json
+
+### 피드백 등록
+
+POST http://localhost:8080/api/v1/feedbacks/register
+Content-Type: application/json
+
+{
+  "title": "랫풀다운 자세가 정확한지 봐주세요",
+  "content": "턱걸이를 하듯 어깨보다 좀 더 넓게 바를 잡은 다음, 상체를 뒤로 젖히고 팔이 아니라 등의 힘으로 당겨 내려오는 방식이 가장 기본적인 형태이다. 턱걸이와 가동부위는 거의 같으며, 좁게 잡을수록 광배근 안쪽이, 넓게 잡을수록 상부와 바깥쪽이 발달된다. 그밖에 등 뒤로 바를 넘기는 등 몇가지 변형이 있는데, 등에 더 많은 자극을 가할 수 있는 장점이 있지만 초보자는 자칫 몸만 상하기 쉬우므로 정석대로 하는 편이 좋다. 상단 영상의 강경원은 초보자라면 넓은 그립으로 실시할 것을 권하고 있다."
+  "locked": false
+}
+
+### 피드백 등록 (영어로)
+
+POST http://localhost:8080/api/v1/feedbacks/register
+Content-Type: application/json
+
+{
+  "title": "Check if the lat pulldown position is correct.",
+  "content": "The most basic form is to grab the bar wider than your shoulders as if doing a pull-up, then tilt your upper body back and pull it down with your back instead of your arms. The pull-up and the movable part are almost the same, the narrower the grip, the more the inner lats develop, and the wider the grip, the more the upper and outer sides develop. In addition, there are several variations, such as passing the bar behind the back, which has the advantage of giving more stimulation to the back, but it is better for beginners to do it as it is. Kyungwon Kang in the video above recommends that beginners use a wide grip.",
+  "locked": false
+}

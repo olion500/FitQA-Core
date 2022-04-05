@@ -1,5 +1,6 @@
 package com.cocovo.fitqaspringjava.interfaces.feedback;
 
+import com.cocovo.fitqaspringjava.domain.feedback.FeedbackCommand;
 import com.cocovo.fitqaspringjava.domain.feedback.FeedbackInfo;
 import org.mapstruct.InjectionStrategy;
 import org.mapstruct.Mapper;
@@ -13,4 +14,6 @@ import org.mapstruct.ReportingPolicy;
 public interface FeedbackDtoMapper {
 
     FeedbackDto of(FeedbackInfo feedbackInfo);
+
+    FeedbackCommand.RegisterFeedback of(FeedbackDto feedbackDto);
 }

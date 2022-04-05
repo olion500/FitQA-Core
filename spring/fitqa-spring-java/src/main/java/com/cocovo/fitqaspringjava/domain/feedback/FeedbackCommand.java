@@ -1,5 +1,6 @@
 package com.cocovo.fitqaspringjava.domain.feedback;
 
+import com.cocovo.fitqaspringjava.domain.feedback.entity.Feedback;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.ToString;
@@ -14,6 +15,12 @@ public class FeedbackCommand {
         private final String content;
         private final boolean locked;
 
-
+        public Feedback toEntity() {
+            return Feedback.builder()
+                    .title(title)
+                    .content(content)
+                    .locked(locked)
+                    .build();
+        }
     }
 }

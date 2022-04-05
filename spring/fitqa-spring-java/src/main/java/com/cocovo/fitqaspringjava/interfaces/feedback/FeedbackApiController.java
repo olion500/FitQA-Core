@@ -3,12 +3,11 @@ package com.cocovo.fitqaspringjava.interfaces.feedback;
 import com.cocovo.fitqaspringjava.application.feedback.FeedbackFacade;
 import com.cocovo.fitqaspringjava.common.response.CommonResponse;
 import lombok.RequiredArgsConstructor;
+import lombok.Value;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -32,6 +31,15 @@ public class FeedbackApiController {
     @GetMapping("/{feedbackToken}")
     public CommonResponse<FeedbackDto> getFeedbackById(@PathVariable("feedbackToken") String feedbackToken) {
         var feedbackInfo = feedbackFacade.retrieveFeedbackByToken(feedbackToken);
+        var response = feedbackDtoMapper.of(feedbackInfo);
+        return CommonResponse.success(response);
+    }
+
+    @PostMapping("/register")
+    public CommonResponse<FeedbackDto> registerFeedback(@RequestBody @Valid FeedbackDto request) {
+        var registerCommand = feedbackDtoMapper.of(request);
+        log.error(registerCommand.toString());
+        var feedbackInfo = feedbackFacade.registerFeedback(registerCommand);
         var response = feedbackDtoMapper.of(feedbackInfo);
         return CommonResponse.success(response);
     }
