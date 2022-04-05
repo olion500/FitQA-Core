@@ -29,6 +29,18 @@ public class Feedback extends BaseEntity {
     private String content;
     private boolean locked;
 
+    @Enumerated(EnumType.STRING)
+    private Status status;
+
+    @Getter
+    @RequiredArgsConstructor
+    public enum Status {
+        PREPARE("답변대기"),
+        COMPLETE("답변완료");
+
+        private final String description;
+    }
+
     @Builder
     public Feedback(String title, String content, boolean locked) {
         if (StringUtils.isEmpty(title)) throw new InvalidParamException("title cannot be empty.");
@@ -38,5 +50,10 @@ public class Feedback extends BaseEntity {
         this.title = title;
         this.content = content;
         this.locked = locked;
+        this.status = Status.PREPARE;
+    }
+
+    public void changeComplete() {
+        this.status = Status.COMPLETE;
     }
 }
