@@ -13,7 +13,7 @@ import org.mapstruct.ReportingPolicy;
 )
 public interface FeedbackDtoMapper {
 
-    FeedbackDto of(FeedbackInfo feedbackInfo);
+    FeedbackDto.Main of(FeedbackInfo feedbackInfo);
 
-    FeedbackCommand.RegisterFeedback of(FeedbackDto feedbackDto);
+    FeedbackCommand.RegisterFeedback of(FeedbackDto.RegisterReq req);
 }

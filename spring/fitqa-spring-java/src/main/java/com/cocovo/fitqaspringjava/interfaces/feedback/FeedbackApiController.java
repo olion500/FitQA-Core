@@ -20,7 +20,7 @@ public class FeedbackApiController {
     private final FeedbackDtoMapper feedbackDtoMapper;
 
     @GetMapping
-    public CommonResponse<List<FeedbackDto>> getFeedbackAll() {
+    public CommonResponse<List<FeedbackDto.Main>> getFeedbackAll() {
         var feedbacks = feedbackFacade.retrieveFeedbacks();
         var response = feedbacks.stream()
                 .map(feedbackDtoMapper::of)
@@ -29,16 +29,15 @@ public class FeedbackApiController {
     }
 
     @GetMapping("/{feedbackToken}")
-    public CommonResponse<FeedbackDto> getFeedbackById(@PathVariable("feedbackToken") String feedbackToken) {
+    public CommonResponse<FeedbackDto.Main> getFeedbackById(@PathVariable("feedbackToken") String feedbackToken) {
         var feedbackInfo = feedbackFacade.retrieveFeedbackByToken(feedbackToken);
         var response = feedbackDtoMapper.of(feedbackInfo);
         return CommonResponse.success(response);
     }
 
     @PostMapping("/register")
-    public CommonResponse<FeedbackDto> registerFeedback(@RequestBody @Valid FeedbackDto request) {
+    public CommonResponse<FeedbackDto.Main> registerFeedback(@RequestBody @Valid FeedbackDto.RegisterReq request) {
         var registerCommand = feedbackDtoMapper.of(request);
-        log.error(registerCommand.toString());
         var feedbackInfo = feedbackFacade.registerFeedback(registerCommand);
         var response = feedbackDtoMapper.of(feedbackInfo);
         return CommonResponse.success(response);
