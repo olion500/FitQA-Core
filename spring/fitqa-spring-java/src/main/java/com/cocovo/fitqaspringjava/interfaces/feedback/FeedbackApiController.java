@@ -37,7 +37,7 @@ public class FeedbackApiController {
 
     @PostMapping("/register")
     public CommonResponse<FeedbackDto.Main> registerFeedback(@RequestBody @Valid FeedbackDto.RegisterReq request) {
-        var registerCommand = feedbackDtoMapper.of(request);
+        var registerCommand = feedbackDtoMapper. of(request);
         var feedbackInfo = feedbackFacade.registerFeedback(registerCommand);
         var response = feedbackDtoMapper.of(feedbackInfo);
         return CommonResponse.success(response);

@@ -3,6 +3,7 @@ package com.cocovo.fitqaspringjava.domain.feedback.entity;
 import com.cocovo.fitqaspringjava.common.exception.InvalidParamException;
 import com.cocovo.fitqaspringjava.common.util.TokenGenerator;
 import com.cocovo.fitqaspringjava.domain.BaseEntity;
+import com.cocovo.fitqaspringjava.domain.common.TypeInfo;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -24,6 +25,12 @@ public class Feedback extends BaseEntity {
     private Long id;
     private String feedbackToken;
 
+    private String ownerId;
+    private String trainerId;
+    @Enumerated(EnumType.STRING)
+    private TypeInfo.InterestArea interestArea;
+    private Integer price;
+
     private String title;
     @Column(columnDefinition = "TEXT")
     private String content;
@@ -42,11 +49,19 @@ public class Feedback extends BaseEntity {
     }
 
     @Builder
-    public Feedback(String title, String content, boolean locked) {
+    public Feedback(String ownerId, String trainerId, TypeInfo.InterestArea interestArea, Integer price, String title, String content, boolean locked) {
+        if (StringUtils.isEmpty(ownerId)) throw new InvalidParamException("ownerId cannot be empty.");
+        if (StringUtils.isEmpty(trainerId)) throw new InvalidParamException("trainerToken cannot be empty.");
+        if (price < 0) throw new InvalidParamException("price cannot be below 0");
         if (StringUtils.isEmpty(title)) throw new InvalidParamException("title cannot be empty.");
         if (StringUtils.isEmpty(content)) throw new InvalidParamException("content cannot be empty.");
 
-        feedbackToken = TokenGenerator.randomCharacterWithPrefix(FEEDBACK_PREFIX);
+
+        this.feedbackToken = TokenGenerator.randomCharacterWithPrefix(FEEDBACK_PREFIX);
+        this.ownerId = ownerId;
+        this.trainerId = trainerId;
+        this.interestArea = interestArea;
+        this.price = price;
         this.title = title;
         this.content = content;
         this.locked = locked;
