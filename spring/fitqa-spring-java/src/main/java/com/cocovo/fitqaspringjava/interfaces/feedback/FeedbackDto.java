@@ -8,23 +8,9 @@ import lombok.ToString;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 public class FeedbackDto {
-
-    @Getter
-    @Builder
-    @ToString
-    public static class Main {
-        private final String feedbackToken;
-        private final String ownerId;
-        private final String trainerId;
-        private final TypeInfo.InterestArea interestArea;
-        private final Integer price;
-        private final String title;
-        private final String content;
-        private final boolean locked;
-        private final Feedback.Status status;
-    }
 
     @Getter
     @Builder
@@ -44,5 +30,40 @@ public class FeedbackDto {
         private String content;
         @NotNull(message = "locked 는 필수값입니다.")
         private boolean locked;
+    }
+
+    @Getter
+    @Builder
+    @ToString
+    public static class AddCommentReq {
+        @NotEmpty(message = "writerId 는 필수값입니다")
+        private String writerId;
+        @NotEmpty(message = "comment 는 필수값입니다")
+        private String comment;
+    }
+
+    @Getter
+    @Builder
+    @ToString
+    public static class Main {
+        private final String feedbackToken;
+        private final String ownerId;
+        private final String trainerId;
+        private final TypeInfo.InterestArea interestArea;
+        private final Integer price;
+        private final String title;
+        private final String content;
+        private final boolean locked;
+        private final List<FeedbackCommentInfo> comments;
+        private final Feedback.Status status;
+    }
+
+
+    @Getter
+    @Builder
+    @ToString
+    public static class FeedbackCommentInfo {
+        private final String writer;
+        private final String comment;
     }
 }

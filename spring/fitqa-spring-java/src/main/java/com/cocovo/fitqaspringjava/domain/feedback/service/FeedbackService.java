@@ -7,7 +7,9 @@ import java.util.List;
 
 public interface FeedbackService {
 
-    List<FeedbackInfo> retrieveFeedbacks();
-    FeedbackInfo retrieveFeedbackByToken(String feedbackToken);
-    FeedbackInfo registerFeedback(FeedbackCommand.RegisterFeedback command);
+    List<FeedbackInfo.Main> retrieveFeedbacks();
+    FeedbackInfo.Main retrieveFeedbackByToken(String feedbackToken);
+    FeedbackInfo.Main registerFeedback(FeedbackCommand.RegisterFeedback command);
+
+    String addComment(String feedbackToken, FeedbackCommand.AddComment command);
 }
