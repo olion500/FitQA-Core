@@ -6,6 +6,16 @@ spring:
   jpa:
     hibernate:
       ddl-auto: create
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            clientId: 911225987973-iea15nv6sfakfskpt6480a3g4sne6fv9.apps.googleusercontent.com
+            clientSecret: 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
+            scope:
+              - email
+              - profile
 
 server:
   port: 8080
