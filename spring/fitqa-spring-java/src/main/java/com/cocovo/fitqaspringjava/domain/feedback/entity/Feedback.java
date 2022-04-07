@@ -4,6 +4,7 @@ import com.cocovo.fitqaspringjava.common.exception.InvalidParamException;
 import com.cocovo.fitqaspringjava.common.util.TokenGenerator;
 import com.cocovo.fitqaspringjava.domain.BaseEntity;
 import com.cocovo.fitqaspringjava.domain.common.TypeInfo;
+import com.google.common.collect.Lists;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -11,6 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Slf4j
 @Getter
@@ -35,6 +37,9 @@ public class Feedback extends BaseEntity {
     @Column(columnDefinition = "TEXT")
     private String content;
     private boolean locked;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "feedback", cascade = CascadeType.PERSIST)
+    private List<FeedbackComment> feedbackCommentList = Lists.newArrayList();
 
     @Enumerated(EnumType.STRING)
     private Status status;

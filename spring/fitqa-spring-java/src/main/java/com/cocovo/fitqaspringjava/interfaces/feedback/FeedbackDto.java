@@ -45,4 +45,14 @@ public class FeedbackDto {
         @NotNull(message = "locked 는 필수값입니다.")
         private boolean locked;
     }
+
+    @Getter
+    @Builder
+    @ToString
+    public static class AddCommentReq {
+        @NotEmpty(message = "writerId 는 필수값입니다")
+        private String writerId;
+        @NotEmpty(message = "comment 는 필수값입니다")
+        private String comment;
+    }
 }

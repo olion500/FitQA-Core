@@ -2,6 +2,7 @@ package com.cocovo.fitqaspringjava.domain.feedback.service;
 
 import com.cocovo.fitqaspringjava.domain.feedback.FeedbackCommand;
 import com.cocovo.fitqaspringjava.domain.feedback.FeedbackInfo;
+import com.cocovo.fitqaspringjava.domain.feedback.component.FeedbackCommentStore;
 import com.cocovo.fitqaspringjava.domain.feedback.component.FeedbackInfoMapper;
 import com.cocovo.fitqaspringjava.domain.feedback.component.FeedbackReader;
 import com.cocovo.fitqaspringjava.domain.feedback.component.FeedbackStore;
@@ -20,6 +21,7 @@ public class FeedbackServiceImpl implements FeedbackService {
 
     private final FeedbackStore feedbackStore;
     private final FeedbackReader feedbackReader;
+    private final FeedbackCommentStore feedbackCommentStore;
 
     @Override
     public List<FeedbackInfo> retrieveFeedbacks() {
@@ -40,5 +42,13 @@ public class FeedbackServiceImpl implements FeedbackService {
         var initFeedback = command.toEntity();
         var feedback = feedbackStore.store(initFeedback);
         return feedbackInfoMapper.of(feedback);
+    }
+
+    @Override
+    public String addComment(String feedbackToken, FeedbackCommand.AddComment command) {
+        var feedback = feedbackReader.retrieveFeedbackByToken(feedbackToken);
+        var initComment = command.toEntity(feedback);
+        var comment = feedbackCommentStore.store(initComment);
+        return comment.getFeedbackCommentToken();
     }
 }

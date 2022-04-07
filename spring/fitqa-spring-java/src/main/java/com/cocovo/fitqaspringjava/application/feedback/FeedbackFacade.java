@@ -26,4 +26,9 @@ public class FeedbackFacade {
     public FeedbackInfo registerFeedback(FeedbackCommand.RegisterFeedback command) {
         return feedbackService.registerFeedback(command);
     }
+
+    public FeedbackInfo addComment(String feedbackToken, FeedbackCommand.AddComment command) {
+        feedbackService.addComment(feedbackToken, command);
+        return feedbackService.retrieveFeedbackByToken(feedbackToken);
+    }
 }

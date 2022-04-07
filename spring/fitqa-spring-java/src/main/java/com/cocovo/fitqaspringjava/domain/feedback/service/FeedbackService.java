@@ -10,4 +10,6 @@ public interface FeedbackService {
     List<FeedbackInfo> retrieveFeedbacks();
     FeedbackInfo retrieveFeedbackByToken(String feedbackToken);
     FeedbackInfo registerFeedback(FeedbackCommand.RegisterFeedback command);
+
+    String addComment(String feedbackToken, FeedbackCommand.AddComment command);
 }

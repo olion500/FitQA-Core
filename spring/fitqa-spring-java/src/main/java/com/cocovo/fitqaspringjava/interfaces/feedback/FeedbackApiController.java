@@ -42,4 +42,12 @@ public class FeedbackApiController {
         var response = feedbackDtoMapper.of(feedbackInfo);
         return CommonResponse.success(response);
     }
+
+    @PostMapping("/{feedbackToken}/comment")
+    public CommonResponse<FeedbackDto.Main> addComment(@PathVariable("feedbackToken") String feedbackToken, @RequestBody @Valid FeedbackDto.AddCommentReq request) {
+        var commentCommand = feedbackDtoMapper.of(request);
+        var feedbackInfo = feedbackFacade.addComment(feedbackToken, commentCommand);
+        var response = feedbackDtoMapper.of(feedbackInfo);
+        return CommonResponse.success(response);
+    }
 }
