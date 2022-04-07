@@ -15,19 +15,19 @@ import java.util.List;
 public class FeedbackFacade {
     private final FeedbackService feedbackService;
 
-    public List<FeedbackInfo> retrieveFeedbacks() {
+    public List<FeedbackInfo.Main> retrieveFeedbacks() {
         return feedbackService.retrieveFeedbacks();
     }
 
-    public FeedbackInfo retrieveFeedbackByToken(String feedbackToken) {
+    public FeedbackInfo.Main retrieveFeedbackByToken(String feedbackToken) {
         return feedbackService.retrieveFeedbackByToken(feedbackToken);
     }
 
-    public FeedbackInfo registerFeedback(FeedbackCommand.RegisterFeedback command) {
+    public FeedbackInfo.Main registerFeedback(FeedbackCommand.RegisterFeedback command) {
         return feedbackService.registerFeedback(command);
     }
 
-    public FeedbackInfo addComment(String feedbackToken, FeedbackCommand.AddComment command) {
+    public FeedbackInfo.Main addComment(String feedbackToken, FeedbackCommand.AddComment command) {
         feedbackService.addComment(feedbackToken, command);
         return feedbackService.retrieveFeedbackByToken(feedbackToken);
     }

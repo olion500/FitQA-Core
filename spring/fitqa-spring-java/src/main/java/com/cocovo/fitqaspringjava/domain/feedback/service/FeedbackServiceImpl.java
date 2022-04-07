@@ -24,7 +24,7 @@ public class FeedbackServiceImpl implements FeedbackService {
     private final FeedbackCommentStore feedbackCommentStore;
 
     @Override
-    public List<FeedbackInfo> retrieveFeedbacks() {
+    public List<FeedbackInfo.Main> retrieveFeedbacks() {
         var feedbacks = feedbackReader.retrieveFeedbackAll();
         return feedbacks.stream()
                 .map(feedbackInfoMapper::of)
@@ -32,13 +32,13 @@ public class FeedbackServiceImpl implements FeedbackService {
     }
 
     @Override
-    public FeedbackInfo retrieveFeedbackByToken(String feedbackToken) {
+    public FeedbackInfo.Main retrieveFeedbackByToken(String feedbackToken) {
         var feedback = feedbackReader.retrieveFeedbackByToken(feedbackToken);
         return feedbackInfoMapper.of(feedback);
     }
 
     @Override
-    public FeedbackInfo registerFeedback(FeedbackCommand.RegisterFeedback command) {
+    public FeedbackInfo.Main registerFeedback(FeedbackCommand.RegisterFeedback command) {
         var initFeedback = command.toEntity();
         var feedback = feedbackStore.store(initFeedback);
         return feedbackInfoMapper.of(feedback);
