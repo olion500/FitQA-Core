@@ -18,9 +18,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable()
                 .headers().frameOptions().disable() // h2-console 화면을 사용하기 위해 해당 옵션 disable
                 .and()
-                .authorizeRequests()
-                .anyRequest().authenticated()
-                .and()
+//                .authorizeRequests()
+//                .anyRequest().authenticated()
+//                .and()
                 .oauth2Login(oauth ->
                         oauth.userInfoEndpoint()     // oauth2 로그인 성공  후 가져올 때의 설정들
                                 // 소셜로그인 성공 시 후속 조치를 진행할 UserService 인터페이스 구현체 등록

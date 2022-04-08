@@ -4,20 +4,23 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.ToString;
 
-import java.io.Serializable;
-
-@Getter
-@Builder
-public class UserInfo {
+public class UserCommand {
 
     @Getter
     @Builder
     @ToString
-    public static class Main implements Serializable{
+    public static class UpdateUser {
         private String email;
         private String name;
         private String photoURL;
         private User.AccountProvider provider;
-    }
 
+        public User toEntity() {
+            return User.builder()
+                    .email(email)
+                    .name(name)
+                    .photoURL(photoURL)
+                    .build();
+        }
+    }
 }

@@ -1,8 +1,9 @@
 package com.cocovo.fitqaspringjava.config.auth;
 
+import com.cocovo.fitqaspringjava.application.user.UserFacade;
 import com.cocovo.fitqaspringjava.domain.user.User;
-import com.cocovo.fitqaspringjava.domain.user.UserInfo;
-import com.cocovo.fitqaspringjava.infrastructure.user.UserRepository;
+import com.cocovo.fitqaspringjava.interfaces.user.UserDto;
+import com.cocovo.fitqaspringjava.interfaces.user.UserDtoMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
@@ -13,14 +14,13 @@ import org.springframework.security.oauth2.core.user.DefaultOAuth2User;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
 
-import javax.servlet.http.HttpSession;
 import java.util.Collections;
 
 @Service
 @RequiredArgsConstructor
 public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequest, OAuth2User> {
-    private final UserRepository userRepository;
-    private final HttpSession httpsession;
+    private final UserDtoMapper userDtoMapper;
+    private final UserFacade userFacade;
 
     @Override
     public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
@@ -33,18 +33,11 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
         String userNameAttributeName = userRequest.getClientRegistration().getProviderDetails().getUserInfoEndpoint().getUserNameAttributeName();
 
         // Oauth2UserService
-        var attributes = OAuthAttributes.of(registrationId, userNameAttributeName, oAuth2User.getAttributes());
-        User user = saveOrUpdate(attributes);
-        httpsession.setAttribute("user", UserInfo.of(user));
+        var attributes = UserDto.of(registrationId, userNameAttributeName, oAuth2User.getAttributes());
+        var userUpdateCommand = userDtoMapper.of(attributes);
+        userFacade.saveOrUpdate(userUpdateCommand);
 
 
-        return new DefaultOAuth2User(Collections.singleton(new SimpleGrantedAuthority("USER")), attributes.getAttributes(), attributes.getNameAttributeKey());
-    }
-
-    private User saveOrUpdate(OAuthAttributes attributes){
-        User user = userRepository.findByEmail(attributes.getEmail())
-                .map(entity -> entity.update(attributes.getName(), attributes.getPhotoURL()))
-                .orElse(attributes.toEntity());
-        return userRepository.save(user);
+        return new DefaultOAuth2User(Collections.singleton(new SimpleGrantedAuthority("USER")), oAuth2User.getAttributes(), attributes.getAttributeKey());
     }
 }
