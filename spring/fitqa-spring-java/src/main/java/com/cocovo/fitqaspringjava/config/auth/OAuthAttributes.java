@@ -26,8 +26,8 @@ public class OAuthAttributes {
     public static OAuthAttributes of(String registrationId, String userNameAttributeName, Map<String, Object> attributes){
         // 여기서 네이버와 카카오 등 구분 (ofNaver, ofKakao)
         switch (registrationId) {
-//            case "naver":
-//                return ofNaver("id", attributes);
+            case "naver":
+                return ofNaver("id", attributes);
             case "kakao":
                 return ofKakao(userNameAttributeName, attributes);
         }
@@ -53,6 +53,19 @@ public class OAuthAttributes {
                 .email((String) response.get("email"))
                 .photoURL((String) profile.get("profile_image_url"))
                 .attributes(attributes)
+                .nameAttributeKey(userNameAttributeName)
+                .build();
+    }
+
+    private static OAuthAttributes ofNaver(String userNameAttributeName, Map<String, Object> attributes) {
+        // JSON형태이기 떄문에 Map을 통해서 데이터를 가져온다.
+        Map<String, Object> response = (Map<String, Object>)attributes.get("response");
+
+        return OAuthAttributes.builder()
+                .name((String) response.get("name"))
+                .email((String) response.get("email"))
+                .photoURL((String) response.get("profile_image"))
+                .attributes(response)
                 .nameAttributeKey(userNameAttributeName)
                 .build();
     }
