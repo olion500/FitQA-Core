@@ -13,6 +13,7 @@ public class UserDto {
     @Builder
     @ToString
     public static class Main {
+        private final String userToken;
         private final String name;
         private final String email;
         private final String photoURL;
