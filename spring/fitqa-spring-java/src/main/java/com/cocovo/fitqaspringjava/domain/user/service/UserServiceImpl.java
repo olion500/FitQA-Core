@@ -1,31 +1,52 @@
 package com.cocovo.fitqaspringjava.domain.user.service;
 
+import com.cocovo.fitqaspringjava.common.exception.EntityNotFoundException;
+import com.cocovo.fitqaspringjava.domain.user.User;
 import com.cocovo.fitqaspringjava.domain.user.UserCommand;
+import com.cocovo.fitqaspringjava.domain.user.UserInfo;
+import com.cocovo.fitqaspringjava.domain.user.component.UserInfoMapper;
+import com.cocovo.fitqaspringjava.domain.user.component.UserReader;
 import com.cocovo.fitqaspringjava.domain.user.component.UserStore;
-import com.cocovo.fitqaspringjava.domain.user.entity.User;
-import com.cocovo.fitqaspringjava.domain.user.entity.UserSpec;
-import com.cocovo.fitqaspringjava.domain.user.mapper.UserMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class UserServiceImpl implements UserService {
-  private final UserStore userStore;
-  private final UserMapper userMapper;
+public class UserServiceImpl implements UserService{
+    private final UserInfoMapper userInfoMapper;
 
-  @Override
-  @Transactional
-  public String registerUser(UserCommand.RegisterUser registerUser) {
-    User initUser = userMapper.of(registerUser);
-    User registeredUser = userStore.store(initUser);
+    private final UserReader userReader;
+    private final UserStore userStore;
 
-    UserSpec initUserSpec = userMapper.specOf(registeredUser, registerUser);
-    userStore.store(initUserSpec);
+    @Override
+    public List<UserInfo.Main> retrieveUsers() {
+        var users = userReader.retrieveUserAll();
+        return users.stream()
+                .map(userInfoMapper::of)
+                .collect(Collectors.toList());
+    }
 
-    return registeredUser.getUserToken();
-  }
+    @Override
+    public UserInfo.Main retrieveUserByToken(String userToken) {
+        var user = userReader.retrieveUserByToken(userToken);
+        return userInfoMapper.of(user);
+    }
+
+    @Override
+    public UserInfo.Main saveOrUpdate(UserCommand.UpdateUser command) {
+        User user;
+        try {
+            user = userReader.findByEmail(command.getEmail());
+            user.update(command.getName(), command.getPhotoURL());
+        } catch (EntityNotFoundException e) {
+            var initUser = command.toEntity();
+            user = userStore.store(initUser);
+        }
+        return userInfoMapper.of(user);
+    }
 }

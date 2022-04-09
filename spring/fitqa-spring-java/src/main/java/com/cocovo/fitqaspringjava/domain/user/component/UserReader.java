@@ -1,14 +1,13 @@
-/*
 package com.cocovo.fitqaspringjava.domain.user.component;
 
-import com.cocovo.fitqaspringjava.domain.user.UserInfo;
-import com.cocovo.fitqaspringjava.domain.user.entity.User;
+import com.cocovo.fitqaspringjava.domain.feedback.entity.Feedback;
+import com.cocovo.fitqaspringjava.domain.user.User;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface UserReader {
-  User getUserBy(String userToken);
-  List<User> findUserAllBy(List<String> userToken);
-  List<UserInfo.Image> getUserImages(String userToken);
+    List<User> retrieveUserAll();
+    User retrieveUserByToken(String userToken);
+    User findByEmail(String email);
 }
-*/
