@@ -1,5 +1,7 @@
 package com.cocovo.fitqaspringjava.config;
 
+import com.cocovo.fitqaspringjava.config.auth.AuthFailureHandler;
+import com.cocovo.fitqaspringjava.config.auth.AuthSuccessHandler;
 import com.cocovo.fitqaspringjava.config.auth.CustomOAuth2UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -16,14 +18,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .csrf().disable()
+                .formLogin().disable()
                 .headers().frameOptions().disable() // h2-console 화면을 사용하기 위해 해당 옵션 disable
                 .and()
 //                .authorizeRequests()
 //                .anyRequest().authenticated()
 //                .and()
-                .oauth2Login(oauth ->
-                        oauth.userInfoEndpoint()     // oauth2 로그인 성공  후 가져올 때의 설정들
-                                // 소셜로그인 성공 시 후속 조치를 진행할 UserService 인터페이스 구현체 등록
-                                .userService(customOauth2UserService));  // 리소스 서버에서 사용자 정보를 가져온 상태에서 추가로 진행
+                .oauth2Login()
+                .userInfoEndpoint()
+                .userService(customOauth2UserService)
+                .and()
+                .successHandler(new AuthSuccessHandler())
+                .failureHandler(new AuthFailureHandler())
+                ;
     }
 }

@@ -14,5 +14,5 @@ import org.mapstruct.ReportingPolicy;
 public interface UserDtoMapper {
     UserDto.Main of(UserInfo.Main userInfo);
 
-    UserCommand.UpdateUser of(UserDto.Main user);
+    UserCommand.UpdateUser of(UserDto.RegisterReq user);
 }

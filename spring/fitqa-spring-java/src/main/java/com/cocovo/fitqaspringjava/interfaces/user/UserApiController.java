@@ -2,6 +2,7 @@ package com.cocovo.fitqaspringjava.interfaces.user;
 
 import com.cocovo.fitqaspringjava.application.user.UserFacade;
 import com.cocovo.fitqaspringjava.common.response.CommonResponse;
+import com.cocovo.fitqaspringjava.common.response.ErrorCode;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -34,5 +35,10 @@ public class UserApiController {
         var userInfo = userFacade.retrieveUserInfo(userToken);
         var response = userDtoMapper.of(userInfo);
         return CommonResponse.success(response);
+    }
+
+    @GetMapping("/failed")
+    public CommonResponse authFailed() {
+        return CommonResponse.fail(ErrorCode.USER_AUTH_FAILED);
     }
 }

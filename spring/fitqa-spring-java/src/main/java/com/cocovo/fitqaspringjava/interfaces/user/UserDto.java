@@ -1,10 +1,12 @@
 package com.cocovo.fitqaspringjava.interfaces.user;
 
 import com.cocovo.fitqaspringjava.domain.user.User;
+import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.ToString;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class UserDto {
@@ -18,12 +20,29 @@ public class UserDto {
         private final String email;
         private final String photoURL;
         private final User.AccountProvider provider;
-
-        private final String attributeKey;
-        private final Map<String, Object> attributes;
     }
 
-    public static UserDto.Main of(String registrationId, String userNameAttributeName, Map<String, Object> attributes) {
+    @Getter
+    @Builder
+    @ToString
+    public static class RegisterReq {
+        private final String name;
+        private final String email;
+        private final String photoURL;
+        private final User.AccountProvider provider;
+
+        private final String attributeKey;
+        @Getter(AccessLevel.NONE)
+        private final Map<String, Object> attributes;
+
+        public Map<String, Object> getAttributes(String userToken) {
+            var modifiable = new HashMap<>(attributes);
+            modifiable.put("token", userToken);
+            return modifiable;
+        }
+    }
+
+    public static UserDto.RegisterReq of(String registrationId, String userNameAttributeName, Map<String, Object> attributes) {
         switch (registrationId) {
             case "naver":
                 return ofNaver("id", attributes);
@@ -33,8 +52,8 @@ public class UserDto {
         return ofGoogle(userNameAttributeName, attributes);
     }
 
-    private static Main ofGoogle(String attributeKey, Map<String, Object> attributes) {
-        return Main.builder()
+    private static RegisterReq ofGoogle(String attributeKey, Map<String, Object> attributes) {
+        return RegisterReq.builder()
                 .name((String) attributes.get("name"))
                 .email((String) attributes.get("email"))
                 .photoURL((String) attributes.get("picture"))
@@ -44,10 +63,10 @@ public class UserDto {
                 .build();
     }
 
-    private static Main ofKakao(String attributeKey, Map<String, Object> attributes) {
+    private static RegisterReq ofKakao(String attributeKey, Map<String, Object> attributes) {
         var response = (Map<String, Object>)attributes.get("kakao_account");
         var profile = (Map<String, Object>) response.get("profile");
-        return Main.builder()
+        return RegisterReq.builder()
                 .name((String) profile.get("nickname"))
                 .email((String) response.get("email"))
                 .photoURL((String) profile.get("profile_image_url"))
@@ -57,9 +76,9 @@ public class UserDto {
                 .build();
     }
 
-    private static Main ofNaver(String attributeKey, Map<String, Object> attributes) {
+    private static RegisterReq ofNaver(String attributeKey, Map<String, Object> attributes) {
         Map<String, Object> response = (Map<String, Object>)attributes.get("response");
-        return Main.builder()
+        return RegisterReq.builder()
                 .name((String) response.get("name"))
                 .email((String) response.get("email"))
                 .photoURL((String) response.get("profile_image"))

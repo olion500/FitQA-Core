@@ -15,6 +15,7 @@ import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
+import java.util.HashMap;
 
 @Service
 @RequiredArgsConstructor
@@ -32,12 +33,12 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
         // OAuth2 로그인 진행 시 키가 되는 필드 값(PK)
         String userNameAttributeName = userRequest.getClientRegistration().getProviderDetails().getUserInfoEndpoint().getUserNameAttributeName();
 
-        // Oauth2UserService
-        var attributes = UserDto.of(registrationId, userNameAttributeName, oAuth2User.getAttributes());
-        var userUpdateCommand = userDtoMapper.of(attributes);
-        userFacade.saveOrUpdate(userUpdateCommand);
+        // Call UserFacade to save user data.
+        var initUser = UserDto.of(registrationId, userNameAttributeName, oAuth2User.getAttributes());
+        var userUpdateCommand = userDtoMapper.of(initUser);
+        var userInfo = userFacade.saveOrUpdate(userUpdateCommand);
+        var user = userDtoMapper.of(userInfo);
 
-
-        return new DefaultOAuth2User(Collections.singleton(new SimpleGrantedAuthority("USER")), oAuth2User.getAttributes(), attributes.getAttributeKey());
+        return new DefaultOAuth2User(Collections.singleton(new SimpleGrantedAuthority("USER")), initUser.getAttributes(user.getUserToken()), initUser.getAttributeKey());
     }
 }
