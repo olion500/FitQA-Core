@@ -20,6 +20,7 @@ public class UserCommand {
                     .email(email)
                     .name(name)
                     .photoURL(photoURL)
+                    .provider(provider)
                     .build();
         }
     }
