@@ -24,6 +24,7 @@ public class TrainerApiController {
     var trainers = trainerFacade.retrieveTrainers();
     var response =
         trainers.stream().map(main -> trainerDtoMapper.of(main)).collect(Collectors.toList());
+    System.out.println(response);
     return CommonResponse.success(response);
   }
 

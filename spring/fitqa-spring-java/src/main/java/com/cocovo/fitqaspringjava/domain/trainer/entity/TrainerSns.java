@@ -23,6 +23,8 @@ public class TrainerSns extends BaseEntity {
   @JoinColumn(name = "trainer_id")
   private Trainer trainer;
 
+
+  @Enumerated(EnumType.STRING)
   private SnsType.Type snsType;
   private String snsUrl;
 
