@@ -23,6 +23,7 @@ public class TrainerInterestArea extends BaseEntity {
   @JoinColumn(name = "trainer_id")
   private Trainer trainer;
 
+  @Enumerated(EnumType.STRING)
   private WorkOutType.InterestArea interestArea;
 
   @Builder
