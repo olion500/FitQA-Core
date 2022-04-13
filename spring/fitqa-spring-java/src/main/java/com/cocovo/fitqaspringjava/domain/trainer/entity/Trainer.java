@@ -36,6 +36,10 @@ public class Trainer extends BaseEntity {
 
   private String introduceTitle;
   private String introduceContext;
+
+  private String representativeCareer;
+  private String representativeFootprints;
+
   private Integer likesCount;
 
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "trainer", cascade = CascadeType.PERSIST)
@@ -64,6 +68,8 @@ public class Trainer extends BaseEntity {
     this.likesCount = 0;
     this.introduceTitle = "";
     this.introduceContext = "";
+    this.representativeCareer = "";
+    this.representativeFootprints = "";
   }
 
   public void addInterestArea(TrainerInterestArea newTrainerInterestArea) {

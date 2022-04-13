@@ -21,6 +21,8 @@ public class TrainerInfo {
     private final WorkOutType.Style style;
     private final String introduceTitle;
     private final String introduceContext;
+    private final String representativeCareer;
+    private final String representativeFootprints;
     private final Integer likesCount;
     private final List<TrainerImageInfo> images;
     private final List<TrainerCareerInfo> careers;

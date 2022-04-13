@@ -11,7 +11,7 @@ import javax.validation.constraints.NotNull;
 import java.util.List;
 
 public class TrainerDto {
-
+  // Read
   @Getter
   @ToString
   public static class RegisterTrainerRequest {
@@ -35,12 +35,14 @@ public class TrainerDto {
     private List<String> interestAreas;
   }
 
+  // Update
   @Getter
   @ToString
   public static class UpdateTrainerInterestAreasRequest {
     private List<TypeInfo.InterestArea> interestAreas;
   }
 
+  // Domain
   @Getter
   @Builder
   @ToString
@@ -50,6 +52,8 @@ public class TrainerDto {
     private final TypeInfo.WorkOutStyle style;
     private final String introduceTitle;
     private final String introduceContext;
+    private final String representativeCareer;
+    private final String representativeFootprints;
     private final Integer likesCount;
     private final List<TrainerImageInfo> images;
     private final List<TrainerCareerInfo> careers;
