@@ -28,7 +28,7 @@ public class Feedback extends BaseEntity {
     private String feedbackToken;
 
     private String ownerId;
-    private String trainerId;
+    private Long trainerId;
     @Enumerated(EnumType.STRING)
     private TypeInfo.InterestArea interestArea;
     private Integer price;
@@ -54,9 +54,9 @@ public class Feedback extends BaseEntity {
     }
 
     @Builder
-    public Feedback(String ownerId, String trainerId, TypeInfo.InterestArea interestArea, Integer price, String title, String content, boolean locked) {
+    public Feedback(String ownerId, Long trainerId, TypeInfo.InterestArea interestArea,
+                    Integer price, String title, String content, boolean locked) {
         if (StringUtils.isEmpty(ownerId)) throw new InvalidParamException("ownerId cannot be empty.");
-        if (StringUtils.isEmpty(trainerId)) throw new InvalidParamException("trainerToken cannot be empty.");
         if (price < 0) throw new InvalidParamException("price cannot be below 0");
         if (StringUtils.isEmpty(title)) throw new InvalidParamException("title cannot be empty.");
         if (StringUtils.isEmpty(content)) throw new InvalidParamException("content cannot be empty.");

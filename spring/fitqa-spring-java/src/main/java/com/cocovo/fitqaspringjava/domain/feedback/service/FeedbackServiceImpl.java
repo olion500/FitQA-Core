@@ -38,6 +38,14 @@ public class FeedbackServiceImpl implements FeedbackService {
     }
 
     @Override
+    public List<FeedbackInfo.Main> retrieveFeedbacksByTrainerId(Long trainerId) {
+        var feedbacks = feedbackReader.retrieveFeedbackAllByTrainerId(trainerId);
+        return feedbacks.stream()
+                .map(feedbackInfoMapper::of)
+                .collect(Collectors.toList());
+    }
+
+    @Override
     public FeedbackInfo.Main registerFeedback(FeedbackCommand.RegisterFeedback command) {
         var initFeedback = command.toEntity();
         var feedback = feedbackStore.store(initFeedback);

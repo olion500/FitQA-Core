@@ -26,4 +26,9 @@ public class FeedbackReaderImpl implements FeedbackReader {
         return feedbackRepository.findByFeedbackToken(feedbackToken)
                 .orElseThrow(EntityNotFoundException::new);
     }
+
+    @Override
+    public List<Feedback> retrieveFeedbackAllByTrainerId(Long trainerId) {
+        return feedbackRepository.findAllByTrainerId(trainerId);
+    }
 }

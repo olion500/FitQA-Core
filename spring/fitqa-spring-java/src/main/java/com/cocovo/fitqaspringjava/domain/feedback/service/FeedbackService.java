@@ -9,6 +9,9 @@ public interface FeedbackService {
 
     List<FeedbackInfo.Main> retrieveFeedbacks();
     FeedbackInfo.Main retrieveFeedbackByToken(String feedbackToken);
+
+    List<FeedbackInfo.Main> retrieveFeedbacksByTrainerId(Long trainerId);
+
     FeedbackInfo.Main registerFeedback(FeedbackCommand.RegisterFeedback command);
 
     String addComment(String feedbackToken, FeedbackCommand.AddComment command);

@@ -16,6 +16,7 @@ public class TrainerInfo {
   @Builder
   @ToString
   public static class Main {
+    private final Long id;
     private final String trainerToken;
     private final String name;
     private final WorkOutType.Style style;
