@@ -1,7 +1,7 @@
 package com.cocovo.fitqaspringjava.interfaces.trainer.dto;
 
 import com.cocovo.fitqaspringjava.domain.common.TypeInfo;
-
+import com.cocovo.fitqaspringjava.domain.trainer.entity.TrainerCareer;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.ToString;
@@ -74,8 +74,8 @@ public class TrainerDto {
   @Builder
   @ToString
   public static class TrainerCareerInfo {
-    private final Long contestId;
-    private final String awards;
+    private final String description;
+    private final TrainerCareer.Type type;
   }
 
   @Getter

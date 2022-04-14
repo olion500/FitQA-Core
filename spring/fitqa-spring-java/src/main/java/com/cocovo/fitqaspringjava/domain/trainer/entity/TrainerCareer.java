@@ -24,15 +24,26 @@ public class TrainerCareer extends BaseEntity {
   @JoinColumn(name = "trainer_id")
   private Trainer trainer;
 
-  private Long contestId;
-  private String awards;
+  private String description;
+
+  @Enumerated(EnumType.STRING)
+  private Type type;
+
+  @Getter
+  @RequiredArgsConstructor
+  public enum Type {
+    CAREER("경력"),
+    LICENSE("학력 및 자격 면허");
+
+    private final String description;
+  }
 
   @Builder
-  public TrainerCareer(Trainer trainer, Long contestId, String awards) {
-    if (StringUtils.isEmpty(awards))
-      throw new InvalidParamException("awards is empty");
+  public TrainerCareer(Trainer trainer, String description, Type type) {
+    if (StringUtils.isEmpty(description))
+      throw new InvalidParamException("description is empty");
     this.trainer = trainer;
-    this.contestId = contestId;
-    this.awards = awards;
+    this.description = description;
+    this.type = type;
   }
 }

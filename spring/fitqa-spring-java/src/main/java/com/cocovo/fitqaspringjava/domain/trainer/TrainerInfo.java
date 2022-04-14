@@ -46,12 +46,12 @@ public class TrainerInfo {
   @Getter
   @ToString
   public static class TrainerCareerInfo {
-    private final Long contestId;
-    private final String awards;
+    private final String description;
+    private final TrainerCareer.Type type;
 
     public TrainerCareerInfo(TrainerCareer trainerCareer) {
-      this.contestId = trainerCareer.getContestId();
-      this.awards = trainerCareer.getAwards();
+      this.description = trainerCareer.getDescription();
+      this.type = trainerCareer.getType();
     }
   }
 
