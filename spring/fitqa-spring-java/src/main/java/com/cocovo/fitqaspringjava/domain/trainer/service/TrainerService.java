@@ -19,5 +19,8 @@ public interface TrainerService {
 
   // update
   TrainerInfo.Main updateTrainerInterestAreas(String trainerToken,
-                                              TrainerCommand.UpdateTrainersByInterestAreas updateInterestAreas);
+                                              TrainerCommand.UpdateTrainerByInterestAreas updateInterestAreas);
+
+  TrainerInfo.Main updateTrainerInfo(String trainerToken,
+                                     TrainerCommand.UpdateTrainerInfo updateTrainerInfo);
 }

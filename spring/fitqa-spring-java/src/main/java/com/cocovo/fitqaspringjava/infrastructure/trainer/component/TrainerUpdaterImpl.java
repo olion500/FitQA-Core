@@ -4,7 +4,7 @@ import com.cocovo.fitqaspringjava.domain.common.entity.type.WorkOutType;
 import com.cocovo.fitqaspringjava.domain.trainer.component.TrainerUpdater;
 import com.cocovo.fitqaspringjava.domain.trainer.entity.Trainer;
 import com.cocovo.fitqaspringjava.domain.trainer.entity.TrainerInterestArea;
-import com.cocovo.fitqaspringjava.infrastructure.trainer.repository.TrainerInterestAreaRepository;
+import com.cocovo.fitqaspringjava.infrastructure.trainer.repository.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -39,6 +39,21 @@ public class TrainerUpdaterImpl implements TrainerUpdater {
       trainer.addInterestArea(newTrainerInterestArea);
       trainerInterestAreaRepository.save(newTrainerInterestArea);
     }
+    return true;
+  }
+
+  @Override
+  public boolean updateTrainerInfo(Trainer trainer, Trainer initUpdateTrainer) {
+    trainer.updateName(initUpdateTrainer.getName())
+        .updateStyle(initUpdateTrainer.getStyle())
+        .updateIntroduce(initUpdateTrainer.getIntroduceTitle(), initUpdateTrainer
+            .getIntroduceContext());
+
+    trainer.updateCareers(initUpdateTrainer.getCareers())
+        .updateFeedbackPrices(initUpdateTrainer.getFeedbackPrices())
+        .updateInterestAreas(initUpdateTrainer.getInterestAreas())
+        .updateSns(initUpdateTrainer.getSns());
+
     return true;
   }
 }

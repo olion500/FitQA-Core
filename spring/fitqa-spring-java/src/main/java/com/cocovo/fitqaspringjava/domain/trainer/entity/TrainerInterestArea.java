@@ -31,4 +31,8 @@ public class TrainerInterestArea extends BaseEntity {
     this.trainer = trainer;
     this.interestArea = interestArea;
   }
+
+  public void setTrainer(Trainer trainer) {
+    this.trainer = trainer;
+  }
 }

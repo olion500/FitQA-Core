@@ -22,6 +22,7 @@ public class TrainerApiController {
   @GetMapping
   public CommonResponse getTrainersAll() {
     var trainers = trainerFacade.retrieveTrainers();
+    System.out.println(trainers);
     var response =
         trainers.stream().map(main -> trainerDtoMapper.of(main)).collect(Collectors.toList());
     System.out.println(response);
@@ -54,10 +55,20 @@ public class TrainerApiController {
   }
 
   @PutMapping("/{trainerToken}/interestAreas")
-  public CommonResponse updateTrainer(@PathVariable(value = "trainerToken") String trainerToken,
-                                      @RequestBody TrainerDto.UpdateTrainerInterestAreasRequest request) {
+  public CommonResponse updateTrainerInterestAreas(
+      @PathVariable(value = "trainerToken") String trainerToken,
+      @RequestBody TrainerDto.UpdateTrainerInterestAreasRequest request) {
     var updatedTrainer =
         trainerFacade.updateTrainerInterestAreas(trainerToken, trainerDtoMapper.of(request));
+    var response = trainerDtoMapper.of(updatedTrainer);
+    return CommonResponse.success(response);
+  }
+
+  @PutMapping("/{trainerToken}")
+  public CommonResponse updateTrainerInfo(@PathVariable(value = "trainerToken") String trainerToken,
+                                          @RequestBody @Valid TrainerDto.UpdateTrainerInfoRequest request) {
+    var updatedTrainer =
+        trainerFacade.updateTrainerInfo(trainerToken, trainerDtoMapper.of(request));
     var response = trainerDtoMapper.of(updatedTrainer);
     return CommonResponse.success(response);
   }

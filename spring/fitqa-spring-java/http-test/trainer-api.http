@@ -27,12 +27,51 @@ Content-Type: application/json
 ###
 # 트레이너의 관심 부위 정보를 변경합니다
 
-PUT http://localhost:8080/api/v1/trainers/trn_Fb1Q9MPItiVTnkiY/interestAreas
+PUT http://localhost:8080/api/v1/trainers/trn_EfF1W4nfWsOoDx49/interestAreas
 Content-Type: application/json
 
 {
   "interestAreas": [
     "LOWER",
     "BACK"
+  ]
+}
+
+###
+# 트레이너의 정보를 변경합니다.
+
+PUT http://localhost:8080/api/v1/trainers/trn_EfF1W4nfWsOoDx49/
+Content-Type: application/json
+
+{
+  "name": "오상헌333",
+  "style": "BODY_BUILDING",
+  "introduceTitle": "소개 제목을 변경합니다777",
+  "introduceContext": "소개 내용을 변경합니다777",
+  "careers": [
+    {
+      "description": "1번 경력입니다.",
+      "type": "CAREER"
+    }
+  ],
+  "feedbackPrices": [
+    {
+      "area": "LOWER",
+      "price": 6000
+    }
+  ],
+  "interestAreas": [
+    {
+      "interestArea": "CHEST"
+    },
+    {
+      "interestArea": "SHOULDER"
+    }
+  ],
+  "sns": [
+    {
+      "snsUrl": "Sns 3 Url",
+      "snsType": "INSTAGRAM"
+    }
   ]
 }

@@ -21,6 +21,8 @@ public class TrainerInfo {
     private final WorkOutType.Style style;
     private final String introduceTitle;
     private final String introduceContext;
+    private final String representativeCareer;
+    private final String representativeFootprints;
     private final Integer likesCount;
     private final List<TrainerImageInfo> images;
     private final List<TrainerCareerInfo> careers;
@@ -44,23 +46,23 @@ public class TrainerInfo {
   @Getter
   @ToString
   public static class TrainerCareerInfo {
-    private final Long contestId;
-    private final String awards;
+    private final String description;
+    private final TrainerCareer.Type type;
 
     public TrainerCareerInfo(TrainerCareer trainerCareer) {
-      this.contestId = trainerCareer.getContestId();
-      this.awards = trainerCareer.getAwards();
+      this.description = trainerCareer.getDescription();
+      this.type = trainerCareer.getType();
     }
   }
 
   @Getter
   @ToString
   public static class TrainerFeedbackPriceInfo {
-    private final WorkOutType.InterestArea interestArea;
+    private final WorkOutType.InterestArea area;
     private final Integer price;
 
     public TrainerFeedbackPriceInfo(TrainerFeedbackPrice trainerFeedbackPrice) {
-      this.interestArea = trainerFeedbackPrice.getInterestArea();
+      this.area = trainerFeedbackPrice.getInterestArea();
       this.price = trainerFeedbackPrice.getPrice();
     }
   }

@@ -1,17 +1,15 @@
 package com.cocovo.fitqaspringjava.interfaces.trainer.dto;
 
 import com.cocovo.fitqaspringjava.domain.common.TypeInfo;
-
-import lombok.Builder;
-import lombok.Getter;
-import lombok.ToString;
+import com.cocovo.fitqaspringjava.domain.trainer.entity.TrainerCareer;
+import lombok.*;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 
 public class TrainerDto {
-
+  // Read
   @Getter
   @ToString
   public static class RegisterTrainerRequest {
@@ -35,6 +33,7 @@ public class TrainerDto {
     private List<String> interestAreas;
   }
 
+  // Update
   @Getter
   @ToString
   public static class UpdateTrainerInterestAreasRequest {
@@ -42,14 +41,31 @@ public class TrainerDto {
   }
 
   @Getter
-  @Builder
   @ToString
+  @RequiredArgsConstructor
+  public static class UpdateTrainerInfoRequest {
+    private String name;
+    private TypeInfo.WorkOutStyle style;
+    private String introduceTitle;
+    private String introduceContext;
+    private List<TrainerCareerInfo> careers;
+    private List<TrainerFeedbackPriceInfo> feedbackPrices;
+    private List<TrainerInterestAreaInfo> interestAreas;
+    private List<TrainerSnsInfo> sns;
+  }
+
+  // Domain
+  @Getter
+  @ToString
+  @Builder
   public static class Main {
     private final String trainerToken;
     private final String name;
     private final TypeInfo.WorkOutStyle style;
     private final String introduceTitle;
     private final String introduceContext;
+    private final String representativeCareer;
+    private final String representativeFootprints;
     private final Integer likesCount;
     private final List<TrainerImageInfo> images;
     private final List<TrainerCareerInfo> careers;
@@ -59,39 +75,48 @@ public class TrainerDto {
   }
 
   @Getter
-  @Builder
   @ToString
+  @Builder
   public static class TrainerImageInfo {
     private final String imageUrl;
     private final TypeInfo.ImageType imageType;
   }
 
   @Getter
-  @Builder
   @ToString
+  @Builder
   public static class TrainerCareerInfo {
-    private final Long contestId;
-    private final String awards;
+    private final String description;
+    private final TrainerCareer.Type type;
   }
 
   @Getter
-  @Builder
   @ToString
+  @Builder
   public static class TrainerFeedbackPriceInfo {
-    private final TypeInfo.InterestArea interestArea;
+    private final TypeInfo.InterestArea area;
     private final Integer price;
   }
 
   @Getter
-  @Builder
   @ToString
   public static class TrainerInterestAreaInfo {
-    private final TypeInfo.InterestArea interestArea;
+    private TypeInfo.InterestArea interestArea;
+
+    public TrainerInterestAreaInfo() { }
+
+    public TrainerInterestAreaInfo(TypeInfo.InterestArea interestArea) {
+      this.interestArea = interestArea;
+    }
+
+    public void setInterestArea(TypeInfo.InterestArea interestArea) {
+      this.interestArea = interestArea;
+    }
   }
 
   @Getter
-  @Builder
   @ToString
+  @Builder
   public static class TrainerSnsInfo {
     private final TypeInfo.SnsType snsType;
     private final String snsUrl;
