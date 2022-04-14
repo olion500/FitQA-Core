@@ -2,9 +2,7 @@ package com.cocovo.fitqaspringjava.interfaces.trainer.dto;
 
 import com.cocovo.fitqaspringjava.domain.common.TypeInfo;
 import com.cocovo.fitqaspringjava.domain.trainer.entity.TrainerCareer;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.ToString;
+import lombok.*;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -42,10 +40,24 @@ public class TrainerDto {
     private List<TypeInfo.InterestArea> interestAreas;
   }
 
+  @Getter
+  @ToString
+  @RequiredArgsConstructor
+  public static class UpdateTrainerInfoRequest {
+    private String name;
+    private TypeInfo.WorkOutStyle style;
+    private String introduceTitle;
+    private String introduceContext;
+    private List<TrainerCareerInfo> careers;
+    private List<TrainerFeedbackPriceInfo> feedbackPrices;
+    private List<TrainerInterestAreaInfo> interestAreas;
+    private List<TrainerSnsInfo> sns;
+  }
+
   // Domain
   @Getter
-  @Builder
   @ToString
+  @Builder
   public static class Main {
     private final String trainerToken;
     private final String name;
@@ -63,39 +75,48 @@ public class TrainerDto {
   }
 
   @Getter
-  @Builder
   @ToString
+  @Builder
   public static class TrainerImageInfo {
     private final String imageUrl;
     private final TypeInfo.ImageType imageType;
   }
 
   @Getter
-  @Builder
   @ToString
+  @Builder
   public static class TrainerCareerInfo {
     private final String description;
     private final TrainerCareer.Type type;
   }
 
   @Getter
-  @Builder
   @ToString
+  @Builder
   public static class TrainerFeedbackPriceInfo {
-    private final TypeInfo.InterestArea interestArea;
+    private final TypeInfo.InterestArea area;
     private final Integer price;
   }
 
   @Getter
-  @Builder
   @ToString
   public static class TrainerInterestAreaInfo {
-    private final TypeInfo.InterestArea interestArea;
+    private TypeInfo.InterestArea interestArea;
+
+    public TrainerInterestAreaInfo() { }
+
+    public TrainerInterestAreaInfo(TypeInfo.InterestArea interestArea) {
+      this.interestArea = interestArea;
+    }
+
+    public void setInterestArea(TypeInfo.InterestArea interestArea) {
+      this.interestArea = interestArea;
+    }
   }
 
   @Getter
-  @Builder
   @ToString
+  @Builder
   public static class TrainerSnsInfo {
     private final TypeInfo.SnsType snsType;
     private final String snsUrl;

@@ -34,7 +34,13 @@ public class TrainerFacade {
   }
 
   public TrainerInfo.Main updateTrainerInterestAreas(String trainerToken,
-                                                     TrainerCommand.UpdateTrainersByInterestAreas updateInterestAreas) {
+                                                     TrainerCommand.UpdateTrainerByInterestAreas updateInterestAreas) {
     return trainerService.updateTrainerInterestAreas(trainerToken, updateInterestAreas);
+  }
+
+  public TrainerInfo.Main updateTrainerInfo(String trainerToken,
+                                            TrainerCommand.UpdateTrainerInfo updateTrainerInfo) {
+    return trainerService.updateTrainerInfo(trainerToken, updateTrainerInfo);
+
   }
 }

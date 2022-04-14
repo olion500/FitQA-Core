@@ -34,4 +34,8 @@ public class TrainerSns extends BaseEntity {
     this.snsType = snsType;
     this.snsUrl = snsUrl;
   }
+
+  public void setTrainer(Trainer trainer) {
+    this.trainer = trainer;
+  }
 }

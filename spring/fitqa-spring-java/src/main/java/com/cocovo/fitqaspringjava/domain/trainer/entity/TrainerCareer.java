@@ -46,4 +46,8 @@ public class TrainerCareer extends BaseEntity {
     this.description = description;
     this.type = type;
   }
+
+  public void setTrainer(Trainer trainer) {
+    this.trainer = trainer;
+  }
 }

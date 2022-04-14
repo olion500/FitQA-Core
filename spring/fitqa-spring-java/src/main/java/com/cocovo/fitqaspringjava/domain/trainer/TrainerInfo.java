@@ -58,11 +58,11 @@ public class TrainerInfo {
   @Getter
   @ToString
   public static class TrainerFeedbackPriceInfo {
-    private final WorkOutType.InterestArea interestArea;
+    private final WorkOutType.InterestArea area;
     private final Integer price;
 
     public TrainerFeedbackPriceInfo(TrainerFeedbackPrice trainerFeedbackPrice) {
-      this.interestArea = trainerFeedbackPrice.getInterestArea();
+      this.area = trainerFeedbackPrice.getInterestArea();
       this.price = trainerFeedbackPrice.getPrice();
     }
   }
