@@ -14,7 +14,7 @@ public class FeedbackCommand {
     @ToString
     public static class RegisterFeedback {
         private String ownerId;
-        private String trainerId;
+        private Long trainerId;
         private TypeInfo.InterestArea interestArea;
         private Integer price;
         private String title;
