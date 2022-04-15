@@ -42,3 +42,15 @@ Content-Type: application/json
   "writerId": "1",
   "comment": "와, 정말 보기 좋네요"
 }
+
+### 피드백 등록 (영어로)
+
+POST http://localhost:8080/api/v1/feedbacks/fdb_oEdwORt9OaCPNNTa/answer
+Content-Type: application/json
+
+{
+  "trainerToken": "trn_EfF1W4nfWsOoDx49",
+  "videoUrl": "test video url",
+  "description": "오 트레이너가 피드백 답변에 응했습니다22"
+}
+

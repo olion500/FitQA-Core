@@ -7,15 +7,20 @@ import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
 
 @Mapper(
-    componentModel = "spring",
-    injectionStrategy = InjectionStrategy.CONSTRUCTOR,
-    unmappedTargetPolicy = ReportingPolicy.ERROR
+        componentModel = "spring",
+        injectionStrategy = InjectionStrategy.CONSTRUCTOR,
+        unmappedTargetPolicy = ReportingPolicy.ERROR
 )
 public interface FeedbackDtoMapper {
 
-  FeedbackDto.Main of(FeedbackInfo.Main feedbackInfo);
+    FeedbackDto.Main of(FeedbackInfo.Main feedbackInfo);
 
-  FeedbackCommand.RegisterFeedback of(FeedbackDto.RegisterReq req);
+    FeedbackDto.FeedbackAnswerInfo of(FeedbackInfo.FeedbackAnswerInfo feedbackAnswerInfo);
 
-  FeedbackCommand.AddComment of(FeedbackDto.AddCommentReq req);
+    FeedbackCommand.RegisterFeedback of(FeedbackDto.RegisterReq req);
+
+    FeedbackCommand.RegisterFeedbackAnswer of(FeedbackDto.RegisterAnswerReq req);
+
+    FeedbackCommand.AddComment of(FeedbackDto.AddCommentReq req);
+
 }

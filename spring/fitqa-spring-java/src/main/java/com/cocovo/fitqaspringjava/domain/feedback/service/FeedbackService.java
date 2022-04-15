@@ -15,5 +15,8 @@ public interface FeedbackService {
 
   FeedbackInfo.Main registerFeedback(FeedbackCommand.RegisterFeedback command);
 
+  FeedbackInfo.FeedbackAnswerInfo registerFeedbackAnswer(String feedbackToken,
+      FeedbackCommand.RegisterFeedbackAnswer command);
+
   String addComment(String feedbackToken, FeedbackCommand.AddComment command);
 }

@@ -2,6 +2,7 @@ package com.cocovo.fitqaspringjava.domain.feedback;
 
 import com.cocovo.fitqaspringjava.domain.common.TypeInfo;
 import com.cocovo.fitqaspringjava.domain.feedback.entity.Feedback;
+import com.cocovo.fitqaspringjava.domain.feedback.entity.FeedbackAnswer;
 import com.cocovo.fitqaspringjava.domain.feedback.entity.FeedbackComment;
 import lombok.Builder;
 import lombok.Getter;
@@ -31,6 +32,23 @@ public class FeedbackCommand {
           .title(title)
           .content(content)
           .locked(locked)
+          .build();
+    }
+  }
+
+  @Getter
+  @Builder
+  @ToString
+  public static class RegisterFeedbackAnswer {
+    private String trainerToken;
+    private String videoUrl;
+    private String description;
+
+    public FeedbackAnswer toEntity(Feedback feedback) {
+      return FeedbackAnswer.builder()
+          .feedback(feedback)
+          .videoUrl(videoUrl)
+          .description(description)
           .build();
     }
   }
