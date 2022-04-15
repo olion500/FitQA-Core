@@ -4,9 +4,9 @@ import com.cocovo.fitqaspringjava.domain.common.TypeInfo;
 import com.cocovo.fitqaspringjava.domain.feedback.entity.Feedback;
 import lombok.Builder;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import java.time.ZonedDateTime;
 import java.util.List;
 
 public class FeedbackInfo {
@@ -25,6 +25,8 @@ public class FeedbackInfo {
         private final boolean locked;
         private final List<FeedbackCommentInfo> comments;
         private final Feedback.Status status;
+        private final ZonedDateTime createdAt;
+        private final ZonedDateTime updatedAt;
     }
 
     @Getter

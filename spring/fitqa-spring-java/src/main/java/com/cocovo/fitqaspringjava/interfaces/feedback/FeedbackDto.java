@@ -8,6 +8,7 @@ import lombok.ToString;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.time.ZonedDateTime;
 import java.util.List;
 
 public class FeedbackDto {
@@ -56,6 +57,8 @@ public class FeedbackDto {
         private final boolean locked;
         private final List<FeedbackCommentInfo> comments;
         private final Feedback.Status status;
+        private final ZonedDateTime createdAt;
+        private final ZonedDateTime updatedAt;
     }
 
 
