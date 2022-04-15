@@ -4,6 +4,7 @@ import com.cocovo.fitqaspringjava.domain.common.TypeInfo;
 import com.cocovo.fitqaspringjava.domain.feedback.entity.Feedback;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import lombok.ToString;
 
 import java.time.ZonedDateTime;
@@ -32,14 +33,12 @@ public class FeedbackInfo {
 
     @Getter
     @ToString
+    @RequiredArgsConstructor
     public static class FeedbackCommentInfo {
         private final String writer;
         private final String comment;
-
-        public FeedbackCommentInfo(String writer, String comment) {
-            this.writer = writer;
-            this.comment = comment;
-        }
+        private final ZonedDateTime createdAt;
+        private final ZonedDateTime updatedAt;
     }
 
     @Getter

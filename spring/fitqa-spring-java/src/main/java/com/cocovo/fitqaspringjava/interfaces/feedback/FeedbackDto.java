@@ -81,6 +81,8 @@ public class FeedbackDto {
     public static class FeedbackCommentInfo {
         private final String writer;
         private final String comment;
+        private final ZonedDateTime createdAt;
+        private final ZonedDateTime updatedAt;
     }
 
     @Getter
