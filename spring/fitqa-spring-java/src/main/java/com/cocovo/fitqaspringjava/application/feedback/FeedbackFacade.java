@@ -26,6 +26,11 @@ public class FeedbackFacade {
     return feedbackService.retrieveFeedbackByToken(feedbackToken);
   }
 
+  public List<FeedbackInfo.Main> retrieveFeedbacksOfTrainer(String trainerToken) {
+    var trainer = trainerService.retrieveTrainerByToken(trainerToken);
+    return feedbackService.retrieveFeedbacksByTrainerId(trainer.getId());
+  }
+
   public FeedbackInfo.Main registerFeedback(FeedbackCommand.RegisterFeedback command) {
     return feedbackService.registerFeedback(command);
   }

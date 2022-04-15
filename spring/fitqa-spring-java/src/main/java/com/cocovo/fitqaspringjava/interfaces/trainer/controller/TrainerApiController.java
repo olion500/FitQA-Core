@@ -1,5 +1,6 @@
 package com.cocovo.fitqaspringjava.interfaces.trainer.controller;
 
+import com.cocovo.fitqaspringjava.application.feedback.FeedbackFacade;
 import com.cocovo.fitqaspringjava.application.trainer.TrainerFacade;
 import com.cocovo.fitqaspringjava.common.response.CommonResponse;
 import com.cocovo.fitqaspringjava.interfaces.feedback.FeedbackDtoMapper;
@@ -19,6 +20,7 @@ import java.util.stream.Collectors;
 public class TrainerApiController {
 
   private final TrainerFacade trainerFacade;
+  private final FeedbackFacade feedbackFacade;
   private final TrainerDtoMapper trainerDtoMapper;
   private final FeedbackDtoMapper feedbackDtoMapper;
 
@@ -41,7 +43,7 @@ public class TrainerApiController {
 
   @GetMapping("/{trainerToken}/feedbacks")
   public CommonResponse getTrainerFeedbacks(@PathVariable("trainerToken") String trainerToken) {
-    var feedbacks = trainerFacade.getFeedbacksOfTrainer(trainerToken);
+    var feedbacks = feedbackFacade.retrieveFeedbacksOfTrainer(trainerToken);
     var response = feedbacks.stream()
         .map(feedbackDtoMapper::of)
         .collect(Collectors.toList());
