@@ -30,7 +30,7 @@ public class AuthSuccessHandler implements AuthenticationSuccessHandler {
 
   private void sendDirectToUserDetail(HttpServletResponse response, String userToken)
       throws IOException {
-    var entryUrl = "/api/v1/users/" + userToken;
+    var entryUrl = "/api/v1/users/success?token=" + userToken;
     response.sendRedirect(entryUrl);
   }
 
