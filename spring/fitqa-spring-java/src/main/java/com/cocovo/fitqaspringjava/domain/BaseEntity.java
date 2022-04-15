@@ -12,6 +12,7 @@ import java.time.ZonedDateTime;
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
 public class BaseEntity {
+
   @CreationTimestamp
   private ZonedDateTime createdAt;
 

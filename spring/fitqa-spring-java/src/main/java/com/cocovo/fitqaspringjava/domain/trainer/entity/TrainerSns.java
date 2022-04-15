@@ -15,6 +15,7 @@ import javax.persistence.*;
 @Table(name = "trainers_sns")
 @RequiredArgsConstructor
 public class TrainerSns extends BaseEntity {
+
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;

@@ -20,25 +20,28 @@ import java.util.HashMap;
 @Service
 @RequiredArgsConstructor
 public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequest, OAuth2User> {
-    private final UserDtoMapper userDtoMapper;
-    private final UserFacade userFacade;
 
-    @Override
-    public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
-        var delegate = new DefaultOAuth2UserService();
-        var oAuth2User = delegate.loadUser(userRequest);
+  private final UserDtoMapper userDtoMapper;
+  private final UserFacade userFacade;
 
-        // OAuth2 Service id (ex. google, kakao, naver)
-        String registrationId = userRequest.getClientRegistration().getRegistrationId();
-        // OAuth2 로그인 진행 시 키가 되는 필드 값(PK)
-        String userNameAttributeName = userRequest.getClientRegistration().getProviderDetails().getUserInfoEndpoint().getUserNameAttributeName();
+  @Override
+  public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
+    var delegate = new DefaultOAuth2UserService();
+    var oAuth2User = delegate.loadUser(userRequest);
 
-        // Call UserFacade to save user data.
-        var initUser = UserDto.of(registrationId, userNameAttributeName, oAuth2User.getAttributes());
-        var userUpdateCommand = userDtoMapper.of(initUser);
-        var userInfo = userFacade.saveOrUpdate(userUpdateCommand);
-        var user = userDtoMapper.of(userInfo);
+    // OAuth2 Service id (ex. google, kakao, naver)
+    String registrationId = userRequest.getClientRegistration().getRegistrationId();
+    // OAuth2 로그인 진행 시 키가 되는 필드 값(PK)
+    String userNameAttributeName = userRequest.getClientRegistration().getProviderDetails()
+        .getUserInfoEndpoint().getUserNameAttributeName();
 
-        return new DefaultOAuth2User(Collections.singleton(new SimpleGrantedAuthority("USER")), initUser.getAttributes(user.getUserToken()), initUser.getAttributeKey());
-    }
+    // Call UserFacade to save user data.
+    var initUser = UserDto.of(registrationId, userNameAttributeName, oAuth2User.getAttributes());
+    var userUpdateCommand = userDtoMapper.of(initUser);
+    var userInfo = userFacade.saveOrUpdate(userUpdateCommand);
+    var user = userDtoMapper.of(userInfo);
+
+    return new DefaultOAuth2User(Collections.singleton(new SimpleGrantedAuthority("USER")),
+        initUser.getAttributes(user.getUserToken()), initUser.getAttributeKey());
+  }
 }

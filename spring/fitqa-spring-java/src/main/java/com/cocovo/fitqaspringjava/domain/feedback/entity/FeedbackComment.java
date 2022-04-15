@@ -17,29 +17,36 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Table(name = "feedback_comment")
 public class FeedbackComment extends BaseEntity {
-    private final String FEEDBACK_COMMENT_PREFIX = "fct_";
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private String feedbackCommentToken;
+  private final String FEEDBACK_COMMENT_PREFIX = "fct_";
 
-    @ManyToOne
-    @JoinColumn(name = "feedback_id")
-    private Feedback feedback;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
+  private String feedbackCommentToken;
 
-    private String writer;
-    private String comment;
+  @ManyToOne
+  @JoinColumn(name = "feedback_id")
+  private Feedback feedback;
 
-    @Builder
-    public FeedbackComment(Feedback feedback, String writer, String comment) {
-        if (feedback == null) throw new InvalidParamException("feedback cannot be null");
-        if (StringUtils.isEmpty(writer)) throw new InvalidParamException("writer cannot be empty.");
-        if (StringUtils.isEmpty(comment)) throw new InvalidParamException("comment cannot be empty.");
+  private String writer;
+  private String comment;
 
-        this.feedbackCommentToken = TokenGenerator.randomCharacterWithPrefix(FEEDBACK_COMMENT_PREFIX);
-        this.feedback = feedback;
-        this.writer = writer;
-        this.comment = comment;
-    }
+  @Builder
+  public FeedbackComment(Feedback feedback, String writer, String comment) {
+      if (feedback == null) {
+          throw new InvalidParamException("feedback cannot be null");
+      }
+      if (StringUtils.isEmpty(writer)) {
+          throw new InvalidParamException("writer cannot be empty.");
+      }
+      if (StringUtils.isEmpty(comment)) {
+          throw new InvalidParamException("comment cannot be empty.");
+      }
+
+    this.feedbackCommentToken = TokenGenerator.randomCharacterWithPrefix(FEEDBACK_COMMENT_PREFIX);
+    this.feedback = feedback;
+    this.writer = writer;
+    this.comment = comment;
+  }
 }

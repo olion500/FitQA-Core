@@ -17,46 +17,47 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 public class FeedbackServiceImpl implements FeedbackService {
-    private final FeedbackInfoMapper feedbackInfoMapper;
 
-    private final FeedbackStore feedbackStore;
-    private final FeedbackReader feedbackReader;
-    private final FeedbackCommentStore feedbackCommentStore;
+  private final FeedbackInfoMapper feedbackInfoMapper;
 
-    @Override
-    public List<FeedbackInfo.Main> retrieveFeedbacks() {
-        var feedbacks = feedbackReader.retrieveFeedbackAll();
-        return feedbacks.stream()
-                .map(feedbackInfoMapper::of)
-                .collect(Collectors.toList());
-    }
+  private final FeedbackStore feedbackStore;
+  private final FeedbackReader feedbackReader;
+  private final FeedbackCommentStore feedbackCommentStore;
 
-    @Override
-    public FeedbackInfo.Main retrieveFeedbackByToken(String feedbackToken) {
-        var feedback = feedbackReader.retrieveFeedbackByToken(feedbackToken);
-        return feedbackInfoMapper.of(feedback);
-    }
+  @Override
+  public List<FeedbackInfo.Main> retrieveFeedbacks() {
+    var feedbacks = feedbackReader.retrieveFeedbackAll();
+    return feedbacks.stream()
+        .map(feedbackInfoMapper::of)
+        .collect(Collectors.toList());
+  }
 
-    @Override
-    public List<FeedbackInfo.Main> retrieveFeedbacksByTrainerId(Long trainerId) {
-        var feedbacks = feedbackReader.retrieveFeedbackAllByTrainerId(trainerId);
-        return feedbacks.stream()
-                .map(feedbackInfoMapper::of)
-                .collect(Collectors.toList());
-    }
+  @Override
+  public FeedbackInfo.Main retrieveFeedbackByToken(String feedbackToken) {
+    var feedback = feedbackReader.retrieveFeedbackByToken(feedbackToken);
+    return feedbackInfoMapper.of(feedback);
+  }
 
-    @Override
-    public FeedbackInfo.Main registerFeedback(FeedbackCommand.RegisterFeedback command) {
-        var initFeedback = command.toEntity();
-        var feedback = feedbackStore.store(initFeedback);
-        return feedbackInfoMapper.of(feedback);
-    }
+  @Override
+  public List<FeedbackInfo.Main> retrieveFeedbacksByTrainerId(Long trainerId) {
+    var feedbacks = feedbackReader.retrieveFeedbackAllByTrainerId(trainerId);
+    return feedbacks.stream()
+        .map(feedbackInfoMapper::of)
+        .collect(Collectors.toList());
+  }
 
-    @Override
-    public String addComment(String feedbackToken, FeedbackCommand.AddComment command) {
-        var feedback = feedbackReader.retrieveFeedbackByToken(feedbackToken);
-        var initComment = command.toEntity(feedback);
-        var comment = feedbackCommentStore.store(initComment);
-        return comment.getFeedbackCommentToken();
-    }
+  @Override
+  public FeedbackInfo.Main registerFeedback(FeedbackCommand.RegisterFeedback command) {
+    var initFeedback = command.toEntity();
+    var feedback = feedbackStore.store(initFeedback);
+    return feedbackInfoMapper.of(feedback);
+  }
+
+  @Override
+  public String addComment(String feedbackToken, FeedbackCommand.AddComment command) {
+    var feedback = feedbackReader.retrieveFeedbackByToken(feedbackToken);
+    var initComment = command.toEntity(feedback);
+    var comment = feedbackCommentStore.store(initComment);
+    return comment.getFeedbackCommentToken();
+  }
 }

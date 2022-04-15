@@ -9,6 +9,7 @@ import java.util.List;
 
 @Repository
 public interface TrainerRepository extends JpaRepository<Trainer, Long> {
+
   Trainer getByTrainerToken(String trainerToken);
 
   List<Trainer> findAllByInterestAreasIn(List<WorkOutType.InterestArea> interestAreas);

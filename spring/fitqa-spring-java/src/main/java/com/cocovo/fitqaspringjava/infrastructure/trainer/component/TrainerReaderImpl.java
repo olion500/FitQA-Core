@@ -14,6 +14,7 @@ import java.util.List;
 @Component
 @RequiredArgsConstructor
 public class TrainerReaderImpl implements TrainerReader {
+
   private final TrainerRepository trainerRepository;
 
   @Override

@@ -6,6 +6,7 @@ import com.cocovo.fitqaspringjava.domain.trainer.entity.Trainer;
 import java.util.List;
 
 public interface TrainerReader {
+
   List<Trainer> retrieveTrainersAll();
 
   List<Trainer> retrieveTrainersByInterestAreas(List<WorkOutType.InterestArea> interestAreaList);

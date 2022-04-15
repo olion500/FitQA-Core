@@ -16,11 +16,12 @@ import java.util.List;
 @Component
 @RequiredArgsConstructor
 public class TrainerUpdaterImpl implements TrainerUpdater {
+
   private final TrainerInterestAreaRepository trainerInterestAreaRepository;
 
   @Override
   public boolean updateTrainerInterestAreas(Trainer trainer,
-                                            List<WorkOutType.InterestArea> updateInterestAreas) {
+      List<WorkOutType.InterestArea> updateInterestAreas) {
     var trainerInterestAreas = trainer.getInterestAreas();
     List<TrainerInterestArea> toBeDeleted = new ArrayList<>();
 

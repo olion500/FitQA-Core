@@ -8,15 +8,16 @@ import lombok.ToString;
 @Builder
 public class UserInfo {
 
-    @Getter
-    @Builder
-    @ToString
-    public static class Main{
-        private String userToken;
-        private String email;
-        private String name;
-        private String photoURL;
-        private User.AccountProvider provider;
-    }
+  @Getter
+  @Builder
+  @ToString
+  public static class Main {
+
+    private String userToken;
+    private String email;
+    private String name;
+    private String photoURL;
+    private User.AccountProvider provider;
+  }
 
 }

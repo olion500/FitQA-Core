@@ -3,6 +3,7 @@ package com.cocovo.fitqaspringjava.common.exception;
 import com.cocovo.fitqaspringjava.common.response.ErrorCode;
 
 public class IllegalStatusException extends BaseException {
+
   public IllegalStatusException() {
     super(ErrorCode.COMMON_ILLEGAL_STATUS);
   }

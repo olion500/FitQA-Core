@@ -16,6 +16,7 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class TrainerFacade {
+
   private final TrainerService trainerService;
   private final FeedbackService feedbackService;
 
@@ -42,12 +43,12 @@ public class TrainerFacade {
   }
 
   public TrainerInfo.Main updateTrainerInterestAreas(String trainerToken,
-                                                     TrainerCommand.UpdateTrainerByInterestAreas updateInterestAreas) {
+      TrainerCommand.UpdateTrainerByInterestAreas updateInterestAreas) {
     return trainerService.updateTrainerInterestAreas(trainerToken, updateInterestAreas);
   }
 
   public TrainerInfo.Main updateTrainerInfo(String trainerToken,
-                                            TrainerCommand.UpdateTrainerInfo updateTrainerInfo) {
+      TrainerCommand.UpdateTrainerInfo updateTrainerInfo) {
     return trainerService.updateTrainerInfo(trainerToken, updateTrainerInfo);
 
   }

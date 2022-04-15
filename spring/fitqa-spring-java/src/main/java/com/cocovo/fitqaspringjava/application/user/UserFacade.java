@@ -13,17 +13,18 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class UserFacade {
-    private final UserService userService;
 
-    public List<UserInfo.Main> retrieveUsers() {
-        return userService.retrieveUsers();
-    }
+  private final UserService userService;
 
-    public UserInfo.Main retrieveUserInfo(String userToken) {
-        return userService.retrieveUserByToken(userToken);
-    }
+  public List<UserInfo.Main> retrieveUsers() {
+    return userService.retrieveUsers();
+  }
 
-    public UserInfo.Main saveOrUpdate(UserCommand.UpdateUser command) {
-        return userService.saveOrUpdate(command);
-    }
+  public UserInfo.Main retrieveUserInfo(String userToken) {
+    return userService.retrieveUserByToken(userToken);
+  }
+
+  public UserInfo.Main saveOrUpdate(UserCommand.UpdateUser command) {
+    return userService.saveOrUpdate(command);
+  }
 }

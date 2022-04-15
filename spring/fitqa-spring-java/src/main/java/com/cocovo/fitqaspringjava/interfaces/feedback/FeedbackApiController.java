@@ -16,38 +16,43 @@ import java.util.stream.Collectors;
 @RequestMapping("/api/v1/feedbacks")
 @RequiredArgsConstructor
 public class FeedbackApiController {
-    private final FeedbackFacade feedbackFacade;
-    private final FeedbackDtoMapper feedbackDtoMapper;
 
-    @GetMapping
-    public CommonResponse<List<FeedbackDto.Main>> getFeedbackAll() {
-        var feedbacks = feedbackFacade.retrieveFeedbacks();
-        var response = feedbacks.stream()
-                .map(feedbackDtoMapper::of)
-                .collect(Collectors.toList());
-        return CommonResponse.success(response);
-    }
+  private final FeedbackFacade feedbackFacade;
+  private final FeedbackDtoMapper feedbackDtoMapper;
 
-    @GetMapping("/{feedbackToken}")
-    public CommonResponse<FeedbackDto.Main> getFeedbackById(@PathVariable("feedbackToken") String feedbackToken) {
-        var feedbackInfo = feedbackFacade.retrieveFeedbackByToken(feedbackToken);
-        var response = feedbackDtoMapper.of(feedbackInfo);
-        return CommonResponse.success(response);
-    }
+  @GetMapping
+  public CommonResponse<List<FeedbackDto.Main>> getFeedbackAll() {
+    var feedbacks = feedbackFacade.retrieveFeedbacks();
+    var response = feedbacks.stream()
+        .map(feedbackDtoMapper::of)
+        .collect(Collectors.toList());
+    return CommonResponse.success(response);
+  }
 
-    @PostMapping("/register")
-    public CommonResponse<FeedbackDto.Main> registerFeedback(@RequestBody @Valid FeedbackDto.RegisterReq request) {
-        var registerCommand = feedbackDtoMapper. of(request);
-        var feedbackInfo = feedbackFacade.registerFeedback(registerCommand);
-        var response = feedbackDtoMapper.of(feedbackInfo);
-        return CommonResponse.success(response);
-    }
+  @GetMapping("/{feedbackToken}")
+  public CommonResponse<FeedbackDto.Main> getFeedbackById(
+      @PathVariable("feedbackToken") String feedbackToken) {
+    var feedbackInfo = feedbackFacade.retrieveFeedbackByToken(feedbackToken);
+    var response = feedbackDtoMapper.of(feedbackInfo);
+    return CommonResponse.success(response);
+  }
 
-    @PostMapping("/{feedbackToken}/comment")
-    public CommonResponse<FeedbackDto.Main> addComment(@PathVariable("feedbackToken") String feedbackToken, @RequestBody @Valid FeedbackDto.AddCommentReq request) {
-        var commentCommand = feedbackDtoMapper.of(request);
-        var feedbackInfo = feedbackFacade.addComment(feedbackToken, commentCommand);
-        var response = feedbackDtoMapper.of(feedbackInfo);
-        return CommonResponse.success(response);
-    }
+  @PostMapping("/register")
+  public CommonResponse<FeedbackDto.Main> registerFeedback(
+      @RequestBody @Valid FeedbackDto.RegisterReq request) {
+    var registerCommand = feedbackDtoMapper.of(request);
+    var feedbackInfo = feedbackFacade.registerFeedback(registerCommand);
+    var response = feedbackDtoMapper.of(feedbackInfo);
+    return CommonResponse.success(response);
+  }
+
+  @PostMapping("/{feedbackToken}/comment")
+  public CommonResponse<FeedbackDto.Main> addComment(
+      @PathVariable("feedbackToken") String feedbackToken,
+      @RequestBody @Valid FeedbackDto.AddCommentReq request) {
+    var commentCommand = feedbackDtoMapper.of(request);
+    var feedbackInfo = feedbackFacade.addComment(feedbackToken, commentCommand);
+    var response = feedbackDtoMapper.of(feedbackInfo);
+    return CommonResponse.success(response);
+  }
 }

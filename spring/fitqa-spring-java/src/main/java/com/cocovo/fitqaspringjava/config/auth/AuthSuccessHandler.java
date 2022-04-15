@@ -11,25 +11,30 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class AuthSuccessHandler implements AuthenticationSuccessHandler {
-    @Override
-    public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
-        var userToken = getTokenFromPrincipal(authentication.getPrincipal());
-        sendDirectToUserDetail(response, userToken);
-    }
 
-    @Override
-    public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authentication) throws IOException, ServletException {
-        AuthenticationSuccessHandler.super.onAuthenticationSuccess(request, response, chain, authentication);
-        var userToken = getTokenFromPrincipal(authentication.getPrincipal());
-        sendDirectToUserDetail(response, userToken);
-    }
+  @Override
+  public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
+      Authentication authentication) throws IOException, ServletException {
+    var userToken = getTokenFromPrincipal(authentication.getPrincipal());
+    sendDirectToUserDetail(response, userToken);
+  }
 
-    private void sendDirectToUserDetail(HttpServletResponse response, String userToken) throws IOException {
-        var entryUrl = "/api/v1/users/" + userToken;
-        response.sendRedirect(entryUrl);
-    }
+  @Override
+  public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
+      FilterChain chain, Authentication authentication) throws IOException, ServletException {
+    AuthenticationSuccessHandler.super
+        .onAuthenticationSuccess(request, response, chain, authentication);
+    var userToken = getTokenFromPrincipal(authentication.getPrincipal());
+    sendDirectToUserDetail(response, userToken);
+  }
 
-    private String getTokenFromPrincipal(Object principal) {
-        return String.valueOf(((DefaultOAuth2User) principal).getAttributes().get("token"));
-    }
+  private void sendDirectToUserDetail(HttpServletResponse response, String userToken)
+      throws IOException {
+    var entryUrl = "/api/v1/users/" + userToken;
+    response.sendRedirect(entryUrl);
+  }
+
+  private String getTokenFromPrincipal(Object principal) {
+    return String.valueOf(((DefaultOAuth2User) principal).getAttributes().get("token"));
+  }
 }

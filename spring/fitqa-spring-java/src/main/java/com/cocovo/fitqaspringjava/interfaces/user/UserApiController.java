@@ -18,27 +18,28 @@ import java.util.stream.Collectors;
 @RequestMapping("/api/v1/users")
 @RequiredArgsConstructor
 public class UserApiController {
-    private final UserFacade userFacade;
-    private final UserDtoMapper userDtoMapper;
 
-    @GetMapping
-    public CommonResponse<List<UserDto.Main>> getUserAll() {
-        var users = userFacade.retrieveUsers();
-        var response = users.stream()
-                .map(userDtoMapper::of)
-                .collect(Collectors.toList());
-        return CommonResponse.success(response);
-    }
+  private final UserFacade userFacade;
+  private final UserDtoMapper userDtoMapper;
 
-    @GetMapping("/{userToken}")
-    public CommonResponse<UserDto.Main> getUserByToken(@PathVariable("userToken") String userToken) {
-        var userInfo = userFacade.retrieveUserInfo(userToken);
-        var response = userDtoMapper.of(userInfo);
-        return CommonResponse.success(response);
-    }
+  @GetMapping
+  public CommonResponse<List<UserDto.Main>> getUserAll() {
+    var users = userFacade.retrieveUsers();
+    var response = users.stream()
+        .map(userDtoMapper::of)
+        .collect(Collectors.toList());
+    return CommonResponse.success(response);
+  }
 
-    @GetMapping("/failed")
-    public CommonResponse authFailed() {
-        return CommonResponse.fail(ErrorCode.USER_AUTH_FAILED);
-    }
+  @GetMapping("/{userToken}")
+  public CommonResponse<UserDto.Main> getUserByToken(@PathVariable("userToken") String userToken) {
+    var userInfo = userFacade.retrieveUserInfo(userToken);
+    var response = userDtoMapper.of(userInfo);
+    return CommonResponse.success(response);
+  }
+
+  @GetMapping("/failed")
+  public CommonResponse authFailed() {
+    return CommonResponse.fail(ErrorCode.USER_AUTH_FAILED);
+  }
 }

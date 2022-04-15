@@ -17,6 +17,7 @@ import javax.persistence.*;
 @Table(name = "trainers_images")
 @NoArgsConstructor
 public class TrainerImage extends BaseEntity {
+
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
@@ -32,8 +33,9 @@ public class TrainerImage extends BaseEntity {
   @Builder
   public TrainerImage(Trainer trainer, String imageUrl, ImageType.Type imageType) {
     //Todo(in.heo): Need to improve exception
-    if (StringUtils.isEmpty(imageUrl))
+    if (StringUtils.isEmpty(imageUrl)) {
       throw new InvalidParamException("imageUrl is empty");
+    }
     this.trainer = trainer;
     this.imageUrl = imageUrl;
     this.imageType = imageType;

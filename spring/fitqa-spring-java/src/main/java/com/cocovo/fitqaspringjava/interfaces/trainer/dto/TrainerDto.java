@@ -9,10 +9,12 @@ import javax.validation.constraints.NotNull;
 import java.util.List;
 
 public class TrainerDto {
+
   // Read
   @Getter
   @ToString
   public static class RegisterTrainerRequest {
+
     @NotEmpty(message = "name 은 필수값입니다")
     private String name;
     @NotNull(message = "style 은 필수값입니다")
@@ -23,6 +25,7 @@ public class TrainerDto {
   @Builder
   @ToString
   public static class RegisterTrainerResponse {
+
     private final String trainerToken;
   }
 
@@ -30,6 +33,7 @@ public class TrainerDto {
   @Builder
   @ToString
   public static class RetrieveTrainersRequest {
+
     private List<String> interestAreas;
   }
 
@@ -37,6 +41,7 @@ public class TrainerDto {
   @Getter
   @ToString
   public static class UpdateTrainerInterestAreasRequest {
+
     private List<TypeInfo.InterestArea> interestAreas;
   }
 
@@ -44,6 +49,7 @@ public class TrainerDto {
   @ToString
   @RequiredArgsConstructor
   public static class UpdateTrainerInfoRequest {
+
     private String name;
     private TypeInfo.WorkOutStyle style;
     private String introduceTitle;
@@ -59,6 +65,7 @@ public class TrainerDto {
   @ToString
   @Builder
   public static class Main {
+
     private final String trainerToken;
     private final String name;
     private final TypeInfo.WorkOutStyle style;
@@ -78,6 +85,7 @@ public class TrainerDto {
   @ToString
   @Builder
   public static class TrainerImageInfo {
+
     private final String imageUrl;
     private final TypeInfo.ImageType imageType;
   }
@@ -86,6 +94,7 @@ public class TrainerDto {
   @ToString
   @Builder
   public static class TrainerCareerInfo {
+
     private final String description;
     private final TrainerCareer.Type type;
   }
@@ -94,6 +103,7 @@ public class TrainerDto {
   @ToString
   @Builder
   public static class TrainerFeedbackPriceInfo {
+
     private final TypeInfo.InterestArea area;
     private final Integer price;
   }
@@ -101,9 +111,11 @@ public class TrainerDto {
   @Getter
   @ToString
   public static class TrainerInterestAreaInfo {
+
     private TypeInfo.InterestArea interestArea;
 
-    public TrainerInterestAreaInfo() { }
+    public TrainerInterestAreaInfo() {
+    }
 
     public TrainerInterestAreaInfo(TypeInfo.InterestArea interestArea) {
       this.interestArea = interestArea;
@@ -118,6 +130,7 @@ public class TrainerDto {
   @ToString
   @Builder
   public static class TrainerSnsInfo {
+
     private final TypeInfo.SnsType snsType;
     private final String snsUrl;
   }

@@ -15,6 +15,7 @@ import javax.persistence.*;
 @Table(name = "trainers_interest_area")
 @RequiredArgsConstructor
 public class TrainerInterestArea extends BaseEntity {
+
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;

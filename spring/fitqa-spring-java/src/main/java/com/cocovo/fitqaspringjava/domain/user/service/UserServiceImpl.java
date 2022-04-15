@@ -17,36 +17,37 @@ import java.util.stream.Collectors;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class UserServiceImpl implements UserService{
-    private final UserInfoMapper userInfoMapper;
+public class UserServiceImpl implements UserService {
 
-    private final UserReader userReader;
-    private final UserStore userStore;
+  private final UserInfoMapper userInfoMapper;
 
-    @Override
-    public List<UserInfo.Main> retrieveUsers() {
-        var users = userReader.retrieveUserAll();
-        return users.stream()
-                .map(userInfoMapper::of)
-                .collect(Collectors.toList());
+  private final UserReader userReader;
+  private final UserStore userStore;
+
+  @Override
+  public List<UserInfo.Main> retrieveUsers() {
+    var users = userReader.retrieveUserAll();
+    return users.stream()
+        .map(userInfoMapper::of)
+        .collect(Collectors.toList());
+  }
+
+  @Override
+  public UserInfo.Main retrieveUserByToken(String userToken) {
+    var user = userReader.retrieveUserByToken(userToken);
+    return userInfoMapper.of(user);
+  }
+
+  @Override
+  public UserInfo.Main saveOrUpdate(UserCommand.UpdateUser command) {
+    User user;
+    try {
+      user = userReader.findByEmail(command.getEmail());
+      user.update(command.getName(), command.getPhotoURL());
+    } catch (EntityNotFoundException e) {
+      var initUser = command.toEntity();
+      user = userStore.store(initUser);
     }
-
-    @Override
-    public UserInfo.Main retrieveUserByToken(String userToken) {
-        var user = userReader.retrieveUserByToken(userToken);
-        return userInfoMapper.of(user);
-    }
-
-    @Override
-    public UserInfo.Main saveOrUpdate(UserCommand.UpdateUser command) {
-        User user;
-        try {
-            user = userReader.findByEmail(command.getEmail());
-            user.update(command.getName(), command.getPhotoURL());
-        } catch (EntityNotFoundException e) {
-            var initUser = command.toEntity();
-            user = userStore.store(initUser);
-        }
-        return userInfoMapper.of(user);
-    }
+    return userInfoMapper.of(user);
+  }
 }
