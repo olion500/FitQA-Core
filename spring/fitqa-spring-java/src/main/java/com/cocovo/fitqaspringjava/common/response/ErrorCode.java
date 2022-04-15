@@ -9,12 +9,13 @@ public enum ErrorCode {
   COMMON_ENTITY_NOT_FOUND("존재하지 않는 엔터티입니다."),
   COMMON_ILLEGAL_STATUS("잘못된 상태값입니다."),
 
-  USER_AUTH_FAILED("로그인 시도가 실패했습니다.");
+  USER_AUTH_FAILED("로그인 시도가 실패했습니다."),
 
+  FEEDBACK_ANSWER_FAILED("피드백 답변이 실패했습니다.");
 
   private final String errorMsg;
 
   public String getErrorMsg(Object... arg) {
     return String.format(errorMsg, arg);
   }
-}
+  }

@@ -1,11 +1,15 @@
 package com.cocovo.fitqaspringjava.domain.feedback.service;
 
+import com.cocovo.fitqaspringjava.common.exception.FeedbackAnswerException;
+import com.cocovo.fitqaspringjava.common.exception.InvalidParamException;
 import com.cocovo.fitqaspringjava.domain.feedback.FeedbackCommand;
 import com.cocovo.fitqaspringjava.domain.feedback.FeedbackInfo;
 import com.cocovo.fitqaspringjava.domain.feedback.component.FeedbackCommentStore;
 import com.cocovo.fitqaspringjava.domain.feedback.component.FeedbackInfoMapper;
 import com.cocovo.fitqaspringjava.domain.feedback.component.FeedbackReader;
 import com.cocovo.fitqaspringjava.domain.feedback.component.FeedbackStore;
+import com.cocovo.fitqaspringjava.domain.feedback.entity.Feedback;
+import com.cocovo.fitqaspringjava.domain.trainer.component.TrainerReader;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -24,12 +28,32 @@ public class FeedbackServiceImpl implements FeedbackService {
   private final FeedbackReader feedbackReader;
   private final FeedbackCommentStore feedbackCommentStore;
 
+  private final TrainerReader trainerReader;
+
   @Override
   public List<FeedbackInfo.Main> retrieveFeedbacks() {
     var feedbacks = feedbackReader.retrieveFeedbackAll();
     return feedbacks.stream()
         .map(feedbackInfoMapper::of)
         .collect(Collectors.toList());
+  }
+
+  @Override
+  public FeedbackInfo.FeedbackAnswerInfo registerFeedbackAnswer(String feedbackToken,
+      FeedbackCommand.RegisterFeedbackAnswer command) {
+    var trainer = trainerReader.retrieveTrainerByToken(command.getTrainerToken());
+    var feedback = feedbackReader.retrieveFeedbackByToken(feedbackToken);
+
+    if (feedback.getFeedbackAnswer() != null) {
+      throw new FeedbackAnswerException("이미 답변이 완료된 피드백입니다.");
+    } else if (trainer.getId() != feedback.getTrainerId()) {
+      throw new FeedbackAnswerException("잘못된 트레이너가 응답하였습니다.");
+    }
+
+    var initFeedbackAnswer = command.toEntity(feedback);
+    feedbackStore.store(initFeedbackAnswer);
+    feedback.changeComplete();
+    return feedbackInfoMapper.of(initFeedbackAnswer);
   }
 
   @Override

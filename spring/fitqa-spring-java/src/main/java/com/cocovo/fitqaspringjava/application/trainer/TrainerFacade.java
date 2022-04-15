@@ -1,7 +1,6 @@
 package com.cocovo.fitqaspringjava.application.trainer;
 
 
-import com.cocovo.fitqaspringjava.domain.feedback.FeedbackInfo;
 import com.cocovo.fitqaspringjava.domain.feedback.service.FeedbackService;
 import com.cocovo.fitqaspringjava.domain.trainer.TrainerCommand;
 import com.cocovo.fitqaspringjava.domain.trainer.TrainerInfo;
@@ -35,11 +34,6 @@ public class TrainerFacade {
 
   public List<TrainerInfo.Main> retrieveTrainers() {
     return trainerService.retrieveTrainers();
-  }
-
-  public List<FeedbackInfo.Main> getFeedbacksOfTrainer(String trainerToken) {
-    var trainer = trainerService.retrieveTrainerByToken(trainerToken);
-    return feedbackService.retrieveFeedbacksByTrainerId(trainer.getId());
   }
 
   public TrainerInfo.Main updateTrainerInterestAreas(String trainerToken,
