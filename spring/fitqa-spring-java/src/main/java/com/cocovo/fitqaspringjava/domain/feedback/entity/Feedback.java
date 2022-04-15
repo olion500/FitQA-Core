@@ -20,7 +20,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @Table(name = "feedbacks")
 public class Feedback extends BaseEntity {
-    private final String FEEDBACK_PREFIX = "fdb_";
+    private static final String FEEDBACK_PREFIX = "fdb_";
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

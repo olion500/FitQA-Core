@@ -17,36 +17,29 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Table(name = "feedback_comment")
 public class FeedbackComment extends BaseEntity {
+    private static final String FEEDBACK_COMMENT_PREFIX = "fct_";
 
-  private final String FEEDBACK_COMMENT_PREFIX = "fct_";
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private String feedbackCommentToken;
 
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long id;
-  private String feedbackCommentToken;
+    @ManyToOne
+    @JoinColumn(name = "feedback_id")
+    private Feedback feedback;
 
-  @ManyToOne
-  @JoinColumn(name = "feedback_id")
-  private Feedback feedback;
+    private String writer;
+    private String comment;
 
-  private String writer;
-  private String comment;
+    @Builder
+    public FeedbackComment(Feedback feedback, String writer, String comment) {
+        if (feedback == null) throw new InvalidParamException("feedback cannot be null");
+        if (StringUtils.isEmpty(writer)) throw new InvalidParamException("writer cannot be empty.");
+        if (StringUtils.isEmpty(comment)) throw new InvalidParamException("comment cannot be empty.");
 
-  @Builder
-  public FeedbackComment(Feedback feedback, String writer, String comment) {
-      if (feedback == null) {
-          throw new InvalidParamException("feedback cannot be null");
-      }
-      if (StringUtils.isEmpty(writer)) {
-          throw new InvalidParamException("writer cannot be empty.");
-      }
-      if (StringUtils.isEmpty(comment)) {
-          throw new InvalidParamException("comment cannot be empty.");
-      }
-
-    this.feedbackCommentToken = TokenGenerator.randomCharacterWithPrefix(FEEDBACK_COMMENT_PREFIX);
-    this.feedback = feedback;
-    this.writer = writer;
-    this.comment = comment;
-  }
+        this.feedbackCommentToken = TokenGenerator.randomCharacterWithPrefix(FEEDBACK_COMMENT_PREFIX);
+        this.feedback = feedback;
+        this.writer = writer;
+        this.comment = comment;
+    }
 }

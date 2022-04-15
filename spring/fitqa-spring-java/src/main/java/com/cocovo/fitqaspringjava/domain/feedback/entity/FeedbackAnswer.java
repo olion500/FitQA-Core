@@ -17,7 +17,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Table(name = "feedback_answer")
 public class FeedbackAnswer extends BaseEntity {
-  private final String FEEDBACK_ANSWER_PREFIX = "fas_";
+  private static final String FEEDBACK_ANSWER_PREFIX = "fas_";
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
