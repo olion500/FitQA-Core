@@ -1,6 +1,8 @@
 package com.cocovo.fitqaspringjava.interfaces.user;
 
+import com.cocovo.fitqaspringjava.domain.common.entity.type.WorkOutType;
 import com.cocovo.fitqaspringjava.domain.user.User;
+import java.time.ZonedDateTime;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -20,6 +22,9 @@ public class UserDto {
     private final String name;
     private final String email;
     private final String photoURL;
+    private WorkOutType.Style workOutStyle;
+    private User.WorkOutLevel workOutLevel;
+    private User.Gender gender;
     private final User.AccountProvider provider;
   }
 
