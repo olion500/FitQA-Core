@@ -15,22 +15,23 @@ import java.util.Optional;
 @Component
 @RequiredArgsConstructor
 public class UserReaderImpl implements UserReader {
-    private final UserRepository userRepository;
 
-    @Override
-    public List<User> retrieveUserAll() {
-        return userRepository.findAll();
-    }
+  private final UserRepository userRepository;
 
-    @Override
-    public User retrieveUserByToken(String userToken) {
-        return userRepository.findByUserToken(userToken)
-                .orElseThrow(EntityNotFoundException::new);
-    }
+  @Override
+  public List<User> retrieveUserAll() {
+    return userRepository.findAll();
+  }
 
-    @Override
-    public User findByEmail(String email) {
-        return userRepository.findByEmail(email)
-                .orElseThrow(EntityNotFoundException::new);
-    }
+  @Override
+  public User retrieveUserByToken(String userToken) {
+    return userRepository.findByUserToken(userToken)
+        .orElseThrow(EntityNotFoundException::new);
+  }
+
+  @Override
+  public User findByEmail(String email) {
+    return userRepository.findByEmail(email)
+        .orElseThrow(EntityNotFoundException::new);
+  }
 }

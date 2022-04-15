@@ -16,6 +16,7 @@ import javax.persistence.*;
 @Table(name = "trainers_career")
 @RequiredArgsConstructor
 public class TrainerCareer extends BaseEntity {
+
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
@@ -40,8 +41,9 @@ public class TrainerCareer extends BaseEntity {
 
   @Builder
   public TrainerCareer(Trainer trainer, String description, Type type) {
-    if (StringUtils.isEmpty(description))
+    if (StringUtils.isEmpty(description)) {
       throw new InvalidParamException("description is empty");
+    }
     this.trainer = trainer;
     this.description = description;
     this.type = type;

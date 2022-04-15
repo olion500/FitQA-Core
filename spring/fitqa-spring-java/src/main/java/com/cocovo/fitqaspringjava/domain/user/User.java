@@ -16,42 +16,43 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Table(name = "users")
 public class User extends BaseEntity {
-    private final String USER_PREFIX = "usr_";
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private String userToken;
+  private final String USER_PREFIX = "usr_";
 
-    private String email;
-    private String name;
-    private String photoURL;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
+  private String userToken;
 
-    @Enumerated(EnumType.STRING)
-    private AccountProvider provider;
+  private String email;
+  private String name;
+  private String photoURL;
 
-    @Getter
-    @RequiredArgsConstructor
-    public enum AccountProvider {
-        GOOGLE("google"),
-        NAVER("naver"),
-        KAKAO("kakao");
+  @Enumerated(EnumType.STRING)
+  private AccountProvider provider;
 
-        private final String provider;
-    }
+  @Getter
+  @RequiredArgsConstructor
+  public enum AccountProvider {
+    GOOGLE("google"),
+    NAVER("naver"),
+    KAKAO("kakao");
 
-    @Builder
-    public User(String email, String name, String photoURL, AccountProvider provider) {
-        this.userToken = TokenGenerator.randomCharacterWithPrefix(USER_PREFIX);
-        this.email = email;
-        this.name = name;
-        this.photoURL = photoURL;
-        this.provider = provider;
-    }
+    private final String provider;
+  }
 
-    public User update(String name, String photoUrl) {
-        this.name = name;
-        this.photoURL = photoUrl;
-        return this;
-    }
+  @Builder
+  public User(String email, String name, String photoURL, AccountProvider provider) {
+    this.userToken = TokenGenerator.randomCharacterWithPrefix(USER_PREFIX);
+    this.email = email;
+    this.name = name;
+    this.photoURL = photoURL;
+    this.provider = provider;
+  }
+
+  public User update(String name, String photoUrl) {
+    this.name = name;
+    this.photoURL = photoUrl;
+    return this;
+  }
 }

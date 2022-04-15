@@ -17,6 +17,7 @@ import java.util.stream.Collectors;
 @RequestMapping("/api/v1/trainers")
 @RequiredArgsConstructor
 public class TrainerApiController {
+
   private final TrainerFacade trainerFacade;
   private final TrainerDtoMapper trainerDtoMapper;
   private final FeedbackDtoMapper feedbackDtoMapper;
@@ -42,8 +43,8 @@ public class TrainerApiController {
   public CommonResponse getTrainerFeedbacks(@PathVariable("trainerToken") String trainerToken) {
     var feedbacks = trainerFacade.getFeedbacksOfTrainer(trainerToken);
     var response = feedbacks.stream()
-            .map(feedbackDtoMapper::of)
-            .collect(Collectors.toList());
+        .map(feedbackDtoMapper::of)
+        .collect(Collectors.toList());
     return CommonResponse.success(response);
   }
 
@@ -77,7 +78,7 @@ public class TrainerApiController {
 
   @PutMapping("/{trainerToken}")
   public CommonResponse updateTrainerInfo(@PathVariable(value = "trainerToken") String trainerToken,
-                                          @RequestBody @Valid TrainerDto.UpdateTrainerInfoRequest request) {
+      @RequestBody @Valid TrainerDto.UpdateTrainerInfoRequest request) {
     var updatedTrainer =
         trainerFacade.updateTrainerInfo(trainerToken, trainerDtoMapper.of(request));
     var response = trainerDtoMapper.of(updatedTrainer);

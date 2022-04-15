@@ -6,6 +6,7 @@ import com.cocovo.fitqaspringjava.domain.trainer.TrainerInfo;
 import java.util.List;
 
 public interface TrainerService {
+
   // retrieve
   List<TrainerInfo.Main> retrieveTrainers();
 
@@ -19,8 +20,8 @@ public interface TrainerService {
 
   // update
   TrainerInfo.Main updateTrainerInterestAreas(String trainerToken,
-                                              TrainerCommand.UpdateTrainerByInterestAreas updateInterestAreas);
+      TrainerCommand.UpdateTrainerByInterestAreas updateInterestAreas);
 
   TrainerInfo.Main updateTrainerInfo(String trainerToken,
-                                     TrainerCommand.UpdateTrainerInfo updateTrainerInfo);
+      TrainerCommand.UpdateTrainerInfo updateTrainerInfo);
 }

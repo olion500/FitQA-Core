@@ -6,8 +6,9 @@ import com.cocovo.fitqaspringjava.domain.trainer.entity.Trainer;
 import java.util.List;
 
 public interface TrainerUpdater {
+
   boolean updateTrainerInterestAreas(Trainer trainer,
-                                     List<WorkOutType.InterestArea> updateInterestAreas);
+      List<WorkOutType.InterestArea> updateInterestAreas);
 
   boolean updateTrainerInfo(Trainer trainer, Trainer initUpdateTrainer);
 }

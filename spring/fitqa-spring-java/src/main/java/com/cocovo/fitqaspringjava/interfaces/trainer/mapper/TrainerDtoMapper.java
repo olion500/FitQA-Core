@@ -11,6 +11,7 @@ import org.mapstruct.ReportingPolicy;
 @Mapper(componentModel = "spring", injectionStrategy = InjectionStrategy.CONSTRUCTOR,
     unmappedTargetPolicy = ReportingPolicy.ERROR)
 public interface TrainerDtoMapper {
+
   // register
   TrainerCommand.RegisterTrainer of(TrainerDto.RegisterTrainerRequest request);
 
@@ -33,7 +34,8 @@ public interface TrainerDtoMapper {
   TrainerDto.TrainerSnsInfo of(TrainerInfo.TrainerSnsInfo trainerSnsInfo);
 
   // update
-  TrainerCommand.UpdateTrainerByInterestAreas of(TrainerDto.UpdateTrainerInterestAreasRequest request);
+  TrainerCommand.UpdateTrainerByInterestAreas of(
+      TrainerDto.UpdateTrainerInterestAreasRequest request);
 
   TrainerCommand.UpdateTrainerInfo of(TrainerDto.UpdateTrainerInfoRequest request);
 

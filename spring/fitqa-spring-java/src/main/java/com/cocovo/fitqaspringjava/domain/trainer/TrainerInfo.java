@@ -16,6 +16,7 @@ public class TrainerInfo {
   @Builder
   @ToString
   public static class Main {
+
     private final Long id;
     private final String trainerToken;
     private final String name;
@@ -35,6 +36,7 @@ public class TrainerInfo {
   @Getter
   @ToString
   public static class TrainerImageInfo {
+
     private final String imageUrl;
     private final ImageType.Type imageType;
 
@@ -47,6 +49,7 @@ public class TrainerInfo {
   @Getter
   @ToString
   public static class TrainerCareerInfo {
+
     private final String description;
     private final TrainerCareer.Type type;
 
@@ -59,6 +62,7 @@ public class TrainerInfo {
   @Getter
   @ToString
   public static class TrainerFeedbackPriceInfo {
+
     private final WorkOutType.InterestArea area;
     private final Integer price;
 
@@ -71,6 +75,7 @@ public class TrainerInfo {
   @Getter
   @ToString
   public static class TrainerInterestAreaInfo {
+
     private final WorkOutType.InterestArea interestArea;
 
     public TrainerInterestAreaInfo(TrainerInterestArea trainerInterestArea) {
@@ -81,6 +86,7 @@ public class TrainerInfo {
   @Getter
   @ToString
   public static class TrainerSnsInfo {
+
     private final SnsType.Type snsType;
     private final String snsUrl;
 

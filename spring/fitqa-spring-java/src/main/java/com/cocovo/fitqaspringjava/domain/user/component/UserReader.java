@@ -7,7 +7,10 @@ import java.util.List;
 import java.util.Optional;
 
 public interface UserReader {
-    List<User> retrieveUserAll();
-    User retrieveUserByToken(String userToken);
-    User findByEmail(String email);
+
+  List<User> retrieveUserAll();
+
+  User retrieveUserByToken(String userToken);
+
+  User findByEmail(String email);
 }

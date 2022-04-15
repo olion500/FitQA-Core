@@ -10,6 +10,6 @@ import org.mapstruct.ReportingPolicy;
 @Mapper(componentModel = "spring", injectionStrategy = InjectionStrategy.CONSTRUCTOR, unmappedTargetPolicy = ReportingPolicy.ERROR)
 public interface FeedbackInfoMapper {
 
-    @Mapping(source = "feedbackCommentList", target = "comments")
-    FeedbackInfo.Main of(Feedback feedback);
+  @Mapping(source = "feedbackCommentList", target = "comments")
+  FeedbackInfo.Main of(Feedback feedback);
 }

@@ -9,44 +9,46 @@ import lombok.ToString;
 
 public class FeedbackCommand {
 
-    @Getter
-    @Builder
-    @ToString
-    public static class RegisterFeedback {
-        private String ownerId;
-        private Long trainerId;
-        private TypeInfo.InterestArea interestArea;
-        private Integer price;
-        private String title;
-        private String content;
-        private boolean locked;
+  @Getter
+  @Builder
+  @ToString
+  public static class RegisterFeedback {
 
-        public Feedback toEntity() {
-            return Feedback.builder()
-                    .ownerId(ownerId)
-                    .trainerId(trainerId)
-                    .interestArea(interestArea)
-                    .price(price)
-                    .title(title)
-                    .content(content)
-                    .locked(locked)
-                    .build();
-        }
+    private String ownerId;
+    private Long trainerId;
+    private TypeInfo.InterestArea interestArea;
+    private Integer price;
+    private String title;
+    private String content;
+    private boolean locked;
+
+    public Feedback toEntity() {
+      return Feedback.builder()
+          .ownerId(ownerId)
+          .trainerId(trainerId)
+          .interestArea(interestArea)
+          .price(price)
+          .title(title)
+          .content(content)
+          .locked(locked)
+          .build();
     }
+  }
 
-    @Getter
-    @Builder
-    @ToString
-    public static class AddComment {
-        private String writerId;
-        private String comment;
+  @Getter
+  @Builder
+  @ToString
+  public static class AddComment {
 
-        public FeedbackComment toEntity(Feedback feedback) {
-            return FeedbackComment.builder()
-                    .feedback(feedback)
-                    .writer(writerId)
-                    .comment(comment)
-                    .build();
-        }
+    private String writerId;
+    private String comment;
+
+    public FeedbackComment toEntity(Feedback feedback) {
+      return FeedbackComment.builder()
+          .feedback(feedback)
+          .writer(writerId)
+          .comment(comment)
+          .build();
     }
+  }
 }

@@ -15,6 +15,7 @@ import javax.persistence.*;
 @Table(name = "trainers_feedback_price")
 @RequiredArgsConstructor
 public class TrainerFeedbackPrice extends BaseEntity {
+
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
@@ -29,7 +30,7 @@ public class TrainerFeedbackPrice extends BaseEntity {
 
   @Builder
   public TrainerFeedbackPrice(Trainer trainer, WorkOutType.InterestArea interestArea,
-                              Integer price) {
+      Integer price) {
     this.trainer = trainer;
     this.interestArea = interestArea;
     this.price = price;

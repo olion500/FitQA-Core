@@ -11,10 +11,11 @@ import org.springframework.stereotype.Component;
 @Component
 @RequiredArgsConstructor
 public class FeedbackCommentStoreImpl implements FeedbackCommentStore {
-    private final FeedbackCommentRepository feedbackCommentRepository;
 
-    @Override
-    public FeedbackComment store(FeedbackComment feedbackComment) {
-       return feedbackCommentRepository.save(feedbackComment);
-    }
+  private final FeedbackCommentRepository feedbackCommentRepository;
+
+  @Override
+  public FeedbackComment store(FeedbackComment feedbackComment) {
+    return feedbackCommentRepository.save(feedbackComment);
+  }
 }

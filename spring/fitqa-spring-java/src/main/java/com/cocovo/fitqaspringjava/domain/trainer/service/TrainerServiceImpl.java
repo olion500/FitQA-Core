@@ -19,6 +19,7 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 public class TrainerServiceImpl implements TrainerService {
+
   private final TrainerStore trainerStore;
   private final TrainerReader trainerReader;
   private final TrainerUpdater trainerUpdater;
@@ -42,7 +43,8 @@ public class TrainerServiceImpl implements TrainerService {
   public List<TrainerInfo.Main> retrieveTrainers(
       TrainerCommand.RetrieveTrainersByInterestAreas retrieveTrainersByInterestAreas) {
     List<Trainer> foundTrainers =
-        trainerReader.retrieveTrainersByInterestAreas(retrieveTrainersByInterestAreas.getInterestAreas());
+        trainerReader
+            .retrieveTrainersByInterestAreas(retrieveTrainersByInterestAreas.getInterestAreas());
 
     return foundTrainers.stream().map(trainer -> trainerInfoMapper.of(trainer))
         .collect(Collectors.toUnmodifiableList());
@@ -52,13 +54,14 @@ public class TrainerServiceImpl implements TrainerService {
   public List<TrainerInfo.Main> retrieveTrainers() {
     List<Trainer> foundTrainers = trainerReader.retrieveTrainersAll();
 
-    return foundTrainers.stream().map(trainer -> trainerInfoMapper.of(trainer)).collect(Collectors.toList());
+    return foundTrainers.stream().map(trainer -> trainerInfoMapper.of(trainer))
+        .collect(Collectors.toList());
   }
 
   @Override
   @Transactional
   public TrainerInfo.Main updateTrainerInterestAreas(String trainerToken,
-                                                     TrainerCommand.UpdateTrainerByInterestAreas updateInterestAreas) {
+      TrainerCommand.UpdateTrainerByInterestAreas updateInterestAreas) {
     var foundTrainer = trainerReader.retrieveTrainerByToken(trainerToken);
     trainerUpdater.updateTrainerInterestAreas(foundTrainer, updateInterestAreas.getInterestAreas());
     return trainerInfoMapper.of(foundTrainer);
@@ -67,7 +70,7 @@ public class TrainerServiceImpl implements TrainerService {
   @Override
   @Transactional
   public TrainerInfo.Main updateTrainerInfo(String trainerToken,
-                                            TrainerCommand.UpdateTrainerInfo updateTrainerInfo) {
+      TrainerCommand.UpdateTrainerInfo updateTrainerInfo) {
     var foundTrainer = trainerReader.retrieveTrainerByToken(trainerToken);
     var initUpdateTrainer = updateTrainerInfo.toEntity();
     trainerUpdater.updateTrainerInfo(foundTrainer, initUpdateTrainer);

@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 @Component
 @RequiredArgsConstructor
 public class TrainerStoreImpl implements TrainerStore {
+
   private final TrainerRepository trainerRepository;
 
   @Override

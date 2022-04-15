@@ -16,6 +16,7 @@ public class TrainerCommand {
   @Builder
   @ToString
   public static class RegisterTrainer {
+
     private final String name;
     private final WorkOutType.Style style;
 
@@ -28,6 +29,7 @@ public class TrainerCommand {
   @Builder
   @ToString
   public static class RetrieveTrainersByInterestAreas {
+
     private final List<WorkOutType.InterestArea> interestAreas;
   }
 
@@ -35,6 +37,7 @@ public class TrainerCommand {
   @Builder
   @ToString
   public static class UpdateTrainerByInterestAreas {
+
     private final List<WorkOutType.InterestArea> interestAreas;
   }
 
@@ -42,6 +45,7 @@ public class TrainerCommand {
   @Builder
   @ToString
   public static class UpdateTrainerInfo {
+
     private final String name;
     private final WorkOutType.Style style;
     private final String introduceTitle;
@@ -75,6 +79,7 @@ public class TrainerCommand {
   @Builder
   @ToString
   public static class UpdateTrainerCareer {
+
     private final String description;
     private final TrainerCareer.Type type;
 
@@ -87,6 +92,7 @@ public class TrainerCommand {
   @Builder
   @ToString
   public static class UpdateFeedbackPrice {
+
     private final WorkOutType.InterestArea area;
     private final Integer price;
 
@@ -100,6 +106,7 @@ public class TrainerCommand {
   @Builder
   @ToString
   public static class UpdateInterestArea {
+
     private final WorkOutType.InterestArea interestArea;
 
     public TrainerInterestArea toEntity() {
@@ -111,6 +118,7 @@ public class TrainerCommand {
   @Builder
   @ToString
   public static class UpdateSns {
+
     private final SnsType.Type snsType;
     private final String snsUrl;
 

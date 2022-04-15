@@ -6,22 +6,23 @@ import lombok.ToString;
 
 public class UserCommand {
 
-    @Getter
-    @Builder
-    @ToString
-    public static class UpdateUser {
-        private String email;
-        private String name;
-        private String photoURL;
-        private User.AccountProvider provider;
+  @Getter
+  @Builder
+  @ToString
+  public static class UpdateUser {
 
-        public User toEntity() {
-            return User.builder()
-                    .email(email)
-                    .name(name)
-                    .photoURL(photoURL)
-                    .provider(provider)
-                    .build();
-        }
+    private String email;
+    private String name;
+    private String photoURL;
+    private User.AccountProvider provider;
+
+    public User toEntity() {
+      return User.builder()
+          .email(email)
+          .name(name)
+          .photoURL(photoURL)
+          .provider(provider)
+          .build();
     }
+  }
 }

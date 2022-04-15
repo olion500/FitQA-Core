@@ -7,12 +7,13 @@ import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
 
 @Mapper(
-        componentModel = "spring",
-        injectionStrategy = InjectionStrategy.CONSTRUCTOR,
-        unmappedTargetPolicy = ReportingPolicy.IGNORE
+    componentModel = "spring",
+    injectionStrategy = InjectionStrategy.CONSTRUCTOR,
+    unmappedTargetPolicy = ReportingPolicy.IGNORE
 )
 public interface UserDtoMapper {
-    UserDto.Main of(UserInfo.Main userInfo);
 
-    UserCommand.UpdateUser of(UserDto.RegisterReq user);
+  UserDto.Main of(UserInfo.Main userInfo);
+
+  UserCommand.UpdateUser of(UserDto.RegisterReq user);
 }

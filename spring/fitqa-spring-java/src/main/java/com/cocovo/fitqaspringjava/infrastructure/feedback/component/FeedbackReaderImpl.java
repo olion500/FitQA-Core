@@ -14,21 +14,22 @@ import java.util.List;
 @Component
 @RequiredArgsConstructor
 public class FeedbackReaderImpl implements FeedbackReader {
-    private final FeedbackRepository feedbackRepository;
 
-    @Override
-    public List<Feedback> retrieveFeedbackAll() {
-        return feedbackRepository.findAll();
-    }
+  private final FeedbackRepository feedbackRepository;
 
-    @Override
-    public Feedback retrieveFeedbackByToken(String feedbackToken) {
-        return feedbackRepository.findByFeedbackToken(feedbackToken)
-                .orElseThrow(EntityNotFoundException::new);
-    }
+  @Override
+  public List<Feedback> retrieveFeedbackAll() {
+    return feedbackRepository.findAll();
+  }
 
-    @Override
-    public List<Feedback> retrieveFeedbackAllByTrainerId(Long trainerId) {
-        return feedbackRepository.findAllByTrainerId(trainerId);
-    }
+  @Override
+  public Feedback retrieveFeedbackByToken(String feedbackToken) {
+    return feedbackRepository.findByFeedbackToken(feedbackToken)
+        .orElseThrow(EntityNotFoundException::new);
+  }
+
+  @Override
+  public List<Feedback> retrieveFeedbackAllByTrainerId(Long trainerId) {
+    return feedbackRepository.findAllByTrainerId(trainerId);
+  }
 }

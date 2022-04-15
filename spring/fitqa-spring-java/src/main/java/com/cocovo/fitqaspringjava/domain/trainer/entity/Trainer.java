@@ -23,6 +23,7 @@ import java.util.List;
 @DynamicUpdate
 @RequiredArgsConstructor
 public class Trainer extends BaseEntity {
+
   private static final String TRAINER_PREFIX = "trn_";
 
   @Id
@@ -65,11 +66,12 @@ public class Trainer extends BaseEntity {
 
   @Builder
   public Trainer(String name, WorkOutType.Style style, String introduceTitle,
-                 String introduceContext, List<TrainerCareer> careers,
-                 List<TrainerFeedbackPrice> feedbackPrices, List<TrainerInterestArea> interestAreas,
-                 List<TrainerSns> sns) {
-    if (StringUtils.isEmpty(name))
+      String introduceContext, List<TrainerCareer> careers,
+      List<TrainerFeedbackPrice> feedbackPrices, List<TrainerInterestArea> interestAreas,
+      List<TrainerSns> sns) {
+    if (StringUtils.isEmpty(name)) {
       throw new InvalidParamException("name is empty");
+    }
 
     this.trainerToken = TokenGenerator.randomCharacterWithPrefix(TRAINER_PREFIX);
     this.name = name;
