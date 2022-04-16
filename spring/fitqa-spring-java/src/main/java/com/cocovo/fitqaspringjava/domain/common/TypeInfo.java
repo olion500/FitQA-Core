@@ -27,7 +27,7 @@ public class TypeInfo {
 
   @RequiredArgsConstructor
   public enum InterestArea {
-    LOWER("하체"), BACK("등"), CHEST("가슴"), SHOULDER("어깨");
+    LOWER("하체"), BACK("등"), CHEST("가슴"), SHOULDER("어깨"), ARM("팔");
 
     private final String description;
   }
