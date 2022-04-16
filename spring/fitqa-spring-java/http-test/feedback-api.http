@@ -9,8 +9,8 @@ POST http://localhost:8080/api/v1/feedbacks/register
 Content-Type: application/json
 
 {
-  "ownerId": "1",
-  "trainerId": "2",
+  "ownerToken": "usr_SLhg42P1Jer941La",
+  "trainerToken": "trn_zML2LcWDV42W1MTN",
   "interestArea": "LOWER",
   "price": 1000,
   "title": "랫풀다운 자세가 정확한지 봐주세요",

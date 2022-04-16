@@ -10,12 +10,14 @@ import com.cocovo.fitqaspringjava.domain.feedback.component.FeedbackReader;
 import com.cocovo.fitqaspringjava.domain.feedback.component.FeedbackStore;
 import com.cocovo.fitqaspringjava.domain.feedback.entity.Feedback;
 import com.cocovo.fitqaspringjava.domain.trainer.component.TrainerReader;
+import com.cocovo.fitqaspringjava.domain.user.component.UserReader;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
+import org.springframework.transaction.annotation.Transactional;
 
 @Slf4j
 @Service
@@ -28,6 +30,7 @@ public class FeedbackServiceImpl implements FeedbackService {
   private final FeedbackReader feedbackReader;
   private final FeedbackCommentStore feedbackCommentStore;
 
+  private final UserReader userReader;
   private final TrainerReader trainerReader;
 
   @Override
@@ -46,7 +49,7 @@ public class FeedbackServiceImpl implements FeedbackService {
 
     if (feedback.getFeedbackAnswer() != null) {
       throw new FeedbackAnswerException("이미 답변이 완료된 피드백입니다.");
-    } else if (trainer.getId() != feedback.getTrainerId()) {
+    } else if (trainer.getId() != feedback.getTrainer().getId()) {
       throw new FeedbackAnswerException("잘못된 트레이너가 응답하였습니다.");
     }
 
@@ -71,8 +74,14 @@ public class FeedbackServiceImpl implements FeedbackService {
   }
 
   @Override
+  @Transactional
   public FeedbackInfo.Main registerFeedback(FeedbackCommand.RegisterFeedback command) {
-    var initFeedback = command.toEntity();
+    var owner = userReader.retrieveUserByToken(command.getOwnerToken());
+    var trainer = trainerReader.retrieveTrainerByToken(command.getTrainerToken());
+
+    var initFeedback = command.toEntity(owner, trainer);
+    owner.registerFeedback(initFeedback);
+    trainer.registerFeedback(initFeedback);
     var feedback = feedbackStore.store(initFeedback);
     return feedbackInfoMapper.of(feedback);
   }
