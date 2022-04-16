@@ -17,6 +17,8 @@ public class TrainerDto {
 
     @NotEmpty(message = "name 은 필수값입니다")
     private String name;
+    @NotEmpty(message = "name 은 필수값입니다")
+    private String email;
     @NotNull(message = "style 은 필수값입니다")
     private TypeInfo.WorkOutStyle style;
   }
@@ -68,6 +70,7 @@ public class TrainerDto {
 
     private final String trainerToken;
     private final String name;
+    private final String email;
     private final TypeInfo.WorkOutStyle style;
     private final String introduceTitle;
     private final String introduceContext;

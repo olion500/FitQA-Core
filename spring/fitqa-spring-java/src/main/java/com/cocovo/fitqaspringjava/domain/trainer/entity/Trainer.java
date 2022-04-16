@@ -32,6 +32,7 @@ public class Trainer extends BaseEntity {
 
   private String trainerToken;
   private String name;
+  private String email;
 
   @Enumerated(EnumType.STRING)
   private WorkOutType.Style style;
@@ -65,7 +66,7 @@ public class Trainer extends BaseEntity {
   private List<TrainerSns> sns = Lists.newArrayList();
 
   @Builder
-  public Trainer(String name, WorkOutType.Style style, String introduceTitle,
+  public Trainer(String name, String email, WorkOutType.Style style, String introduceTitle,
       String introduceContext, List<TrainerCareer> careers,
       List<TrainerFeedbackPrice> feedbackPrices, List<TrainerInterestArea> interestAreas,
       List<TrainerSns> sns) {
@@ -75,6 +76,7 @@ public class Trainer extends BaseEntity {
 
     this.trainerToken = TokenGenerator.randomCharacterWithPrefix(TRAINER_PREFIX);
     this.name = name;
+    this.email = email;
     this.style = style;
     this.introduceTitle = introduceTitle;
     this.introduceContext = introduceContext;

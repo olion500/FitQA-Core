@@ -18,10 +18,11 @@ public class TrainerCommand {
   public static class RegisterTrainer {
 
     private final String name;
+    private final String email;
     private final WorkOutType.Style style;
 
     public Trainer toEntity() {
-      return Trainer.builder().name(name).style(style).build();
+      return Trainer.builder().name(name).email(email).style(style).build();
     }
   }
 
