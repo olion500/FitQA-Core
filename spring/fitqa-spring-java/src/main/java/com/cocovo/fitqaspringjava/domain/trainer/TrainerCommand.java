@@ -122,9 +122,10 @@ public class TrainerCommand {
 
     private final SnsType.Type snsType;
     private final String snsUrl;
+    private final String snsTitle;
 
     public TrainerSns toEntity() {
-      return TrainerSns.builder().snsType(snsType).snsUrl(snsUrl).build();
+      return TrainerSns.builder().snsType(snsType).snsUrl(snsUrl).snsTitle(snsTitle).build();
     }
   }
 }

@@ -90,10 +90,12 @@ public class TrainerInfo {
 
     private final SnsType.Type snsType;
     private final String snsUrl;
+    private final String snsTitle;
 
     public TrainerSnsInfo(TrainerSns trainerSns) {
       this.snsType = trainerSns.getSnsType();
       this.snsUrl = trainerSns.getSnsUrl();
+      this.snsTitle = trainerSns.getSnsTitle();
     }
   }
 }
