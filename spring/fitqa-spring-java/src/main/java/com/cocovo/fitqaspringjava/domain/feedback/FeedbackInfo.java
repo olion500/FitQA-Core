@@ -17,8 +17,8 @@ public class FeedbackInfo {
     @ToString
     public static class Main {
         private final String feedbackToken;
-        private final String ownerId;
-        private final Long trainerId;
+        private final String ownerToken;
+        private final String trainerToken;
         private final TypeInfo.InterestArea interestArea;
         private final Integer price;
         private final String title;

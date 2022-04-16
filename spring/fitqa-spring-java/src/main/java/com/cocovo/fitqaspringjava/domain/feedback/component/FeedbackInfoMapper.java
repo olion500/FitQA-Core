@@ -11,9 +11,11 @@ import org.mapstruct.ReportingPolicy;
 @Mapper(componentModel = "spring", injectionStrategy = InjectionStrategy.CONSTRUCTOR, unmappedTargetPolicy = ReportingPolicy.ERROR)
 public interface FeedbackInfoMapper {
 
-    @Mapping(source = "feedbackCommentList", target = "comments")
-    @Mapping(source = "feedbackAnswer", target = "answer")
-    FeedbackInfo.Main of(Feedback feedback);
+  @Mapping(source = "feedbackCommentList", target = "comments")
+  @Mapping(source = "feedbackAnswer", target = "answer")
+  @Mapping(target = "ownerToken", expression = "java(feedback.getOwner().getUserToken() != null ? feedback.getOwner().getUserToken() : null)")
+  @Mapping(target = "trainerToken", expression = "java(feedback.getTrainer().getTrainerToken() != null ? feedback.getTrainer().getTrainerToken() : null)")
+  FeedbackInfo.Main of(Feedback feedback);
 
-    FeedbackInfo.FeedbackAnswerInfo of(FeedbackAnswer feedbackAnswer);
+  FeedbackInfo.FeedbackAnswerInfo of(FeedbackAnswer feedbackAnswer);
 }

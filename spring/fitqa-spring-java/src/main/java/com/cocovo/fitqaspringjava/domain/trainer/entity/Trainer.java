@@ -1,5 +1,6 @@
 package com.cocovo.fitqaspringjava.domain.trainer.entity;
 
+import com.cocovo.fitqaspringjava.domain.feedback.entity.Feedback;
 import com.google.common.collect.Lists;
 import com.cocovo.fitqaspringjava.common.exception.InvalidParamException;
 import com.cocovo.fitqaspringjava.common.util.TokenGenerator;
@@ -65,6 +66,10 @@ public class Trainer extends BaseEntity {
       CascadeType.REMOVE}, orphanRemoval = true)
   private List<TrainerSns> sns = Lists.newArrayList();
 
+  @OneToMany(fetch = FetchType.LAZY, mappedBy = "trainer", cascade = {
+      CascadeType.PERSIST}, orphanRemoval = true)
+  private List<Feedback> feedbacks = Lists.newArrayList();
+
   @Builder
   public Trainer(String name, String email, WorkOutType.Style style, String introduceTitle,
       String introduceContext, List<TrainerCareer> careers,
@@ -87,6 +92,10 @@ public class Trainer extends BaseEntity {
     this.likesCount = 0;
     this.representativeCareer = "";
     this.representativeFootprints = "";
+  }
+
+  public void registerFeedback(Feedback initFeedback) {
+    feedbacks.add(initFeedback);
   }
 
   public void addInterestArea(TrainerInterestArea newTrainerInterestArea) {

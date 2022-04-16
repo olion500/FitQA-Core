@@ -17,10 +17,10 @@ public class FeedbackDto {
     @Builder
     @ToString
     public static class RegisterReq {
-        @NotEmpty(message = "ownerId 은 필수값입니다.")
-        private String ownerId;
-        @NotEmpty(message = "trainerId 은 필수값입니다.")
-        private String trainerId;
+        @NotEmpty(message = "ownerToken 은 필수값입니다.")
+        private String ownerToken;
+        @NotEmpty(message = "trainerToken 은 필수값입니다.")
+        private String trainerToken;
         @NotNull(message = "interestArea 은 필수값입니다.")
         private TypeInfo.InterestArea interestArea;
         @NotNull(message = "price 은 필수값입니다.")
@@ -60,8 +60,8 @@ public class FeedbackDto {
     @ToString
     public static class Main {
         private final String feedbackToken;
-        private final String ownerId;
-        private final String trainerId;
+        private final String ownerToken;
+        private final String trainerToken;
         private final TypeInfo.InterestArea interestArea;
         private final Integer price;
         private final String title;

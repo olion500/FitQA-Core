@@ -5,7 +5,10 @@ import com.cocovo.fitqaspringjava.common.util.TokenGenerator;
 import com.cocovo.fitqaspringjava.domain.BaseEntity;
 import com.cocovo.fitqaspringjava.domain.common.entity.type.WorkOutType;
 import com.cocovo.fitqaspringjava.domain.common.entity.type.WorkOutType.Style;
+import com.cocovo.fitqaspringjava.domain.feedback.entity.Feedback;
+import com.google.common.collect.Lists;
 import java.time.ZonedDateTime;
+import java.util.List;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -81,6 +84,10 @@ public class User extends BaseEntity {
     private final String provider;
   }
 
+  @OneToMany(fetch = FetchType.LAZY, mappedBy = "owner", cascade = {
+      CascadeType.PERSIST}, orphanRemoval = true)
+  private List<Feedback> feedbacks = Lists.newArrayList();
+
   @Builder
   public User(String email, String name, String photoURL, ZonedDateTime birthDay,
       Integer height, Integer weight, Double bodyPatPercentage, Double muscleMass,
@@ -112,5 +119,9 @@ public class User extends BaseEntity {
     this.name = name;
     this.photoURL = photoUrl;
     return this;
+  }
+
+  public void registerFeedback(Feedback initFeedback) {
+    feedbacks.add(initFeedback);
   }
 }
