@@ -20,6 +20,7 @@ public class TrainerInfo {
     private final Long id;
     private final String trainerToken;
     private final String name;
+    private final String email;
     private final WorkOutType.Style style;
     private final String introduceTitle;
     private final String introduceContext;
