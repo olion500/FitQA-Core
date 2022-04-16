@@ -136,5 +136,6 @@ public class TrainerDto {
 
     private final TypeInfo.SnsType snsType;
     private final String snsUrl;
+    private final String snsTitle;
   }
 }

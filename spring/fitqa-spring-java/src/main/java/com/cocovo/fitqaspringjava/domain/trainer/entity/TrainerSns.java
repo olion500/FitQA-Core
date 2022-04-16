@@ -28,12 +28,14 @@ public class TrainerSns extends BaseEntity {
   @Enumerated(EnumType.STRING)
   private SnsType.Type snsType;
   private String snsUrl;
+  private String snsTitle;
 
   @Builder
-  public TrainerSns(Trainer trainer, SnsType.Type snsType, String snsUrl) {
+  public TrainerSns(Trainer trainer, SnsType.Type snsType, String snsUrl, String snsTitle) {
     this.trainer = trainer;
     this.snsType = snsType;
     this.snsUrl = snsUrl;
+    this.snsTitle = snsTitle;
   }
 
   public void setTrainer(Trainer trainer) {
