@@ -13,7 +13,6 @@ public interface FeedbackInfoMapper {
 
   @Mapping(source = "feedbackCommentList", target = "comments")
   @Mapping(source = "feedbackAnswer", target = "answer")
-  @Mapping(target = "ownerToken", expression = "java(feedback.getOwner().getUserToken() != null ? feedback.getOwner().getUserToken() : null)")
   @Mapping(target = "trainerToken", expression = "java(feedback.getTrainer().getTrainerToken() != null ? feedback.getTrainer().getTrainerToken() : null)")
   FeedbackInfo.Main of(Feedback feedback);
 
