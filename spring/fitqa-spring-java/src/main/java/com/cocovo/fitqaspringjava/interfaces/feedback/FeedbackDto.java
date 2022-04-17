@@ -63,7 +63,7 @@ public class FeedbackDto {
     public static class Main {
         private final String feedbackToken;
         private final UserDto.Main owner;
-        private final TrainerDto.Simple trainer;
+        private final FeedbackTrainer trainer;
         private final TypeInfo.InterestArea interestArea;
         private final Integer price;
         private final String title;
@@ -75,6 +75,27 @@ public class FeedbackDto {
         private final ZonedDateTime createdAt;
         private final ZonedDateTime updatedAt;
     }
+
+    @Getter
+    @Builder
+    @ToString
+    public static class FeedbackTrainer {
+        private final String trainerToken;
+        private final String name;
+        private final String email;
+        private final TypeInfo.WorkOutStyle style;
+        private final String introduceTitle;
+        private final String introduceContext;
+        private final String representativeCareer;
+        private final String representativeFootprints;
+        private final Integer likesCount;
+        private final List<TrainerDto.TrainerImageInfo> images;
+        private final List<TrainerDto.TrainerCareerInfo> careers;
+        private final List<TrainerDto.TrainerFeedbackPriceInfo> feedbackPrices;
+        private final List<TrainerDto.TrainerInterestAreaInfo> interestAreas;
+        private final List<TrainerDto.TrainerSnsInfo> sns;
+    }
+
 
 
     @Getter

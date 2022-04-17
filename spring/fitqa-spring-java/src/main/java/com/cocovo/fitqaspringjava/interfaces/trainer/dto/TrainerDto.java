@@ -1,12 +1,15 @@
 package com.cocovo.fitqaspringjava.interfaces.trainer.dto;
 
 import com.cocovo.fitqaspringjava.domain.common.TypeInfo;
+import com.cocovo.fitqaspringjava.domain.feedback.entity.Feedback;
 import com.cocovo.fitqaspringjava.domain.trainer.entity.TrainerCareer;
 import com.cocovo.fitqaspringjava.interfaces.feedback.FeedbackDto;
+import com.cocovo.fitqaspringjava.interfaces.user.UserDto;
 import lombok.*;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.time.ZonedDateTime;
 import java.util.List;
 
 public class TrainerDto {
@@ -68,7 +71,6 @@ public class TrainerDto {
   @ToString
   @Builder
   public static class Main {
-
     private final String trainerToken;
     private final String name;
     private final String email;
@@ -87,19 +89,21 @@ public class TrainerDto {
   }
 
   @Getter
-  @ToString
   @Builder
-  public static class Simple {
-    private final String trainerToken;
-    private final String name;
-    private final String email;
-    private final TypeInfo.WorkOutStyle style;
-    private final String introduceTitle;
-    private final String introduceContext;
-    private final String representativeCareer;
-    private final String representativeFootprints;
-    private final Integer likesCount;
-    private final List<TrainerImageInfo> images;
+  @ToString
+  public static class TrainerFeedback {
+    private final String feedbackToken;
+    private final UserDto.Main owner;
+    private final TypeInfo.InterestArea interestArea;
+    private final Integer price;
+    private final String title;
+    private final String content;
+    private final boolean locked;
+    private final List<FeedbackDto.FeedbackCommentInfo> comments;
+    private final FeedbackDto.FeedbackAnswerInfo answer;
+    private final Feedback.Status status;
+    private final ZonedDateTime createdAt;
+    private final ZonedDateTime updatedAt;
   }
 
   @Getter

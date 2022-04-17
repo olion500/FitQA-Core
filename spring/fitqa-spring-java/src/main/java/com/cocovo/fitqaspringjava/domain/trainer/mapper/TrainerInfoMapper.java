@@ -1,10 +1,12 @@
 package com.cocovo.fitqaspringjava.domain.trainer.mapper;
 
 import com.cocovo.fitqaspringjava.domain.feedback.component.FeedbackInfoMapper;
+import com.cocovo.fitqaspringjava.domain.feedback.entity.Feedback;
 import com.cocovo.fitqaspringjava.domain.trainer.TrainerInfo;
 import com.cocovo.fitqaspringjava.domain.trainer.entity.*;
 import org.mapstruct.InjectionStrategy;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import org.mapstruct.ReportingPolicy;
 
 @Mapper(componentModel = "spring", injectionStrategy = InjectionStrategy.CONSTRUCTOR,
@@ -12,6 +14,10 @@ import org.mapstruct.ReportingPolicy;
 public interface TrainerInfoMapper {
 
   TrainerInfo.Main of(Trainer trainer);
+
+  @Mapping(source = "feedbackCommentList", target = "comments")
+  @Mapping(source = "feedbackAnswer", target = "answer")
+  TrainerInfo.TrainerFeedback of(Feedback feedback);
 
   TrainerInfo.TrainerImageInfo of(TrainerImage trainerImage);
 
