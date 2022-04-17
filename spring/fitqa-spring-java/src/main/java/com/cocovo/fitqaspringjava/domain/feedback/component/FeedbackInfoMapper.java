@@ -13,7 +13,6 @@ public interface FeedbackInfoMapper {
 
   @Mapping(source = "feedbackCommentList", target = "comments")
   @Mapping(source = "feedbackAnswer", target = "answer")
-  @Mapping(target = "trainerToken", expression = "java(feedback.getTrainer().getTrainerToken() != null ? feedback.getTrainer().getTrainerToken() : null)")
   FeedbackInfo.Main of(Feedback feedback);
 
   FeedbackInfo.FeedbackAnswerInfo of(FeedbackAnswer feedbackAnswer);

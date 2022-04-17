@@ -2,6 +2,7 @@ package com.cocovo.fitqaspringjava.interfaces.feedback;
 
 import com.cocovo.fitqaspringjava.domain.common.TypeInfo;
 import com.cocovo.fitqaspringjava.domain.feedback.entity.Feedback;
+import com.cocovo.fitqaspringjava.interfaces.trainer.dto.TrainerDto;
 import com.cocovo.fitqaspringjava.interfaces.user.UserDto;
 import lombok.Builder;
 import lombok.Getter;
@@ -62,7 +63,7 @@ public class FeedbackDto {
     public static class Main {
         private final String feedbackToken;
         private final UserDto.Main owner;
-        private final String trainerToken;
+        private final TrainerDto.Main trainer;
         private final TypeInfo.InterestArea interestArea;
         private final Integer price;
         private final String title;
