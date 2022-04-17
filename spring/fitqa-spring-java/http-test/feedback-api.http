@@ -42,11 +42,11 @@ Content-Type: application/json
 
 
 ### 댓글 등록
-POST http://localhost:8080/api/v1/feedbacks/fdb_qdCOZam1pftqW9Sb/comment
+POST http://localhost:8080/api/v1/feedbacks/fdb_xhoVdSMOJYJpN1I7/comment
 Content-Type: application/json
 
 {
-  "writerToken": "usr_JahxADS4mdJrjJX7",
+  "writerToken": "usr_xFrLk7qONnAZDp5s",
   "comment": "와, 정말 보기 좋네요"
 }
 
