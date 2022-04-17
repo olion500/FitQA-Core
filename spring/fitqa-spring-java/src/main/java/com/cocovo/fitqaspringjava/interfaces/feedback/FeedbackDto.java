@@ -15,104 +15,88 @@ import java.util.List;
 
 public class FeedbackDto {
 
-    @Getter
-    @Builder
-    @ToString
-    public static class RegisterReq {
-        @NotEmpty(message = "ownerToken 은 필수값입니다.")
-        private String ownerToken;
-        @NotEmpty(message = "trainerToken 은 필수값입니다.")
-        private String trainerToken;
-        @NotNull(message = "interestArea 은 필수값입니다.")
-        private TypeInfo.InterestArea interestArea;
-        @NotNull(message = "price 은 필수값입니다.")
-        private Integer price;
-        @NotEmpty(message = "title 은 필수값입니다.")
-        private String title;
-        @NotEmpty(message = "content 는 필수값입니다.")
-        private String content;
-        @NotNull(message = "locked 는 필수값입니다.")
-        private boolean locked;
-    }
+  @Getter
+  @Builder
+  @ToString
+  public static class RegisterReq {
 
-    @Getter
-    @Builder
-    @ToString
-    public static class AddCommentReq {
-        @NotEmpty(message = "writerToken 는 필수값입니다")
-        private String writerToken;
-        @NotEmpty(message = "comment 는 필수값입니다")
-        private String comment;
-    }
+    @NotEmpty(message = "ownerToken 은 필수값입니다.")
+    private String ownerToken;
+    @NotEmpty(message = "trainerToken 은 필수값입니다.")
+    private String trainerToken;
+    @NotNull(message = "interestArea 은 필수값입니다.")
+    private TypeInfo.InterestArea interestArea;
+    @NotNull(message = "price 은 필수값입니다.")
+    private Integer price;
+    @NotEmpty(message = "title 은 필수값입니다.")
+    private String title;
+    @NotEmpty(message = "content 는 필수값입니다.")
+    private String content;
+    @NotNull(message = "locked 는 필수값입니다.")
+    private boolean locked;
+  }
 
-    @Getter
-    @Builder
-    @ToString
-    public static class RegisterAnswerReq {
-        @NotEmpty(message = "trainerToken 은 필수값입니다")
-        private String trainerToken;
-        @NotEmpty(message = "writerId 는 필수값입니다")
-        private String videoUrl;
-        @NotEmpty(message = "comment 는 필수값입니다")
-        private String description;
-    }
+  @Getter
+  @Builder
+  @ToString
+  public static class AddCommentReq {
 
-    @Getter
-    @Builder
-    @ToString
-    public static class Main {
-        private final String feedbackToken;
-        private final UserDto.Main owner;
-        private final FeedbackTrainer trainer;
-        private final TypeInfo.InterestArea interestArea;
-        private final Integer price;
-        private final String title;
-        private final String content;
-        private final boolean locked;
-        private final List<FeedbackCommentInfo> comments;
-        private final FeedbackAnswerInfo answer;
-        private final Feedback.Status status;
-        private final ZonedDateTime createdAt;
-        private final ZonedDateTime updatedAt;
-    }
+    @NotEmpty(message = "writerToken 는 필수값입니다")
+    private String writerToken;
+    @NotEmpty(message = "comment 는 필수값입니다")
+    private String comment;
+  }
 
-    @Getter
-    @Builder
-    @ToString
-    public static class FeedbackTrainer {
-        private final String trainerToken;
-        private final String name;
-        private final String email;
-        private final TypeInfo.WorkOutStyle style;
-        private final String introduceTitle;
-        private final String introduceContext;
-        private final String representativeCareer;
-        private final String representativeFootprints;
-        private final Integer likesCount;
-        private final List<TrainerDto.TrainerImageInfo> images;
-        private final List<TrainerDto.TrainerCareerInfo> careers;
-        private final List<TrainerDto.TrainerFeedbackPriceInfo> feedbackPrices;
-        private final List<TrainerDto.TrainerInterestAreaInfo> interestAreas;
-        private final List<TrainerDto.TrainerSnsInfo> sns;
-    }
+  @Getter
+  @Builder
+  @ToString
+  public static class RegisterAnswerReq {
 
+    @NotEmpty(message = "trainerToken 은 필수값입니다")
+    private String trainerToken;
+    @NotEmpty(message = "writerId 는 필수값입니다")
+    private String videoUrl;
+    @NotEmpty(message = "comment 는 필수값입니다")
+    private String description;
+  }
 
+  @Getter
+  @Builder
+  @ToString
+  public static class Main {
 
-    @Getter
-    @Builder
-    @ToString
-    public static class FeedbackCommentInfo {
-        private final UserDto.Main writer;
-        private final String comment;
-        private final ZonedDateTime createdAt;
-        private final ZonedDateTime updatedAt;
-    }
+    private final String feedbackToken;
+    private final UserDto.Main owner;
+    private final TrainerDto.Main trainer;
+    private final TypeInfo.InterestArea interestArea;
+    private final Integer price;
+    private final String title;
+    private final String content;
+    private final boolean locked;
+    private final List<FeedbackCommentInfo> comments;
+    private final FeedbackAnswerInfo answer;
+    private final Feedback.Status status;
+    private final ZonedDateTime createdAt;
+    private final ZonedDateTime updatedAt;
+  }
 
-    @Getter
-    @Builder
-    @ToString
-    public static class FeedbackAnswerInfo {
-        private final String videoUrl;
-        private final String description;
-    }
+  @Getter
+  @Builder
+  @ToString
+  public static class FeedbackCommentInfo {
+
+    private final UserDto.Main writer;
+    private final String comment;
+    private final ZonedDateTime createdAt;
+    private final ZonedDateTime updatedAt;
+  }
+
+  @Getter
+  @Builder
+  @ToString
+  public static class FeedbackAnswerInfo {
+
+    private final String videoUrl;
+    private final String description;
+  }
 }

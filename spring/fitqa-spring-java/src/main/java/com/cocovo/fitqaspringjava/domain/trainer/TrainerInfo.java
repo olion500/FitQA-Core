@@ -1,21 +1,18 @@
 package com.cocovo.fitqaspringjava.domain.trainer;
 
-import com.cocovo.fitqaspringjava.domain.common.TypeInfo;
 import com.cocovo.fitqaspringjava.domain.common.entity.type.ImageType;
 import com.cocovo.fitqaspringjava.domain.common.entity.type.SnsType;
 import com.cocovo.fitqaspringjava.domain.common.entity.type.WorkOutType;
 import com.cocovo.fitqaspringjava.domain.feedback.FeedbackInfo;
-import com.cocovo.fitqaspringjava.domain.feedback.entity.Feedback;
 import com.cocovo.fitqaspringjava.domain.trainer.entity.*;
-import com.cocovo.fitqaspringjava.domain.user.UserInfo;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.ToString;
 
-import java.time.ZonedDateTime;
 import java.util.List;
 
 public class TrainerInfo {
+
 
   @Getter
   @Builder
@@ -37,26 +34,31 @@ public class TrainerInfo {
     private final List<TrainerFeedbackPriceInfo> feedbackPrices;
     private final List<TrainerInterestAreaInfo> interestAreas;
     private final List<TrainerSnsInfo> sns;
-    private final List<TrainerFeedback> feedbacks;
   }
 
   @Getter
   @Builder
   @ToString
-  public static class TrainerFeedback {
-    private final String feedbackToken;
-    private final UserInfo.Main owner;
-    private final TypeInfo.InterestArea interestArea;
-    private final Integer price;
-    private final String title;
-    private final String content;
-    private final boolean locked;
-    private final List<FeedbackInfo.FeedbackCommentInfo> comments;
-    private final FeedbackInfo.FeedbackAnswerInfo answer;
-    private final Feedback.Status status;
-    private final ZonedDateTime createdAt;
-    private final ZonedDateTime updatedAt;
+  public static class TrainerWithFeedback {
+
+    private final Long id;
+    private final String trainerToken;
+    private final String name;
+    private final String email;
+    private final WorkOutType.Style style;
+    private final String introduceTitle;
+    private final String introduceContext;
+    private final String representativeCareer;
+    private final String representativeFootprints;
+    private final Integer likesCount;
+    private final List<TrainerImageInfo> images;
+    private final List<TrainerCareerInfo> careers;
+    private final List<TrainerFeedbackPriceInfo> feedbackPrices;
+    private final List<TrainerInterestAreaInfo> interestAreas;
+    private final List<TrainerSnsInfo> sns;
+    private final List<FeedbackInfo.Main> feedbacks;
   }
+
 
   @Getter
   @ToString

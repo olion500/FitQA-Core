@@ -1,7 +1,7 @@
 package com.cocovo.fitqaspringjava.domain.trainer.service;
 
 import com.cocovo.fitqaspringjava.domain.trainer.TrainerCommand;
-import com.cocovo.fitqaspringjava.domain.trainer.TrainerInfo;
+import com.cocovo.fitqaspringjava.domain.trainer.TrainerInfo.TrainerWithFeedback;
 import com.cocovo.fitqaspringjava.domain.trainer.component.TrainerReader;
 import com.cocovo.fitqaspringjava.domain.trainer.component.TrainerStore;
 import com.cocovo.fitqaspringjava.domain.trainer.component.TrainerUpdater;
@@ -34,46 +34,46 @@ public class TrainerServiceImpl implements TrainerService {
   }
 
   @Override
-  public TrainerInfo.Main retrieveTrainerByToken(String trainerToken) {
+  public TrainerWithFeedback retrieveTrainerByToken(String trainerToken) {
     Trainer foundTrainer = trainerReader.retrieveTrainerByToken(trainerToken);
-    return trainerInfoMapper.of(foundTrainer);
+    return trainerInfoMapper.toWithFeedback(foundTrainer);
   }
 
   @Override
-  public List<TrainerInfo.Main> retrieveTrainers(
+  public List<TrainerWithFeedback> retrieveTrainers(
       TrainerCommand.RetrieveTrainersByInterestAreas retrieveTrainersByInterestAreas) {
     List<Trainer> foundTrainers =
         trainerReader
             .retrieveTrainersByInterestAreas(retrieveTrainersByInterestAreas.getInterestAreas());
 
-    return foundTrainers.stream().map(trainer -> trainerInfoMapper.of(trainer))
+    return foundTrainers.stream().map(trainer -> trainerInfoMapper.toWithFeedback(trainer))
         .collect(Collectors.toUnmodifiableList());
   }
 
   @Override
-  public List<TrainerInfo.Main> retrieveTrainers() {
+  public List<TrainerWithFeedback> retrieveTrainers() {
     List<Trainer> foundTrainers = trainerReader.retrieveTrainersAll();
 
-    return foundTrainers.stream().map(trainer -> trainerInfoMapper.of(trainer))
+    return foundTrainers.stream().map(trainer -> trainerInfoMapper.toWithFeedback(trainer))
         .collect(Collectors.toList());
   }
 
   @Override
   @Transactional
-  public TrainerInfo.Main updateTrainerInterestAreas(String trainerToken,
+  public TrainerWithFeedback updateTrainerInterestAreas(String trainerToken,
       TrainerCommand.UpdateTrainerByInterestAreas updateInterestAreas) {
     var foundTrainer = trainerReader.retrieveTrainerByToken(trainerToken);
     trainerUpdater.updateTrainerInterestAreas(foundTrainer, updateInterestAreas.getInterestAreas());
-    return trainerInfoMapper.of(foundTrainer);
+    return trainerInfoMapper.toWithFeedback(foundTrainer);
   }
 
   @Override
   @Transactional
-  public TrainerInfo.Main updateTrainerInfo(String trainerToken,
+  public TrainerWithFeedback updateTrainerInfo(String trainerToken,
       TrainerCommand.UpdateTrainerInfo updateTrainerInfo) {
     var foundTrainer = trainerReader.retrieveTrainerByToken(trainerToken);
     var initUpdateTrainer = updateTrainerInfo.toEntity();
     trainerUpdater.updateTrainerInfo(foundTrainer, initUpdateTrainer);
-    return trainerInfoMapper.of(foundTrainer);
+    return trainerInfoMapper.toWithFeedback(foundTrainer);
   }
 }
