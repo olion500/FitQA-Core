@@ -63,7 +63,7 @@ public class FeedbackDto {
     public static class Main {
         private final String feedbackToken;
         private final UserDto.Main owner;
-        private final TrainerDto.Main trainer;
+        private final TrainerDto.Simple trainer;
         private final TypeInfo.InterestArea interestArea;
         private final Integer price;
         private final String title;

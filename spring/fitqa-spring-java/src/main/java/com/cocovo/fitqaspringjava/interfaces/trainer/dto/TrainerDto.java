@@ -87,6 +87,22 @@ public class TrainerDto {
   @Getter
   @ToString
   @Builder
+  public static class Simple {
+    private final String trainerToken;
+    private final String name;
+    private final String email;
+    private final TypeInfo.WorkOutStyle style;
+    private final String introduceTitle;
+    private final String introduceContext;
+    private final String representativeCareer;
+    private final String representativeFootprints;
+    private final Integer likesCount;
+    private final List<TrainerImageInfo> images;
+  }
+
+  @Getter
+  @ToString
+  @Builder
   public static class TrainerImageInfo {
 
     private final String imageUrl;
