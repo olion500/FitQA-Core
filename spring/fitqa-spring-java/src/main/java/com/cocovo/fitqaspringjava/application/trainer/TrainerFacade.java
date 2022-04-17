@@ -3,7 +3,7 @@ package com.cocovo.fitqaspringjava.application.trainer;
 
 import com.cocovo.fitqaspringjava.domain.feedback.service.FeedbackService;
 import com.cocovo.fitqaspringjava.domain.trainer.TrainerCommand;
-import com.cocovo.fitqaspringjava.domain.trainer.TrainerInfo;
+import com.cocovo.fitqaspringjava.domain.trainer.TrainerInfo.TrainerWithFeedback;
 import com.cocovo.fitqaspringjava.domain.trainer.service.TrainerService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -23,25 +23,25 @@ public class TrainerFacade {
     return trainerService.registerTrainer(registerTrainer);
   }
 
-  public TrainerInfo.Main retrieveTrainerInfo(String trainerToken) {
+  public TrainerWithFeedback retrieveTrainerInfo(String trainerToken) {
     return trainerService.retrieveTrainerByToken(trainerToken);
   }
 
-  public List<TrainerInfo.Main> retrieveTrainers(
+  public List<TrainerWithFeedback> retrieveTrainers(
       TrainerCommand.RetrieveTrainersByInterestAreas interestAreas) {
     return trainerService.retrieveTrainers(interestAreas);
   }
 
-  public List<TrainerInfo.Main> retrieveTrainers() {
+  public List<TrainerWithFeedback> retrieveTrainers() {
     return trainerService.retrieveTrainers();
   }
 
-  public TrainerInfo.Main updateTrainerInterestAreas(String trainerToken,
+  public TrainerWithFeedback updateTrainerInterestAreas(String trainerToken,
       TrainerCommand.UpdateTrainerByInterestAreas updateInterestAreas) {
     return trainerService.updateTrainerInterestAreas(trainerToken, updateInterestAreas);
   }
 
-  public TrainerInfo.Main updateTrainerInfo(String trainerToken,
+  public TrainerWithFeedback updateTrainerInfo(String trainerToken,
       TrainerCommand.UpdateTrainerInfo updateTrainerInfo) {
     return trainerService.updateTrainerInfo(trainerToken, updateTrainerInfo);
 

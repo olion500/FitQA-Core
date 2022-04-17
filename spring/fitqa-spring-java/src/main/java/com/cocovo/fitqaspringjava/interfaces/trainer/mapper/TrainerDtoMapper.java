@@ -3,9 +3,9 @@ package com.cocovo.fitqaspringjava.interfaces.trainer.mapper;
 import com.cocovo.fitqaspringjava.domain.trainer.TrainerCommand;
 import com.cocovo.fitqaspringjava.domain.trainer.TrainerInfo;
 import com.cocovo.fitqaspringjava.interfaces.trainer.dto.TrainerDto;
+import com.cocovo.fitqaspringjava.interfaces.trainer.dto.TrainerDto.TrainerWithFeedback;
 import org.mapstruct.InjectionStrategy;
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
 import org.mapstruct.ReportingPolicy;
 
 @Mapper(componentModel = "spring", injectionStrategy = InjectionStrategy.CONSTRUCTOR,
@@ -19,7 +19,7 @@ public interface TrainerDtoMapper {
 
   TrainerDto.RegisterTrainerResponse of(String trainerToken);
 
-  TrainerDto.Main of(TrainerInfo.Main trainerInfo);
+  TrainerWithFeedback of(TrainerInfo.TrainerWithFeedback trainerInfo);
 
   TrainerDto.TrainerImageInfo of(TrainerInfo.TrainerImageInfo trainerImageInfo);
 

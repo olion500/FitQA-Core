@@ -66,11 +66,34 @@ public class TrainerDto {
     private List<TrainerSnsInfo> sns;
   }
 
-  // Domain
+
   @Getter
   @ToString
   @Builder
   public static class Main {
+
+    private final String trainerToken;
+    private final String name;
+    private final String email;
+    private final TypeInfo.WorkOutStyle style;
+    private final String introduceTitle;
+    private final String introduceContext;
+    private final String representativeCareer;
+    private final String representativeFootprints;
+    private final Integer likesCount;
+    private final List<TrainerImageInfo> images;
+    private final List<TrainerCareerInfo> careers;
+    private final List<TrainerFeedbackPriceInfo> feedbackPrices;
+    private final List<TrainerInterestAreaInfo> interestAreas;
+    private final List<TrainerSnsInfo> sns;
+  }
+
+  // Domain
+  @Getter
+  @ToString
+  @Builder
+  public static class TrainerWithFeedback {
+
     private final String trainerToken;
     private final String name;
     private final String email;
@@ -88,23 +111,6 @@ public class TrainerDto {
     private final List<FeedbackDto.Main> feedbacks;
   }
 
-  @Getter
-  @Builder
-  @ToString
-  public static class TrainerFeedback {
-    private final String feedbackToken;
-    private final UserDto.Main owner;
-    private final TypeInfo.InterestArea interestArea;
-    private final Integer price;
-    private final String title;
-    private final String content;
-    private final boolean locked;
-    private final List<FeedbackDto.FeedbackCommentInfo> comments;
-    private final FeedbackDto.FeedbackAnswerInfo answer;
-    private final Feedback.Status status;
-    private final ZonedDateTime createdAt;
-    private final ZonedDateTime updatedAt;
-  }
 
   @Getter
   @ToString

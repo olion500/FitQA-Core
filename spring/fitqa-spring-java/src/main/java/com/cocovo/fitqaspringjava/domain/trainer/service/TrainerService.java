@@ -1,27 +1,27 @@
 package com.cocovo.fitqaspringjava.domain.trainer.service;
 
 import com.cocovo.fitqaspringjava.domain.trainer.TrainerCommand;
-import com.cocovo.fitqaspringjava.domain.trainer.TrainerInfo;
 
+import com.cocovo.fitqaspringjava.domain.trainer.TrainerInfo.TrainerWithFeedback;
 import java.util.List;
 
 public interface TrainerService {
 
   // retrieve
-  List<TrainerInfo.Main> retrieveTrainers();
+  List<TrainerWithFeedback> retrieveTrainers();
 
-  List<TrainerInfo.Main> retrieveTrainers(
+  List<TrainerWithFeedback> retrieveTrainers(
       TrainerCommand.RetrieveTrainersByInterestAreas retrieveTrainersByInterestAreas);
 
-  TrainerInfo.Main retrieveTrainerByToken(String trainerToken);
+  TrainerWithFeedback retrieveTrainerByToken(String trainerToken);
 
   // register
   String registerTrainer(TrainerCommand.RegisterTrainer registerTrainer);
 
   // update
-  TrainerInfo.Main updateTrainerInterestAreas(String trainerToken,
+  TrainerWithFeedback updateTrainerInterestAreas(String trainerToken,
       TrainerCommand.UpdateTrainerByInterestAreas updateInterestAreas);
 
-  TrainerInfo.Main updateTrainerInfo(String trainerToken,
+  TrainerWithFeedback updateTrainerInfo(String trainerToken,
       TrainerCommand.UpdateTrainerInfo updateTrainerInfo);
 }
