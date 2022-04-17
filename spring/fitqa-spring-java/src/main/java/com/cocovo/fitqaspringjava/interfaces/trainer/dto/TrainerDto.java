@@ -2,6 +2,7 @@ package com.cocovo.fitqaspringjava.interfaces.trainer.dto;
 
 import com.cocovo.fitqaspringjava.domain.common.TypeInfo;
 import com.cocovo.fitqaspringjava.domain.trainer.entity.TrainerCareer;
+import com.cocovo.fitqaspringjava.interfaces.feedback.FeedbackDto;
 import lombok.*;
 
 import javax.validation.constraints.NotEmpty;
@@ -82,6 +83,7 @@ public class TrainerDto {
     private final List<TrainerFeedbackPriceInfo> feedbackPrices;
     private final List<TrainerInterestAreaInfo> interestAreas;
     private final List<TrainerSnsInfo> sns;
+    private final List<FeedbackDto.Main> feedbacks;
   }
 
   @Getter

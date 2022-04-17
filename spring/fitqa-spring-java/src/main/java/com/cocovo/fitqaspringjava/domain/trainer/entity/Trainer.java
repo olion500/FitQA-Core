@@ -85,13 +85,13 @@ public class Trainer extends BaseEntity {
     this.style = style;
     this.introduceTitle = introduceTitle;
     this.introduceContext = introduceContext;
+    this.representativeCareer = "";
+    this.representativeFootprints = "";
     this.careers = careers;
     this.feedbackPrices = feedbackPrices;
     this.interestAreas = interestAreas;
     this.sns = sns;
     this.likesCount = 0;
-    this.representativeCareer = "";
-    this.representativeFootprints = "";
   }
 
   public void registerFeedback(Feedback initFeedback) {
