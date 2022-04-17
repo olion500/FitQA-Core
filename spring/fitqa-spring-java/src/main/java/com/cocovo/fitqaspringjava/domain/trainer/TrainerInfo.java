@@ -3,6 +3,7 @@ package com.cocovo.fitqaspringjava.domain.trainer;
 import com.cocovo.fitqaspringjava.domain.common.entity.type.ImageType;
 import com.cocovo.fitqaspringjava.domain.common.entity.type.SnsType;
 import com.cocovo.fitqaspringjava.domain.common.entity.type.WorkOutType;
+import com.cocovo.fitqaspringjava.domain.feedback.FeedbackInfo;
 import com.cocovo.fitqaspringjava.domain.trainer.entity.*;
 import lombok.Builder;
 import lombok.Getter;
@@ -32,6 +33,7 @@ public class TrainerInfo {
     private final List<TrainerFeedbackPriceInfo> feedbackPrices;
     private final List<TrainerInterestAreaInfo> interestAreas;
     private final List<TrainerSnsInfo> sns;
+    private final List<FeedbackInfo.Main> feedbacks;
   }
 
   @Getter

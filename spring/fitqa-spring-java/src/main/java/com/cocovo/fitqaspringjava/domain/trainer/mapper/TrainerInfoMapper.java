@@ -1,5 +1,6 @@
 package com.cocovo.fitqaspringjava.domain.trainer.mapper;
 
+import com.cocovo.fitqaspringjava.domain.feedback.component.FeedbackInfoMapper;
 import com.cocovo.fitqaspringjava.domain.trainer.TrainerInfo;
 import com.cocovo.fitqaspringjava.domain.trainer.entity.*;
 import org.mapstruct.InjectionStrategy;
@@ -7,7 +8,7 @@ import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
 
 @Mapper(componentModel = "spring", injectionStrategy = InjectionStrategy.CONSTRUCTOR,
-    unmappedTargetPolicy = ReportingPolicy.ERROR)
+    unmappedTargetPolicy = ReportingPolicy.ERROR, uses = {FeedbackInfoMapper.class})
 public interface TrainerInfoMapper {
 
   TrainerInfo.Main of(Trainer trainer);
