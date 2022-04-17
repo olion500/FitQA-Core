@@ -2,6 +2,8 @@ package com.cocovo.fitqaspringjava.domain.feedback;
 
 import com.cocovo.fitqaspringjava.domain.common.TypeInfo;
 import com.cocovo.fitqaspringjava.domain.feedback.entity.Feedback;
+import com.cocovo.fitqaspringjava.domain.trainer.TrainerInfo;
+import com.cocovo.fitqaspringjava.domain.user.UserInfo;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -17,8 +19,8 @@ public class FeedbackInfo {
     @ToString
     public static class Main {
         private final String feedbackToken;
-        private final String ownerToken;
-        private final String trainerToken;
+        private final UserInfo.Main owner;
+        private final TrainerInfo.Main trainer;
         private final TypeInfo.InterestArea interestArea;
         private final Integer price;
         private final String title;
@@ -35,7 +37,7 @@ public class FeedbackInfo {
     @ToString
     @RequiredArgsConstructor
     public static class FeedbackCommentInfo {
-        private final String writer;
+        private final UserInfo.Main writer;
         private final String comment;
         private final ZonedDateTime createdAt;
         private final ZonedDateTime updatedAt;

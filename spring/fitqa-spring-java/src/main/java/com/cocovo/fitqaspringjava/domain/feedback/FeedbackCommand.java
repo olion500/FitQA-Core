@@ -61,13 +61,13 @@ public class FeedbackCommand {
   @ToString
   public static class AddComment {
 
-    private String writerId;
+    private String writerToken;
     private String comment;
 
-    public FeedbackComment toEntity(Feedback feedback) {
+    public FeedbackComment toEntity(Feedback feedback, User writer) {
       return FeedbackComment.builder()
           .feedback(feedback)
-          .writer(writerId)
+          .writer(writer)
           .comment(comment)
           .build();
     }

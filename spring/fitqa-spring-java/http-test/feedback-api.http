@@ -3,6 +3,13 @@
 GET http://localhost:8080/api/v1/feedbacks
 Content-Type: application/json
 
+### 피드백 디테일
+
+
+GET http://localhost:8080/api/v1/feedbacks/fdb_EL07fLd2JG4DsTDF
+Content-Type: application/json
+
+
 ### 피드백 등록 (한글)
 
 POST http://localhost:8080/api/v1/feedbacks/register
@@ -35,11 +42,11 @@ Content-Type: application/json
 
 
 ### 댓글 등록
-POST http://localhost:8080/api/v1/feedbacks/fdb_qdCOZam1pftqW9Sb/comment
+POST http://localhost:8080/api/v1/feedbacks/fdb_xhoVdSMOJYJpN1I7/comment
 Content-Type: application/json
 
 {
-  "writerId": "1",
+  "writerToken": "usr_xFrLk7qONnAZDp5s",
   "comment": "와, 정말 보기 좋네요"
 }
 

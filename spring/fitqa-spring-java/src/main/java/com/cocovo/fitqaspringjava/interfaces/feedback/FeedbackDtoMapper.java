@@ -4,6 +4,7 @@ import com.cocovo.fitqaspringjava.domain.feedback.FeedbackCommand;
 import com.cocovo.fitqaspringjava.domain.feedback.FeedbackInfo;
 import org.mapstruct.InjectionStrategy;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import org.mapstruct.ReportingPolicy;
 
 @Mapper(

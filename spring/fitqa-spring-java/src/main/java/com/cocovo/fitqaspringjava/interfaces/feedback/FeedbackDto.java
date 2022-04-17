@@ -2,6 +2,8 @@ package com.cocovo.fitqaspringjava.interfaces.feedback;
 
 import com.cocovo.fitqaspringjava.domain.common.TypeInfo;
 import com.cocovo.fitqaspringjava.domain.feedback.entity.Feedback;
+import com.cocovo.fitqaspringjava.interfaces.trainer.dto.TrainerDto;
+import com.cocovo.fitqaspringjava.interfaces.user.UserDto;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.ToString;
@@ -37,8 +39,8 @@ public class FeedbackDto {
     @Builder
     @ToString
     public static class AddCommentReq {
-        @NotEmpty(message = "writerId 는 필수값입니다")
-        private String writerId;
+        @NotEmpty(message = "writerToken 는 필수값입니다")
+        private String writerToken;
         @NotEmpty(message = "comment 는 필수값입니다")
         private String comment;
     }
@@ -60,8 +62,8 @@ public class FeedbackDto {
     @ToString
     public static class Main {
         private final String feedbackToken;
-        private final String ownerToken;
-        private final String trainerToken;
+        private final UserDto.Main owner;
+        private final TrainerDto.Simple trainer;
         private final TypeInfo.InterestArea interestArea;
         private final Integer price;
         private final String title;
@@ -79,7 +81,7 @@ public class FeedbackDto {
     @Builder
     @ToString
     public static class FeedbackCommentInfo {
-        private final String writer;
+        private final UserDto.Main writer;
         private final String comment;
         private final ZonedDateTime createdAt;
         private final ZonedDateTime updatedAt;
