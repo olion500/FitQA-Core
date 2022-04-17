@@ -2,6 +2,7 @@ package com.cocovo.fitqaspringjava.domain;
 
 import lombok.Getter;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.EntityListeners;
@@ -16,6 +17,6 @@ public class BaseEntity {
   @CreationTimestamp
   private ZonedDateTime createdAt;
 
-  @CreationTimestamp
+  @UpdateTimestamp
   private ZonedDateTime updatedAt;
 }
