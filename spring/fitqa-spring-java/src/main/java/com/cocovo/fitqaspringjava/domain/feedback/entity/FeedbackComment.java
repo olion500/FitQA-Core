@@ -3,6 +3,7 @@ package com.cocovo.fitqaspringjava.domain.feedback.entity;
 import com.cocovo.fitqaspringjava.common.exception.InvalidParamException;
 import com.cocovo.fitqaspringjava.common.util.TokenGenerator;
 import com.cocovo.fitqaspringjava.domain.BaseEntity;
+import com.cocovo.fitqaspringjava.domain.user.User;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -28,13 +29,14 @@ public class FeedbackComment extends BaseEntity {
     @JoinColumn(name = "feedback_id")
     private Feedback feedback;
 
-    private String writer;
+    @ManyToOne
+    @JoinColumn(name = "writer_id")
+    private User writer;
     private String comment;
 
     @Builder
-    public FeedbackComment(Feedback feedback, String writer, String comment) {
+    public FeedbackComment(Feedback feedback, User writer, String comment) {
         if (feedback == null) throw new InvalidParamException("feedback cannot be null");
-        if (StringUtils.isEmpty(writer)) throw new InvalidParamException("writer cannot be empty.");
         if (StringUtils.isEmpty(comment)) throw new InvalidParamException("comment cannot be empty.");
 
         this.feedbackCommentToken = TokenGenerator.randomCharacterWithPrefix(FEEDBACK_COMMENT_PREFIX);

@@ -38,8 +38,8 @@ public class FeedbackDto {
     @Builder
     @ToString
     public static class AddCommentReq {
-        @NotEmpty(message = "writerId 는 필수값입니다")
-        private String writerId;
+        @NotEmpty(message = "writerToken 는 필수값입니다")
+        private String writerToken;
         @NotEmpty(message = "comment 는 필수값입니다")
         private String comment;
     }
@@ -80,7 +80,7 @@ public class FeedbackDto {
     @Builder
     @ToString
     public static class FeedbackCommentInfo {
-        private final String writer;
+        private final UserDto.Main writer;
         private final String comment;
         private final ZonedDateTime createdAt;
         private final ZonedDateTime updatedAt;

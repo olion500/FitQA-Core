@@ -89,7 +89,9 @@ public class FeedbackServiceImpl implements FeedbackService {
   @Override
   public String addComment(String feedbackToken, FeedbackCommand.AddComment command) {
     var feedback = feedbackReader.retrieveFeedbackByToken(feedbackToken);
-    var initComment = command.toEntity(feedback);
+    var writer = userReader.retrieveUserByToken(command.getWriterToken());
+
+    var initComment = command.toEntity(feedback, writer);
     var comment = feedbackCommentStore.store(initComment);
     return comment.getFeedbackCommentToken();
   }

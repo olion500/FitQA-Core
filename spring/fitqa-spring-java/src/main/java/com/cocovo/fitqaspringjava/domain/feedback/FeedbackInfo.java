@@ -36,7 +36,7 @@ public class FeedbackInfo {
     @ToString
     @RequiredArgsConstructor
     public static class FeedbackCommentInfo {
-        private final String writer;
+        private final UserInfo.Main writer;
         private final String comment;
         private final ZonedDateTime createdAt;
         private final ZonedDateTime updatedAt;
