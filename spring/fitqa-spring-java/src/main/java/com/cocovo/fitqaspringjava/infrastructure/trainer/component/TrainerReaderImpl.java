@@ -1,5 +1,6 @@
 package com.cocovo.fitqaspringjava.infrastructure.trainer.component;
 
+import com.cocovo.fitqaspringjava.common.exception.EntityNotFoundException;
 import com.cocovo.fitqaspringjava.domain.common.entity.type.WorkOutType;
 import com.cocovo.fitqaspringjava.domain.trainer.component.TrainerReader;
 import com.cocovo.fitqaspringjava.domain.trainer.entity.Trainer;
@@ -20,6 +21,12 @@ public class TrainerReaderImpl implements TrainerReader {
   @Override
   public Trainer retrieveTrainerByToken(String trainerToken) {
     return trainerRepository.getByTrainerToken(trainerToken);
+  }
+
+  @Override
+  public Trainer retrieveTrainerByEmail(String email) {
+    return trainerRepository.findByEmail(email)
+            .orElseThrow(EntityNotFoundException::new);
   }
 
   @Override

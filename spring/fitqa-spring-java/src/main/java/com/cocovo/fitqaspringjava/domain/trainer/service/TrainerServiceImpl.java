@@ -1,6 +1,7 @@
 package com.cocovo.fitqaspringjava.domain.trainer.service;
 
 import com.cocovo.fitqaspringjava.domain.trainer.TrainerCommand;
+import com.cocovo.fitqaspringjava.domain.trainer.TrainerInfo;
 import com.cocovo.fitqaspringjava.domain.trainer.TrainerInfo.TrainerWithFeedback;
 import com.cocovo.fitqaspringjava.domain.trainer.component.TrainerReader;
 import com.cocovo.fitqaspringjava.domain.trainer.component.TrainerStore;
@@ -26,6 +27,7 @@ public class TrainerServiceImpl implements TrainerService {
   private final TrainerInfoMapper trainerInfoMapper;
 
   @Override
+  @Transactional
   public String registerTrainer(TrainerCommand.RegisterTrainer registerTrainer) {
     Trainer initTrainer = registerTrainer.toEntity();
     Trainer registeredTrainer = trainerStore.registerTrainer(initTrainer);
@@ -34,12 +36,21 @@ public class TrainerServiceImpl implements TrainerService {
   }
 
   @Override
+  @Transactional(readOnly = true)
   public TrainerWithFeedback retrieveTrainerByToken(String trainerToken) {
     Trainer foundTrainer = trainerReader.retrieveTrainerByToken(trainerToken);
     return trainerInfoMapper.toWithFeedback(foundTrainer);
   }
 
   @Override
+  @Transactional(readOnly = true)
+  public TrainerInfo.Main retrieveTrainerByEmail(String email) {
+    Trainer foundTrainer = trainerReader.retrieveTrainerByEmail(email);
+    return trainerInfoMapper.toMain(foundTrainer);
+  }
+
+  @Override
+  @Transactional(readOnly = true)
   public List<TrainerWithFeedback> retrieveTrainers(
       TrainerCommand.RetrieveTrainersByInterestAreas retrieveTrainersByInterestAreas) {
     List<Trainer> foundTrainers =
@@ -51,6 +62,7 @@ public class TrainerServiceImpl implements TrainerService {
   }
 
   @Override
+  @Transactional(readOnly = true)
   public List<TrainerWithFeedback> retrieveTrainers() {
     List<Trainer> foundTrainers = trainerReader.retrieveTrainersAll();
 

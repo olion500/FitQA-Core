@@ -12,4 +12,6 @@ public interface TrainerReader {
   List<Trainer> retrieveTrainersByInterestAreas(List<WorkOutType.InterestArea> interestAreaList);
 
   Trainer retrieveTrainerByToken(String trainerToken);
+  
+  Trainer retrieveTrainerByEmail(String email);
 }

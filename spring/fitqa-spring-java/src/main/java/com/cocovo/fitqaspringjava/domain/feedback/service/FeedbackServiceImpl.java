@@ -34,6 +34,7 @@ public class FeedbackServiceImpl implements FeedbackService {
   private final TrainerReader trainerReader;
 
   @Override
+  @Transactional(readOnly = true)
   public List<FeedbackInfo.Main> retrieveFeedbacks() {
     var feedbacks = feedbackReader.retrieveFeedbackAll();
     return feedbacks.stream()
@@ -42,6 +43,7 @@ public class FeedbackServiceImpl implements FeedbackService {
   }
 
   @Override
+  @Transactional
   public FeedbackInfo.FeedbackAnswerInfo registerFeedbackAnswer(String feedbackToken,
       FeedbackCommand.RegisterFeedbackAnswer command) {
     var trainer = trainerReader.retrieveTrainerByToken(command.getTrainerToken());
@@ -60,12 +62,14 @@ public class FeedbackServiceImpl implements FeedbackService {
   }
 
   @Override
+  @Transactional(readOnly = true)
   public FeedbackInfo.Main retrieveFeedbackByToken(String feedbackToken) {
     var feedback = feedbackReader.retrieveFeedbackByToken(feedbackToken);
     return feedbackInfoMapper.of(feedback);
   }
 
   @Override
+  @Transactional(readOnly = true)
   public List<FeedbackInfo.Main> retrieveFeedbacksByTrainerId(Long trainerId) {
     var feedbacks = feedbackReader.retrieveFeedbackAllByTrainerId(trainerId);
     return feedbacks.stream()
@@ -87,6 +91,7 @@ public class FeedbackServiceImpl implements FeedbackService {
   }
 
   @Override
+  @Transactional
   public String addComment(String feedbackToken, FeedbackCommand.AddComment command) {
     var feedback = feedbackReader.retrieveFeedbackByToken(feedbackToken);
     var writer = userReader.retrieveUserByToken(command.getWriterToken());

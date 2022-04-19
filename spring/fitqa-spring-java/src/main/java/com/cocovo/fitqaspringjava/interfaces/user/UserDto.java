@@ -42,9 +42,10 @@ public class UserDto {
     @Getter(AccessLevel.NONE)
     private final Map<String, Object> attributes;
 
-    public Map<String, Object> getAttributes(String userToken) {
+    public Map<String, Object> getAttributes(String userToken, String trainerToken) {
       var modifiable = new HashMap<>(attributes);
       modifiable.put("token", userToken);
+      modifiable.put("trainer_token", trainerToken);
       return modifiable;
     }
   }

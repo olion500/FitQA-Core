@@ -15,8 +15,9 @@ public class AuthSuccessHandler implements AuthenticationSuccessHandler {
   @Override
   public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
       Authentication authentication) throws IOException, ServletException {
-    var userToken = getTokenFromPrincipal(authentication.getPrincipal());
-    sendDirectToUserDetail(response, userToken);
+    var userToken = getValueFromPrincipal(authentication.getPrincipal(), "token");
+    var trainerToken = getValueFromPrincipal(authentication.getPrincipal(), "trainer_token");
+    sendDirectToUserDetail(response, userToken, trainerToken);
   }
 
   @Override
@@ -24,17 +25,18 @@ public class AuthSuccessHandler implements AuthenticationSuccessHandler {
       FilterChain chain, Authentication authentication) throws IOException, ServletException {
     AuthenticationSuccessHandler.super
         .onAuthenticationSuccess(request, response, chain, authentication);
-    var userToken = getTokenFromPrincipal(authentication.getPrincipal());
-    sendDirectToUserDetail(response, userToken);
+    var userToken = getValueFromPrincipal(authentication.getPrincipal(), "token");
+    var trainerToken = getValueFromPrincipal(authentication.getPrincipal(), "trainer_token");
+    sendDirectToUserDetail(response, userToken, trainerToken);
   }
 
-  private void sendDirectToUserDetail(HttpServletResponse response, String userToken)
+  private void sendDirectToUserDetail(HttpServletResponse response, String userToken, String trainerToken)
       throws IOException {
-    var entryUrl = "/api/v1/users/success?token=" + userToken;
+    var entryUrl = "/api/v1/users/success?token=" + userToken + "&trainer_token=" + trainerToken;
     response.sendRedirect(entryUrl);
   }
 
-  private String getTokenFromPrincipal(Object principal) {
-    return String.valueOf(((DefaultOAuth2User) principal).getAttributes().get("token"));
+  private String getValueFromPrincipal(Object principal, String key) {
+    return String.valueOf(((DefaultOAuth2User) principal).getAttributes().get(key));
   }
 }
