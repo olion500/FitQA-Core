@@ -38,6 +38,11 @@ public class UserApiController {
     return CommonResponse.success(response);
   }
 
+  @GetMapping("/success")
+  public CommonResponse authSuccess() {
+    return CommonResponse.success("success");
+  }
+
   @GetMapping("/failed")
   public CommonResponse authFailed() {
     return CommonResponse.fail(ErrorCode.USER_AUTH_FAILED);
