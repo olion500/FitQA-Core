@@ -53,11 +53,11 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
       trainer = null;
     }
 
-    // 3. trainer 이면 trainer Token 을, 아니면 user token 을 반환한다.
-    var token = (trainer == null) ? user.getUserToken() : trainer.getTrainerToken();
+    // 3. trainer 이면 trainerToken 을 추가적으로 전송해준다.
+    var trainerToken = (trainer == null) ? "" : trainer.getTrainerToken();
 
     return new DefaultOAuth2User(Collections.singleton(new SimpleGrantedAuthority("USER")),
-        oauthUser.getAttributes(token), oauthUser.getAttributeKey());
+        oauthUser.getAttributes(user.getUserToken(), trainerToken), oauthUser.getAttributeKey());
   }
 
   private UserDto.Main saveOrUpdateUser(UserDto.RegisterReq initUser) {
