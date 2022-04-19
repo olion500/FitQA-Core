@@ -1,6 +1,7 @@
 package com.cocovo.fitqaspringjava.domain.trainer.service;
 
 import com.cocovo.fitqaspringjava.domain.trainer.TrainerCommand;
+import com.cocovo.fitqaspringjava.domain.trainer.TrainerInfo;
 import com.cocovo.fitqaspringjava.domain.trainer.TrainerInfo.TrainerWithFeedback;
 import com.cocovo.fitqaspringjava.domain.trainer.component.TrainerReader;
 import com.cocovo.fitqaspringjava.domain.trainer.component.TrainerStore;
@@ -37,6 +38,12 @@ public class TrainerServiceImpl implements TrainerService {
   public TrainerWithFeedback retrieveTrainerByToken(String trainerToken) {
     Trainer foundTrainer = trainerReader.retrieveTrainerByToken(trainerToken);
     return trainerInfoMapper.toWithFeedback(foundTrainer);
+  }
+
+  @Override
+  public TrainerInfo.Main retrieveTrainerByEmail(String email) {
+    Trainer foundTrainer = trainerReader.retrieveTrainerByEmail(email);
+    return trainerInfoMapper.toMain(foundTrainer);
   }
 
   @Override

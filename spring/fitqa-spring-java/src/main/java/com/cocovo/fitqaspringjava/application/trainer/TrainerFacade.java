@@ -3,6 +3,7 @@ package com.cocovo.fitqaspringjava.application.trainer;
 
 import com.cocovo.fitqaspringjava.domain.feedback.service.FeedbackService;
 import com.cocovo.fitqaspringjava.domain.trainer.TrainerCommand;
+import com.cocovo.fitqaspringjava.domain.trainer.TrainerInfo;
 import com.cocovo.fitqaspringjava.domain.trainer.TrainerInfo.TrainerWithFeedback;
 import com.cocovo.fitqaspringjava.domain.trainer.service.TrainerService;
 import lombok.RequiredArgsConstructor;
@@ -25,6 +26,10 @@ public class TrainerFacade {
 
   public TrainerWithFeedback retrieveTrainerInfo(String trainerToken) {
     return trainerService.retrieveTrainerByToken(trainerToken);
+  }
+
+  public TrainerInfo.Main retrieveTrainerInfoByEmail(String email) {
+    return trainerService.retrieveTrainerByEmail(email);
   }
 
   public List<TrainerWithFeedback> retrieveTrainers(
