@@ -10,6 +10,7 @@ import com.cocovo.fitqaspringjava.domain.user.component.UserStore;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -25,6 +26,7 @@ public class UserServiceImpl implements UserService {
   private final UserStore userStore;
 
   @Override
+  @Transactional(readOnly = true)
   public List<UserInfo.Main> retrieveUsers() {
     var users = userReader.retrieveUserAll();
     return users.stream()
@@ -33,12 +35,14 @@ public class UserServiceImpl implements UserService {
   }
 
   @Override
+  @Transactional(readOnly = true)
   public UserInfo.Main retrieveUserByToken(String userToken) {
     var user = userReader.retrieveUserByToken(userToken);
     return userInfoMapper.of(user);
   }
 
   @Override
+  @Transactional
   public UserInfo.Main saveOrUpdate(UserCommand.UpdateUser command) {
     User user;
     try {
