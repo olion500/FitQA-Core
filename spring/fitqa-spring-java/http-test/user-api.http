@@ -1,0 +1,24 @@
+### 유저 리스트
+
+GET http://localhost:8080/api/v1/users
+Content-Type: application/json
+
+
+### 유저 정보
+GET http://localhost:8080/api/v1/users/usr_JahxADS4mdJrjJX7
+Content-Type: application/json
+
+### 유저 정보 변경
+POST http://localhost:8080/api/v1/users/usr_JahxADS4mdJrjJX7/update
+Content-Type: application/json
+
+{
+  "name":  "오상헌123",
+  "birthDay": "2022-04-14",
+  "height":  166,
+  "weight": 61,
+  "bodyPatPercentage":  688.0,
+  "muscleMass": 58.0,
+  "workOutStyle":  "BODY_BUILDING",
+  "workOutLevel": "SENIOR"
+}

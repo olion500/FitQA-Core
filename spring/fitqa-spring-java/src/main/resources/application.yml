@@ -1,0 +1,14 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://fitqa-db-dev.czkattcbnkfu.ap-northeast-2.rds.amazonaws.com:5432/fitqa-db-dev
+    username: fitqadmin
+    password: vltzk123!
+  jpa:
+    hibernate:
+      ddl-auto: none
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+  profiles:
+    include: oauth
+
+server:
+  port: 8080
