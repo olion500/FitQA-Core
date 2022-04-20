@@ -36,9 +36,9 @@ public class UserServiceImpl implements UserService {
 
   @Override
   @Transactional(readOnly = true)
-  public UserInfo.Main retrieveUserByToken(String userToken) {
+  public UserInfo.Info retrieveUserByToken(String userToken) {
     var user = userReader.retrieveUserByToken(userToken);
-    return userInfoMapper.of(user);
+    return userInfoMapper.ofInfo(user);
   }
 
   @Override
@@ -52,6 +52,14 @@ public class UserServiceImpl implements UserService {
       var initUser = command.toEntity();
       user = userStore.store(initUser);
     }
+    return userInfoMapper.of(user);
+  }
+
+  @Override
+  @Transactional
+  public UserInfo.Main updateUserInfo(String userToken, UserCommand.UpdateUserInfo command) {
+    var user = userReader.retrieveUserByToken(userToken);
+    user = user.updateUserInfo(command);
     return userInfoMapper.of(user);
   }
 }

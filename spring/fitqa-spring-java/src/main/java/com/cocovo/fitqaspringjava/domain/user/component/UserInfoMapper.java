@@ -14,4 +14,5 @@ import org.mapstruct.ReportingPolicy;
 public interface UserInfoMapper {
 
   UserInfo.Main of(User user);
+  UserInfo.Info ofInfo(User user);
 }

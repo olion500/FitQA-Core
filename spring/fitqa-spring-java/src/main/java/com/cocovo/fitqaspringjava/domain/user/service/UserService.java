@@ -9,7 +9,9 @@ public interface UserService {
 
   List<UserInfo.Main> retrieveUsers();
 
-  UserInfo.Main retrieveUserByToken(String userToken);
+  UserInfo.Info retrieveUserByToken(String userToken);
 
   UserInfo.Main saveOrUpdate(UserCommand.UpdateUser command);
+
+  UserInfo.Main updateUserInfo(String userToken, UserCommand.UpdateUserInfo command);
 }

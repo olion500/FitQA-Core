@@ -31,6 +31,40 @@ public class UserDto {
   @Getter
   @Builder
   @ToString
+  public static class Info {
+
+    private String userToken;
+    private String email;
+    private String name;
+    private String photoURL;
+    private ZonedDateTime birthDay;
+    private Integer height;
+    private Integer weight;
+    private Double bodyPatPercentage;
+    private Double muscleMass;
+    private WorkOutType.Style workOutStyle;
+    private User.WorkOutLevel workOutLevel;
+    private User.Gender gender;
+    private User.AccountProvider provider;
+  }
+
+  @Getter
+  @Builder
+  @ToString
+  public static class UpdateInfoReq {
+    private String name;
+    private String birthDay;
+    private Integer height;
+    private Integer weight;
+    private double bodyPatPercentage;
+    private double muscleMass;
+    private WorkOutType.Style workOutStyle;
+    private User.WorkOutLevel workOutLevel;
+  }
+
+  @Getter
+  @Builder
+  @ToString
   public static class RegisterReq {
 
     private final String name;
@@ -96,6 +130,4 @@ public class UserDto {
         .attributes(attributes)
         .build();
   }
-
-
 }

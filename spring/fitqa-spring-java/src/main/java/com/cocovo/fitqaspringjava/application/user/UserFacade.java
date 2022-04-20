@@ -20,11 +20,15 @@ public class UserFacade {
     return userService.retrieveUsers();
   }
 
-  public UserInfo.Main retrieveUserInfo(String userToken) {
+  public UserInfo.Info retrieveUserInfo(String userToken) {
     return userService.retrieveUserByToken(userToken);
   }
 
   public UserInfo.Main saveOrUpdate(UserCommand.UpdateUser command) {
     return userService.saveOrUpdate(command);
+  }
+
+  public UserInfo.Main updateUserInfo(String userToken, UserCommand.UpdateUserInfo command) {
+    return userService.updateUserInfo(userToken, command);
   }
 }
