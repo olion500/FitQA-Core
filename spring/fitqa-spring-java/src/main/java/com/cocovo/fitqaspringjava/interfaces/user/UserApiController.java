@@ -37,7 +37,7 @@ public class UserApiController {
     return CommonResponse.success(response);
   }
 
-  @GetMapping("/{userToken}/update")
+  @PostMapping("/{userToken}/update")
   public CommonResponse<UserDto.Main> updateUserInfo(@PathVariable("userToken") String userToken, @RequestBody @Valid UserDto.UpdateInfoReq request) {
     var updateInfoCommand = userDtoMapper.of(request);
     var userInfo = userFacade.updateUserInfo(userToken, updateInfoCommand);

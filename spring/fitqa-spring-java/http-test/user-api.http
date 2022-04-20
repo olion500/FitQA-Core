@@ -9,11 +9,11 @@ GET http://localhost:8080/api/v1/users/usr_JahxADS4mdJrjJX7
 Content-Type: application/json
 
 ### 유저 정보 변경
-GET http://localhost:8080/api/v1/users/usr_JahxADS4mdJrjJX7/update
+POST http://localhost:8080/api/v1/users/usr_JahxADS4mdJrjJX7/update
 Content-Type: application/json
 
 {
-  "name":  "오상헌",
+  "name":  "오상헌123",
   "birthDay": "2022-04-14",
   "height":  166,
   "weight": 61,
