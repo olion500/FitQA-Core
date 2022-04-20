@@ -124,4 +124,16 @@ public class User extends BaseEntity {
   public void registerFeedback(Feedback initFeedback) {
     feedbacks.add(initFeedback);
   }
+
+  public User updateUserInfo(UserCommand.UpdateUserInfo command) {
+    this.name = command.getName();
+    this.birthDay = command.getBirthDay();
+    this.height = command.getHeight();
+    this.weight = command.getWeight();
+    this.bodyPatPercentage = command.getBodyPatPercentage();
+    this.muscleMass = command.getMuscleMass();
+    this.workOutStyle = command.getWorkOutStyle();
+    this.workOutLevel = command.getWorkOutLevel();
+    return this;
+  }
 }

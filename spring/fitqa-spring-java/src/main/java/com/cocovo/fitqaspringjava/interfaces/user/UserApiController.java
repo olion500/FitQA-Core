@@ -3,13 +3,12 @@ package com.cocovo.fitqaspringjava.interfaces.user;
 import com.cocovo.fitqaspringjava.application.user.UserFacade;
 import com.cocovo.fitqaspringjava.common.response.CommonResponse;
 import com.cocovo.fitqaspringjava.common.response.ErrorCode;
+import com.cocovo.fitqaspringjava.interfaces.feedback.FeedbackDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -32,8 +31,16 @@ public class UserApiController {
   }
 
   @GetMapping("/{userToken}")
-  public CommonResponse<UserDto.Main> getUserByToken(@PathVariable("userToken") String userToken) {
+  public CommonResponse<UserDto.Info> getUserByToken(@PathVariable("userToken") String userToken) {
     var userInfo = userFacade.retrieveUserInfo(userToken);
+    var response = userDtoMapper.of(userInfo);
+    return CommonResponse.success(response);
+  }
+
+  @GetMapping("/{userToken}/update")
+  public CommonResponse<UserDto.Main> updateUserInfo(@PathVariable("userToken") String userToken, @RequestBody @Valid UserDto.UpdateInfoReq request) {
+    var updateInfoCommand = userDtoMapper.of(request);
+    var userInfo = userFacade.updateUserInfo(userToken, updateInfoCommand);
     var response = userDtoMapper.of(userInfo);
     return CommonResponse.success(response);
   }
