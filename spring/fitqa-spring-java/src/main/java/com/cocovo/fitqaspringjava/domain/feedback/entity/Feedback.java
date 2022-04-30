@@ -6,6 +6,7 @@ import com.cocovo.fitqaspringjava.domain.BaseEntity;
 import com.cocovo.fitqaspringjava.domain.common.TypeInfo;
 import com.cocovo.fitqaspringjava.domain.trainer.entity.Trainer;
 import com.cocovo.fitqaspringjava.domain.user.User;
+import com.cocovo.fitqaspringjava.domain.video.entity.Video;
 import com.google.common.collect.Lists;
 import lombok.Builder;
 import lombok.Getter;
@@ -53,6 +54,9 @@ public class Feedback extends BaseEntity {
   @OneToOne(mappedBy = "feedback", cascade = CascadeType.PERSIST, orphanRemoval = true)
   private FeedbackAnswer feedbackAnswer;
 
+  @OneToMany(fetch = FetchType.LAZY, mappedBy = "feedback", cascade = CascadeType.PERSIST)
+  private List<Video> feedbackVideo;
+
   @Enumerated(EnumType.STRING)
   private Status status;
 
@@ -86,6 +90,7 @@ public class Feedback extends BaseEntity {
     this.title = title;
     this.content = content;
     this.locked = locked;
+    this.feedbackVideo = Lists.newArrayList();
     this.status = Status.PREPARE;
   }
 

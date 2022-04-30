@@ -3,6 +3,7 @@ package com.cocovo.fitqaspringjava.domain.video.entity;
 import com.cocovo.fitqaspringjava.common.exception.InvalidParamException;
 import com.cocovo.fitqaspringjava.common.util.TokenGenerator;
 import com.cocovo.fitqaspringjava.domain.BaseEntity;
+import com.cocovo.fitqaspringjava.domain.feedback.entity.Feedback;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -30,8 +31,12 @@ public class Video extends BaseEntity {
     private int width;
     private int height;
 
+    @ManyToOne
+    @JoinColumn(name = "feedback_id")
+    private Feedback feedback;
+
     @Builder
-    public Video(String videoUrl, String thumbnailUrl, int width, int height) {
+    public Video(Feedback feedback, String videoUrl, String thumbnailUrl, int width, int height) {
         if (StringUtils.isEmpty(videoUrl))
             throw new InvalidParamException("videoUrl cannot be empty");
         if (StringUtils.isEmpty(thumbnailUrl))
@@ -40,6 +45,7 @@ public class Video extends BaseEntity {
         if (height < 0) throw new InvalidParamException("height cannot be below 0");
 
         this.videoToken = TokenGenerator.randomCharacterWithPrefix(VIDEO_PREFIX);
+        this.feedback = feedback;
         this.videoUrl = videoUrl;
         this.thumbnailUrl = thumbnailUrl;
         this.width = width;

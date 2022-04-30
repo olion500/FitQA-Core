@@ -1,5 +1,7 @@
 package com.cocovo.fitqaspringjava.domain.video;
 
+import com.cocovo.fitqaspringjava.domain.feedback.entity.Feedback;
+import com.cocovo.fitqaspringjava.domain.video.entity.Video;
 import com.cocovo.fitqaspringjava.domain.video.entity.VideoFeedbackWaiting;
 import lombok.Builder;
 import lombok.Getter;
@@ -14,6 +16,16 @@ public class VideoCommand {
         private String thumbnailUrl;
         private int width;
         private int height;
+
+        public Video toEntity(Feedback feedback) {
+            return Video.builder()
+                    .feedback(feedback)
+                    .videoUrl(videoUrl)
+                    .thumbnailUrl(thumbnailUrl)
+                    .width(width)
+                    .height(height)
+                    .build();
+        }
     }
 
     @Getter

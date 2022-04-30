@@ -2,6 +2,7 @@ package com.cocovo.fitqaspringjava.domain.video.service;
 
 import com.cocovo.fitqaspringjava.domain.feedback.component.FeedbackReader;
 import com.cocovo.fitqaspringjava.domain.video.VideoCommand;
+import com.cocovo.fitqaspringjava.domain.video.VideoInfo;
 import com.cocovo.fitqaspringjava.domain.video.VideoWaitingInfo;
 import com.cocovo.fitqaspringjava.domain.video.component.VideoReader;
 import com.cocovo.fitqaspringjava.domain.video.component.VideoStore;
@@ -26,16 +27,18 @@ public class VideoServiceImpl implements VideoService {
 
     @Override
     @Transactional
-    public VideoWaitingInfo.Main registerVideo(String videoKey, VideoCommand.Register command) {
+    public VideoInfo.Main registerVideo(String videoKey, VideoCommand.Register command) {
         // 1. find feedback id using videokey from video waiting.
         var feedbackWaiting= videoReader.findWaitingByVideoKey(videoKey);
         var feedback = feedbackReader.retrieveFeedbackByToken(feedbackWaiting.getFeedbackToken());
 
         // 2. add video to feedback
+        var initVideo = command.toEntity(feedback);
+        var video = videoStore.store(initVideo);
 
         // 3. change waiting status
         feedbackWaiting.changeDone();
-        return videoMapper.of(feedbackWaiting);
+        return videoMapper.of(video);
     }
 
     @Override
