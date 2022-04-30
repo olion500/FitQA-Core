@@ -12,6 +12,7 @@ public class VideoCommand {
     @Builder
     @ToString
     public static class Register {
+        private String videoKey;
         private String videoUrl;
         private String thumbnailUrl;
         private int width;

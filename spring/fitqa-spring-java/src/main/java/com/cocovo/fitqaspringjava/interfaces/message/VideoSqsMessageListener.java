@@ -1,5 +1,8 @@
 package com.cocovo.fitqaspringjava.interfaces.message;
 
+import com.cocovo.fitqaspringjava.application.video.VideoFacade;
+import com.cocovo.fitqaspringjava.common.exception.InvalidParamException;
+import com.cocovo.fitqaspringjava.domain.video.VideoCommand;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.aws.messaging.listener.SqsMessageDeletionPolicy;
@@ -11,9 +14,30 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class VideoSqsMessageListener {
 
-    // TODO : change policy to ON_SUCCESS
+    private VideoFacade videoFacade;
+
     @SqsListener(value = "fitqa-video-complete", deletionPolicy = SqsMessageDeletionPolicy.NEVER)
-    public void readMessage(VideoCompleteMessage message) {
+    public void readVideoCompleteMessage(VideoCompleteMessage message) {
         log.info(message.getKey());
+
+        var video = getFile(message, VideoCompleteMessage.FileType.VIDEO);
+        var thumbnail = getFile(message, VideoCompleteMessage.FileType.IMAGE);
+        var registerCommand = VideoCommand.Register
+                .builder()
+                .videoKey(message.getKey())
+                .videoUrl(video.getUrl())
+                .thumbnailUrl(thumbnail.getUrl())
+                .height(video.getHeight())
+                .width(video.getWidth())
+                .build();
+
+        videoFacade.registerVideo(message.getKey(), registerCommand);
+
+        // TODO : remove message from queue when it success.
+    }
+
+    private VideoCompleteMessage.VideoCompleteFile getFile(VideoCompleteMessage message, VideoCompleteMessage.FileType fileType) {
+        return message.getFiles().stream().filter(f -> f.getType() == fileType).findFirst()
+                .orElseThrow(InvalidParamException::new);
     }
 }
