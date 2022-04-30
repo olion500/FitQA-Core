@@ -40,8 +40,9 @@ public class VideoServiceImpl implements VideoService {
 
     @Override
     @Transactional
-    public VideoWaitingInfo.Main registerWaiting(String videoKey, String feedbackToken) {
-        var feedbackWaiting = videoStore.store(videoKey, feedbackToken);
+    public VideoWaitingInfo.Main registerFeedbackWaiting(VideoCommand.RegisterFeedbackWaiting command) {
+        var initVideoFeedbackWaiting = command.toEntity();
+        var feedbackWaiting = videoStore.store(initVideoFeedbackWaiting);
         return videoMapper.of(feedbackWaiting);
     }
 }

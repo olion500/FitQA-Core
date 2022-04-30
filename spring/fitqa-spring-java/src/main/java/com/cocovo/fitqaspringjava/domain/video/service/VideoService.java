@@ -6,5 +6,5 @@ import com.cocovo.fitqaspringjava.domain.video.VideoWaitingInfo;
 public interface VideoService {
     VideoWaitingInfo.Main registerVideo(String videoKey, VideoCommand.Register command);
 
-    VideoWaitingInfo.Main registerWaiting(String videoKey, String feedbackToken);
+    VideoWaitingInfo.Main registerFeedbackWaiting(VideoCommand.RegisterFeedbackWaiting command);
 }
