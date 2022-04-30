@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class VideoSqsMessageListener {
 
+    // TODO : change policy to ON_SUCCESS
     @SqsListener(value = "fitqa-video-complete", deletionPolicy = SqsMessageDeletionPolicy.NEVER)
     public void readMessage(VideoCompleteMessage message) {
         log.info(message.getKey());
