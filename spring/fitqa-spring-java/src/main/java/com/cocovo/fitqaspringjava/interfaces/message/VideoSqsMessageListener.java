@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class VideoSqsMessageListener {
 
-    private VideoFacade videoFacade;
+    private final VideoFacade videoFacade;
 
     @SqsListener(value = "fitqa-video-complete", deletionPolicy = SqsMessageDeletionPolicy.NEVER)
     public void readVideoCompleteMessage(VideoCompleteMessage message) {
