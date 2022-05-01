@@ -16,7 +16,7 @@ public class VideoSqsMessageListener {
 
     private final VideoFacade videoFacade;
 
-    @SqsListener(value = "fitqa-video-complete", deletionPolicy = SqsMessageDeletionPolicy.NEVER)
+    @SqsListener(value = "fitqa-video-complete", deletionPolicy = SqsMessageDeletionPolicy.ON_SUCCESS)
     public void readVideoCompleteMessage(VideoCompleteMessage message) {
         log.info(message.getKey());
 
@@ -32,8 +32,6 @@ public class VideoSqsMessageListener {
                 .build();
 
         videoFacade.registerVideo(message.getKey(), registerCommand);
-
-        // TODO : remove message from queue when it success.
     }
 
     private VideoCompleteMessage.VideoCompleteFile getFile(VideoCompleteMessage message, VideoCompleteMessage.FileType fileType) {
