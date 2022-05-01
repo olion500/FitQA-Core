@@ -20,6 +20,11 @@ public class VideoSqsMessageListener {
     public void readVideoCompleteMessage(VideoCompleteMessage message) {
         log.info(message.getKey());
 
+        if (message.getStatus() == VideoCompleteMessage.Status.ERROR) {
+            log.error(String.format("The message is on error. (videoKey : %s)", message.getKey()));
+            return;
+        }
+
         var video = getFile(message, VideoCompleteMessage.FileType.VIDEO);
         var thumbnail = getFile(message, VideoCompleteMessage.FileType.IMAGE);
         var registerCommand = VideoCommand.Register
