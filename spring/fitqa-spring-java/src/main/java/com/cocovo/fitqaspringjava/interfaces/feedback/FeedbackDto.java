@@ -75,6 +75,7 @@ public class FeedbackDto {
     private final boolean locked;
     private final List<FeedbackCommentInfo> comments;
     private final FeedbackAnswerInfo answer;
+    private final List<FeedbackVideoInfo> video;
     private final Feedback.Status status;
     private final ZonedDateTime createdAt;
     private final ZonedDateTime updatedAt;
@@ -98,5 +99,18 @@ public class FeedbackDto {
 
     private final String videoUrl;
     private final String description;
+  }
+
+  @Getter
+  @Builder
+  @ToString
+  public static class FeedbackVideoInfo {
+
+    private final String videoUrl;
+    private final String thumbnailUrl;
+    private final int width;
+    private final int height;
+    private final ZonedDateTime createdAt;
+    private final ZonedDateTime updatedAt;
   }
 }

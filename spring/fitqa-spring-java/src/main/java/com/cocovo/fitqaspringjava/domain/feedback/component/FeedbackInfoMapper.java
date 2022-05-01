@@ -13,6 +13,7 @@ public interface FeedbackInfoMapper {
 
   @Mapping(source = "feedbackCommentList", target = "comments")
   @Mapping(source = "feedbackAnswer", target = "answer")
+  @Mapping(source = "feedbackVideo", target = "video")
   FeedbackInfo.Main of(Feedback feedback);
 
   FeedbackInfo.FeedbackAnswerInfo of(FeedbackAnswer feedbackAnswer);

@@ -5,6 +5,7 @@ import com.cocovo.fitqaspringjava.domain.common.entity.type.WorkOutType;
 import com.cocovo.fitqaspringjava.domain.feedback.entity.Feedback;
 import com.cocovo.fitqaspringjava.domain.trainer.TrainerInfo;
 import com.cocovo.fitqaspringjava.domain.user.UserInfo;
+import com.cocovo.fitqaspringjava.domain.video.VideoInfo;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -29,6 +30,7 @@ public class FeedbackInfo {
         private final boolean locked;
         private final List<FeedbackCommentInfo> comments;
         private final FeedbackAnswerInfo answer;
+        private final List<FeedbackVideoInfo> video;
         private final Feedback.Status status;
         private final ZonedDateTime createdAt;
         private final ZonedDateTime updatedAt;
@@ -54,5 +56,17 @@ public class FeedbackInfo {
             this.videoUrl = videoUrl;
             this.description = description;
         }
+    }
+
+    @Getter
+    @ToString
+    @RequiredArgsConstructor
+    public static class FeedbackVideoInfo {
+        private final String videoUrl;
+        private final String thumbnailUrl;
+        private final int width;
+        private final int height;
+        private final ZonedDateTime createdAt;
+        private final ZonedDateTime updatedAt;
     }
 }

@@ -1,5 +1,6 @@
 package com.cocovo.fitqaspringjava.domain.video;
 
+import java.time.ZonedDateTime;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.ToString;
@@ -13,5 +14,7 @@ public class VideoInfo {
         private String thumbnailUrl;
         private int width;
         private int height;
+        private final ZonedDateTime createdAt;
+        private final ZonedDateTime updatedAt;
     }
 }
