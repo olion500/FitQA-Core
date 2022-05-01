@@ -18,7 +18,7 @@ public class VideoSqsMessageListener {
 
     @SqsListener(value = "fitqa-video-complete", deletionPolicy = SqsMessageDeletionPolicy.ON_SUCCESS)
     public void readVideoCompleteMessage(VideoCompleteMessage message) {
-        log.info(message.getKey());
+        log.info(String.format("Incoming video complete message : %s", message.getKey()));
 
         if (message.getStatus() == VideoCompleteMessage.Status.ERROR) {
             log.error(String.format("The message is on error. (videoKey : %s)", message.getKey()));
