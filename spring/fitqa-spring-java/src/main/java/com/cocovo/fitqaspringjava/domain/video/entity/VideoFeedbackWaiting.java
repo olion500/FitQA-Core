@@ -14,7 +14,7 @@ import javax.persistence.*;
 @Getter
 @Entity
 @RequiredArgsConstructor
-@Table(name = "video_feedback_waitinngs")
+@Table(name = "video_feedback_waitings")
 public class VideoFeedbackWaiting extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

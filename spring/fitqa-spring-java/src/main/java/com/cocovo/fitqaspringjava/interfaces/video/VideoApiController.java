@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/v1/video")
 @RequiredArgsConstructor
-public class videoApiController {
+public class VideoApiController {
 
     private final VideoFacade videoFacade;
     private final VideoDtoMapper videoDtoMapper;
