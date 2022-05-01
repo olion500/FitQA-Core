@@ -1,0 +1,4 @@
+### 피드백에 비디오 Waiting 추가
+
+POST http://localhost:8080/api/v1/video/fdb_lgDuLvINvaTxIp4S/waiting/vi64rZRyYIx0URpyNmq9
+Content-Type: application/json
