@@ -1,7 +1,10 @@
 package com.cocovo.fitqaspringjava.interfaces.message;
 
 import com.cocovo.fitqaspringjava.application.video.VideoFacade;
+import com.cocovo.fitqaspringjava.common.exception.EntityNotFoundException;
 import com.cocovo.fitqaspringjava.common.exception.InvalidParamException;
+import com.cocovo.fitqaspringjava.common.exception.VideoEncodeFailedException;
+import com.cocovo.fitqaspringjava.common.exception.VideoNotRegisteredException;
 import com.cocovo.fitqaspringjava.domain.video.VideoCommand;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -22,7 +25,7 @@ public class VideoSqsMessageListener {
 
         if (message.getStatus() == VideoCompleteMessage.Status.ERROR) {
             log.error(String.format("The message is on error. (videoKey : %s)", message.getKey()));
-            return;
+            throw new VideoEncodeFailedException();
         }
 
         var video = getFile(message, VideoCompleteMessage.FileType.VIDEO);

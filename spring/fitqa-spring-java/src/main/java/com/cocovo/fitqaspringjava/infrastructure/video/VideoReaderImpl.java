@@ -1,6 +1,7 @@
 package com.cocovo.fitqaspringjava.infrastructure.video;
 
 import com.cocovo.fitqaspringjava.common.exception.EntityNotFoundException;
+import com.cocovo.fitqaspringjava.common.exception.VideoNotRegisteredException;
 import com.cocovo.fitqaspringjava.domain.video.component.VideoReader;
 import com.cocovo.fitqaspringjava.domain.video.entity.VideoFeedbackWaiting;
 import lombok.RequiredArgsConstructor;
@@ -17,6 +18,6 @@ public class VideoReaderImpl implements VideoReader {
     @Override
     public VideoFeedbackWaiting findWaitingByVideoKey(String videoKey) {
         return videoFeedbackWaitingRepository.findByVideoKey(videoKey)
-                .orElseThrow(EntityNotFoundException::new);
+                .orElseThrow(VideoNotRegisteredException::new);
     }
 }

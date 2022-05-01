@@ -11,7 +11,10 @@ public enum ErrorCode {
 
   USER_AUTH_FAILED("로그인 시도가 실패했습니다."),
 
-  FEEDBACK_ANSWER_FAILED("피드백 답변이 실패했습니다.");
+  FEEDBACK_ANSWER_FAILED("피드백 답변이 실패했습니다."),
+
+  VIDEO_NOT_REGISTERED("동영상이 아직 등록되지 않았습니다."),
+  VIDEO_ENCODE_FAILED("동영상 인코딩이 실패했습니다.");
 
   private final String errorMsg;
 
