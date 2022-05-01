@@ -1,4 +1,4 @@
-package com.cocovo.fitqaspringjava.infrastructure.video;
+package com.cocovo.fitqaspringjava.infrastructure.video.repository;
 
 import com.cocovo.fitqaspringjava.domain.video.entity.VideoFeedbackWaiting;
 import org.springframework.data.jpa.repository.JpaRepository;
