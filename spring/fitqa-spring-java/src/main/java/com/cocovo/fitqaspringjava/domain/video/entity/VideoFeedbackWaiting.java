@@ -22,6 +22,8 @@ public class VideoFeedbackWaiting extends BaseEntity {
 
     private String feedbackToken;
     private String videoKey;
+
+    @Enumerated(EnumType.STRING)
     private Status status;
 
     @Getter
