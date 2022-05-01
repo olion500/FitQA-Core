@@ -12,3 +12,12 @@ spring:
 
 server:
   port: 8080
+
+cloud:
+  aws:
+    region:
+      static: ap-northeast-2
+      auto: false
+    credentials:
+      access-key: AKIAVCWWD3CZLUPTOPUP
+      secret-key: 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
