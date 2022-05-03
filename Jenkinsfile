@@ -22,7 +22,7 @@ pipeline {
     stage('Build Spring') {
       steps {
         script {
-          sh "cd spring/fitqa-spring-java/; sudo ./gradlew clean build"
+          sh "cd spring/fitqa-spring-java/; ./gradlew clean build"
           sh "cd ../.."
         }
       }
