@@ -1,8 +1,10 @@
 spring:
+  config:
+    import: database.properties, secrets.properties
   datasource:
-    url: jdbc:postgresql://fitqa-db-dev.czkattcbnkfu.ap-northeast-2.rds.amazonaws.com:5432/fitqa-db-dev
-    username: fitqadmin
-    password: vltzk123!
+    url: ${JDBC_DATABASE_URL}
+    username: ${JDBC_DATABASE_USERNAME}
+    password: ${JDBC_DATABASE_PASSWORD}
   jpa:
     hibernate:
       ddl-auto: none
@@ -11,4 +13,4 @@ spring:
     include: oauth
 
 server:
-  port: 8080
+  port: ${JDBC_DATABASE_PORT}

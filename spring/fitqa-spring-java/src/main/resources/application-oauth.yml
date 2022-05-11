@@ -4,20 +4,20 @@ spring:
       client:
         registration:
           google:
-            client-id: 911225987973-iea15nv6sfakfskpt6480a3g4sne6fv9.apps.googleusercontent.com
-            client-secret: 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
+            client-id: ${GOOGLE_CLIENT_ID}
+            client-secret: ${GOOGLE_CLIENT_SECRET}
             scope: profile, email
           kakao:
-            client-id: 111c31f131771184910327e475190262
-            client-secret: beWBhWFR2DbI6EIsDhK8kGv9bnbb3UjY
+            client-id: ${KAKAO_CLIENT_ID}
+            client-secret: ${KAKAO_CLIENT_SECRET}
             redirect-uri: http://ec2-13-125-176-194.ap-northeast-2.compute.amazonaws.com:8080/login/oauth2/code/kakao
             authorization-grant-type: authorization_code
             scope: profile_nickname, profile_image, account_email
             client-name: kakao
             client-authentication-method: POST
           naver:
-            client-id: LugLfQulPyaaAhM0NG6z
-            client-secret: 7n607Ndzji
+            client-id: ${NAVER_CLIENT_ID}
+            client-secret: ${NAVER_CLIENT_SECRET}
             redirect-uri: http://ec2-13-125-176-194.ap-northeast-2.compute.amazonaws.com:8080/login/oauth2/code/naver
             authorization-grant-type: authorization_code
             scope: name, email, profile_image
