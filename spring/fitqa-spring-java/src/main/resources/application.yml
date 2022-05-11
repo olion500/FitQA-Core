@@ -1,6 +1,8 @@
 spring:
   config:
-    import: database.properties, secrets.properties
+    import:
+      - optional:database.properties
+      - optional:secrets.properties
   datasource:
     url: ${JDBC_DATABASE_URL}
     username: ${JDBC_DATABASE_USERNAME}
