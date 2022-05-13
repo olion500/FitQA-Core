@@ -15,4 +15,4 @@ spring:
     include: oauth
 
 server:
-  port: ${JDBC_DATABASE_PORT}
+  port: 8080
