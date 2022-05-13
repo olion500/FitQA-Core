@@ -1,44 +1,56 @@
-# FitQA-Spring-Java
+# FitQA-Core
+`SpringBoot`기반으로 만들어진 FitQA 서비스의 기본적인 기능을 수행하는 서비스입니다.
+다음과 같은 도메인을 포함하고 있습니다.
+- 유저 : 소셜 로그인, 유저 CRUD
+- 트레이너 : 경력, 학력 등의 트레이너 프로필, 피드백 가격 차등 설정, 트레이너 CRUD
+- 피드백 : 유저가 트레이너에게 피드백 요청, 피드백 답변, 피드백 동영상 처리
+
 
 ## How to build
 
-### Run PostgreSQL and pgAdmin
+### Variables
+빌드를 수행하기 위해서 아래와 같은 작업이 필요합니다. 아래 방법 중 하나를 골라 수행하면 됩니다.
 
-1. Run docker-compose up in `FitQA-Spring-Java/docker/`
-```shell
-$ docker-compose up
+#### Database 설정
+- 파일로 설정하기
+1. `spring/fitqa-spring-java/src/main/resources` 안에 `database.properties` 파일을 만듭니다.
+2. 파일 안에 데이터베이스 정보를 입력합니다.  
+**입력예시**
+```properties
+JDBC_DATABASE_URL=jdbc:postgresql://<db_url>:<port>/<db_name>
+JDBC_DATABASE_USERNAME=<username>
+JDBC_DATABASE_PASSWORD=<password>
 ```
 
-2. Initially, You need to establish a connection.
+- 실행 시 `Env`로 추가하기
+1. `gradlew bootRun -Pargs=--JDBC_DATABASE_URL=jdbc:postgresql://<db_url>:<port>/<db_name>,--JDBC_DATABASE_USERNAME=<username>,--JDBC_DATABASE_PASSWORD=<password>`
+`gradlew bootRun` 뒤에 `-Pargs` 안에 데이터베이스 정보를 추가합니다
 
-    2.1 Open `localhost:5050/browser/` in Browser
 
-    2.2 Login pgAdmin as `admin@admin.com/admin`
+#### Secret Key 설정
+- 파일로 설정하기
+1. `spring/fitqa-spring-java/src/main/resources` 안에 `secrets.properties` 파일을 만듭니다.
+2. 파일 안에 SecretKey 정보를 입력합니다.  
+**입력예시**
+```properties
+GOOGLE_CLIENT_ID=<google_client_id>
+GOOGLE_CLIENT_SECRET=<google_client_secret>
 
-    2.3 Register server and set name `fitqa`
-      ![image](https://github.com/CoCoVo/FitQA-Spring-Java/blob/master/docs/image/readme_1.PNG)
+KAKAO_CLIENT_ID=<kakao_client_id>
+KAKAO_CLIENT_SECRET=<kakao_client_secret>
+KAAKO_REDIRECT_URL=<kakao_redirect_url>
 
-    2.4 Get `fitqa-postgres` IP Address
-   
-      ```shell
-      $ docker container ls
-        # like below
-      CONTAINER ID   IMAGE                  COMMAND                  CREATED          STATUS          PORTS                           NAMES
-      48e42245ae99   dpage/pgadmin4         "/entrypoint.sh"         14 minutes ago   Up 14 minutes   443/tcp, 0.0.0.0:5050->80/tcp   fitqa_pgadmin
-      a2481193acdc   postgres:13.1-alpine   "docker-entrypoint.s"   14 minutes ago   Up 14 minutes   0.0.0.0:5432->5432/tcp          fitqa_postgres
-      
-        # Get postgres container id and write like below
-      $ docker inspect a2481193acdc | grep IPAddress
-            "SecondaryIPAddresses": null,
-            "IPAddress": "",
-                    "IPAddress": "192.168.0.3", # -> this is fitqa-postgres IP Address
-      ```
-   
-    2.4 Set `Host name/address` to **fitqa-postgres ip**, `Username` to **root**, `Password` to 
-   **root** 
+NAVER_CLIENT_ID=<naver_client_id>
+NAVER_CLIENT_SECRET=<naver_client_id>
+NAVER_REDIRECT_URL=<naver_redirect_url>
+```
 
-      ![image](https://github.com/CoCoVo/FitQA-Sping-Java/blob/master/docs/image/readme_2.PNG)
-   
-    2.5 Check out the database
+- 실행 시 `Env`로 추가하기
+1. `gradlew bootRun` 뒤에 `-Pargs` 안에 데이터베이스 정보를 추가합니다
 
-      ![image](https://github.com/CoCoVo/FitQA-Spring-Java/blob/master/docs/image/readme_3.PNG)
+
+## Tech/framework used
+- Clean Architecture
+- Spring Boot
+- OAuth2
+- AWS SQS
