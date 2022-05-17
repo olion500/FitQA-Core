@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
+import org.springframework.web.multipart.MultipartFile;
 
 @Slf4j
 @RestController
@@ -39,7 +40,8 @@ public class FeedbackApiController {
 
   @PostMapping("/register")
   public CommonResponse<FeedbackDto.Main> registerFeedback(
-      @RequestBody @Valid FeedbackDto.RegisterReq request) {
+      @RequestPart(value = "context", required = true) @Valid FeedbackDto.RegisterReq request,
+      @RequestPart(value = "videos", required = true) List<MultipartFile> videos) {
     var registerCommand = feedbackDtoMapper.of(request);
     var feedbackInfo = feedbackFacade.registerFeedback(registerCommand);
     var response = feedbackDtoMapper.of(feedbackInfo);
