@@ -2,6 +2,7 @@ package com.cocovo.fitqaspringjava.infrastructure.common.component;
 
 import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.PutObjectRequest;
+import com.cocovo.fitqaspringjava.common.exception.FailedConvertToFileException;
 import com.cocovo.fitqaspringjava.domain.common.FileUploader;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -31,22 +32,27 @@ public class S3FileUploader implements FileUploader {
     private String bucket;
 
     @Override
-    public List<String> uploadFiles(String destination, MultipartFile... multipartFiles) throws IOException {
-        var files = new ArrayList<File>();
-        for (MultipartFile multipartFile : multipartFiles) {
-            Optional<File> convertedFileOpt = fileManager.convertMultipartFileToFile(multipartFile);
-            if (convertedFileOpt.isEmpty()) {
-                throw new IOException("파일 변환에 실패했습니다.");
-            }
-            files.add(convertedFileOpt.get());
-        }
-
+    public List<String> uploadFiles(String destination, MultipartFile... multipartFiles) throws FailedConvertToFileException {
+        var files = convertToFile(multipartFiles);
         var uploadedFileUrl = files.stream().map(file -> {
             final String fileName = createUploadFileNameWithCreationDate(destination, file);
             final String fileUrl = putS3(file, fileName);
             return fileUrl;
         }).collect(Collectors.toList());
         return uploadedFileUrl;
+    }
+
+    private ArrayList<File> convertToFile(MultipartFile... multipartFiles) throws FailedConvertToFileException {
+        var files = new ArrayList<File>();
+
+        for (MultipartFile multipartFile : multipartFiles) {
+            Optional<File> convertedFileOpt = fileManager.convertMultipartFileToFile(multipartFile);
+            if (convertedFileOpt.isEmpty()) {
+                throw new FailedConvertToFileException("파일 생성을 실패하였습니다.");
+            }
+            files.add(convertedFileOpt.get());
+        }
+        return files;
     }
 
     private String putS3(File uploadFile, String fileName) {

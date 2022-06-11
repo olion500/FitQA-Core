@@ -1,5 +1,6 @@
 package com.cocovo.fitqaspringjava.domain.feedback.service;
 
+import com.cocovo.fitqaspringjava.common.exception.FailedConvertToFileException;
 import com.cocovo.fitqaspringjava.common.exception.FeedbackAnswerException;
 import com.cocovo.fitqaspringjava.domain.common.FileUploader;
 import com.cocovo.fitqaspringjava.domain.feedback.FeedbackCommand;
@@ -97,7 +98,7 @@ public class FeedbackServiceImpl implements FeedbackService {
                     + "/" + REGISTER_FEEDBACK_DIRECTORY + "/";
             var videoUrls = fileUploader.uploadFiles(destination, command.getVideos()
                     .toArray(MultipartFile[]::new));
-        } catch (IOException e) {
+        } catch (FailedConvertToFileException e) {
             e.printStackTrace();
         }
 
