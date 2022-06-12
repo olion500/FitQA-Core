@@ -4,15 +4,17 @@ import com.cocovo.fitqaspringjava.domain.trainer.TrainerCommand;
 
 import com.cocovo.fitqaspringjava.domain.trainer.TrainerInfo;
 import com.cocovo.fitqaspringjava.domain.trainer.TrainerInfo.TrainerWithFeedback;
+import org.springframework.data.domain.Pageable;
+
 import java.util.List;
 
 public interface TrainerService {
 
   // retrieve
-  List<TrainerWithFeedback> retrieveTrainers();
+  List<TrainerWithFeedback> retrieveTrainers(Pageable pageable);
 
   List<TrainerWithFeedback> retrieveTrainers(
-      TrainerCommand.RetrieveTrainersByInterestAreas retrieveTrainersByInterestAreas);
+      TrainerCommand.RetrieveTrainersByInterestAreas retrieveTrainersByInterestAreas, Pageable pageable);
 
   TrainerWithFeedback retrieveTrainerByToken(String trainerToken);
 

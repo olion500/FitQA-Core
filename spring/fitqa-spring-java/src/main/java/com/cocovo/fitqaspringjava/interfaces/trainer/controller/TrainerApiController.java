@@ -8,6 +8,9 @@ import com.cocovo.fitqaspringjava.interfaces.trainer.dto.TrainerDto;
 import com.cocovo.fitqaspringjava.interfaces.trainer.mapper.TrainerDtoMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -25,12 +28,11 @@ public class TrainerApiController {
   private final FeedbackDtoMapper feedbackDtoMapper;
 
   @GetMapping
-  public CommonResponse getTrainersAll() {
-    var trainers = trainerFacade.retrieveTrainers();
-    System.out.println(trainers);
+  public CommonResponse getTrainersAll(
+          @PageableDefault(size = 10, sort = "likesCount", direction = Sort.Direction.DESC) Pageable pageable) {
+    var trainers = trainerFacade.retrieveTrainers(pageable);
     var response =
         trainers.stream().map(main -> trainerDtoMapper.of(main)).collect(Collectors.toList());
-    System.out.println(response);
     return CommonResponse.success(response);
   }
 
@@ -52,8 +54,9 @@ public class TrainerApiController {
 
   @GetMapping(params = "interestAreas")
   public CommonResponse getTrainerByInterestAreas(
-      @RequestParam(value = "interestAreas", required = true) TrainerDto.RetrieveTrainersRequest request) {
-    var trainers = trainerFacade.retrieveTrainers(trainerDtoMapper.of(request));
+      @RequestParam(value = "interestAreas", required = true) TrainerDto.RetrieveTrainersRequest request,
+      @PageableDefault(size = 1, sort = "likesCount", direction = Sort.Direction.DESC) Pageable pageable) {
+    var trainers = trainerFacade.retrieveTrainers(trainerDtoMapper.of(request), pageable);
     var response =
         trainers.stream().map(main -> trainerDtoMapper.of(main)).collect(Collectors.toList());
     return CommonResponse.success(response);
