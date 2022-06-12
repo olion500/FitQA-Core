@@ -7,6 +7,8 @@ import com.cocovo.fitqaspringjava.domain.trainer.entity.Trainer;
 import com.cocovo.fitqaspringjava.infrastructure.trainer.repository.TrainerRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -36,7 +38,7 @@ public class TrainerReaderImpl implements TrainerReader {
   }
 
   @Override
-  public List<Trainer> retrieveTrainersAll() {
-    return trainerRepository.findAll();
+  public Page<Trainer> retrieveTrainersAll(Pageable pageable) {
+    return trainerRepository.findAll(pageable);
   }
 }

@@ -10,6 +10,8 @@ import com.cocovo.fitqaspringjava.domain.trainer.entity.Trainer;
 import com.cocovo.fitqaspringjava.domain.trainer.mapper.TrainerInfoMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -63,9 +65,8 @@ public class TrainerServiceImpl implements TrainerService {
 
   @Override
   @Transactional(readOnly = true)
-  public List<TrainerWithFeedback> retrieveTrainers() {
-    List<Trainer> foundTrainers = trainerReader.retrieveTrainersAll();
-
+  public List<TrainerWithFeedback> retrieveTrainers(Pageable pageable) {
+    Page<Trainer> foundTrainers = trainerReader.retrieveTrainersAll(pageable);
     return foundTrainers.stream().map(trainer -> trainerInfoMapper.toWithFeedback(trainer))
         .collect(Collectors.toList());
   }

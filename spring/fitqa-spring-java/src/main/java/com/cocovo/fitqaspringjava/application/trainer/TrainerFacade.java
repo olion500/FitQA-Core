@@ -8,6 +8,7 @@ import com.cocovo.fitqaspringjava.domain.trainer.TrainerInfo.TrainerWithFeedback
 import com.cocovo.fitqaspringjava.domain.trainer.service.TrainerService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -37,8 +38,8 @@ public class TrainerFacade {
     return trainerService.retrieveTrainers(interestAreas);
   }
 
-  public List<TrainerWithFeedback> retrieveTrainers() {
-    return trainerService.retrieveTrainers();
+  public List<TrainerWithFeedback> retrieveTrainers(Pageable pageable) {
+    return trainerService.retrieveTrainers(pageable);
   }
 
   public TrainerWithFeedback updateTrainerInterestAreas(String trainerToken,
