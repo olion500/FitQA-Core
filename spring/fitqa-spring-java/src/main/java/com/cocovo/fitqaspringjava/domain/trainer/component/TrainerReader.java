@@ -11,7 +11,8 @@ public interface TrainerReader {
 
   Page<Trainer> retrieveTrainersAll(Pageable pageable);
 
-  List<Trainer> retrieveTrainersByInterestAreas(List<WorkOutType.InterestArea> interestAreaList);
+  List<Trainer> retrieveTrainersByInterestAreas(List<WorkOutType.InterestArea> interestAreaList,
+                                                Pageable pageable);
 
   Trainer retrieveTrainerByToken(String trainerToken);
   

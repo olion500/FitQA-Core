@@ -54,8 +54,9 @@ public class TrainerApiController {
 
   @GetMapping(params = "interestAreas")
   public CommonResponse getTrainerByInterestAreas(
-      @RequestParam(value = "interestAreas", required = true) TrainerDto.RetrieveTrainersRequest request) {
-    var trainers = trainerFacade.retrieveTrainers(trainerDtoMapper.of(request));
+      @RequestParam(value = "interestAreas", required = true) TrainerDto.RetrieveTrainersRequest request,
+      @PageableDefault(size = 1, sort = "likesCount", direction = Sort.Direction.DESC) Pageable pageable) {
+    var trainers = trainerFacade.retrieveTrainers(trainerDtoMapper.of(request), pageable);
     var response =
         trainers.stream().map(main -> trainerDtoMapper.of(main)).collect(Collectors.toList());
     return CommonResponse.success(response);

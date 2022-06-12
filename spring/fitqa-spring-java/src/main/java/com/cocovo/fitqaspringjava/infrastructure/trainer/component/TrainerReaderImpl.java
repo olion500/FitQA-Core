@@ -33,8 +33,8 @@ public class TrainerReaderImpl implements TrainerReader {
 
   @Override
   public List<Trainer> retrieveTrainersByInterestAreas(
-      List<WorkOutType.InterestArea> interestAreaList) {
-    return trainerRepository.findAllByInterestAreasIn(interestAreaList);
+      List<WorkOutType.InterestArea> interestAreaList, Pageable pageable) {
+    return trainerRepository.findAllByInterestAreasIn(interestAreaList, pageable);
   }
 
   @Override

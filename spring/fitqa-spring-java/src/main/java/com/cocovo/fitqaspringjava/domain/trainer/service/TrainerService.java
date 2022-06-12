@@ -14,7 +14,7 @@ public interface TrainerService {
   List<TrainerWithFeedback> retrieveTrainers(Pageable pageable);
 
   List<TrainerWithFeedback> retrieveTrainers(
-      TrainerCommand.RetrieveTrainersByInterestAreas retrieveTrainersByInterestAreas);
+      TrainerCommand.RetrieveTrainersByInterestAreas retrieveTrainersByInterestAreas, Pageable pageable);
 
   TrainerWithFeedback retrieveTrainerByToken(String trainerToken);
 

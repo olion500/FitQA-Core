@@ -54,10 +54,10 @@ public class TrainerServiceImpl implements TrainerService {
   @Override
   @Transactional(readOnly = true)
   public List<TrainerWithFeedback> retrieveTrainers(
-      TrainerCommand.RetrieveTrainersByInterestAreas retrieveTrainersByInterestAreas) {
+      TrainerCommand.RetrieveTrainersByInterestAreas retrieveTrainersByInterestAreas, Pageable pageable) {
     List<Trainer> foundTrainers =
         trainerReader
-            .retrieveTrainersByInterestAreas(retrieveTrainersByInterestAreas.getInterestAreas());
+            .retrieveTrainersByInterestAreas(retrieveTrainersByInterestAreas.getInterestAreas(), pageable);
 
     return foundTrainers.stream().map(trainer -> trainerInfoMapper.toWithFeedback(trainer))
         .collect(Collectors.toUnmodifiableList());

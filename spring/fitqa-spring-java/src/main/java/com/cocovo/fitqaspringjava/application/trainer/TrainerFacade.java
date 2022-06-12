@@ -34,8 +34,8 @@ public class TrainerFacade {
   }
 
   public List<TrainerWithFeedback> retrieveTrainers(
-      TrainerCommand.RetrieveTrainersByInterestAreas interestAreas) {
-    return trainerService.retrieveTrainers(interestAreas);
+      TrainerCommand.RetrieveTrainersByInterestAreas interestAreas, Pageable pageable) {
+    return trainerService.retrieveTrainers(interestAreas, pageable);
   }
 
   public List<TrainerWithFeedback> retrieveTrainers(Pageable pageable) {
